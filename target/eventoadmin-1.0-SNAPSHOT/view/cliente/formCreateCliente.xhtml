@@ -1,0 +1,56 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces">
+
+
+    <h:form id="formCreateCliente" >
+        <p:fieldset legend="#{xmsg['generalData']}">
+            <x:modalMessages/>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="nome" value="* #{msg['cliente.nome']}:" />
+                        <p:inputText id="nome" value="#{clienteMB.entity.nome}" maxlength="40"  styleClass="form-control"  />
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="cpf" value="CPF:" />
+                        <x:cpf id="cpf" value="#{clienteMB.entity.cpf}" maxlength="11"  styleClass="form-control" placeholder="000.000.000-00" />
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="email" value="#{msg['cliente.email']}:" />
+                        <p:inputText id="email" value="#{clienteMB.entity.email}" maxlength="80"  styleClass="form-control"  />
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="telefone" value="#{msg['cliente.telefone']}:" />
+                        <p:inputText id="telefone" value="#{clienteMB.entity.telefone}" maxlength="15"  styleClass="form-control"  />
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="whatsapp" value="#{msg['cliente.whatsapp']}:" />
+                        <p:inputText id="whatsapp" value="#{clienteMB.entity.whatsapp}" maxlength="15"  styleClass="form-control"  />
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="datacadastro" value="* Data de Cadastro:" />
+                        <p:inputText id="dataCadastro" value="#{clienteMB.entity.datacadastro}" styleClass="form-control" readonly="true">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                        </p:inputText>
+                    </div>
+
+                </div>
+            </div>
+        </p:fieldset>
+        <h:outputText value="#{xmsg['requiredFieldsForm']}"/>
+        <div class="uix-center">
+            <x:securityArea rolesAllowed="cliente.create">
+                <p:commandButton process="@form" update="@form" action="#{clienteMB.save}" value="#{xmsg['save']}" />
+            </x:securityArea>
+            <x:securityArea rolesAllowed="cliente.audit">
+                <x:audit for="#{clienteMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+
+</ui:composition>

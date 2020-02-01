@@ -1,0 +1,180 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:custom="http://java.sun.com/jsf/composite/components"
+                 >
+    <h:form id="formDetailUsuario" styleClass="uix-form-detail">
+
+        <p:tabView id="tabViewUsuario">
+            <p:tab title="#{msg['dadosGerais']}">
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['usuario.nome']}:" styleClass="control-label" /><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{usuarioMB.entity.nome}"/>
+                            </span>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['usuario.cpf']}:" styleClass="control-label" /><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText converter="cpfConverter" value="#{usuarioMB.entity.cpf}"/>
+                            </span>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['usuario.email']}:" styleClass="control-label" /><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{usuarioMB.entity.email}"/>
+                            </span>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['usuario.userLogin']}:" styleClass="control-label" /><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{usuarioMB.entity.userLogin}"/>
+                            </span>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['usuario.situacaoUsuario']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{usuarioMB.entity.situacaoUsuario.descricao}"/>
+                            </span>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['usuario.emailCadastroEnviado']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{usuarioMB.entity.emailCadastroEnviado}" converter ="yesNoConverter" />
+                            </span>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['usuario.senhaCadastrada']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{usuarioMB.entity.senhaCadastrada}" converter ="yesNoConverter" />
+                            </span>
+                        </div>
+                        <h:panelGroup rendered="#{sessaoUsuarioMB.user.superUsuario}" >
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                                <h:outputLabel value="#{msg['usuario.superUsuario']}:" styleClass="control-label"/><br/>
+                                <span class="uix-content-detail">
+                                    <h:outputText value="#{usuarioMB.entity.superUsuario}" converter ="yesNoConverter" />
+                                </span>
+                            </div>
+                        </h:panelGroup>
+                    </div>
+
+                </div>
+            </p:tab>
+            <p:tab title="#{msg['usuario.perfisAcesso']}">
+                <p:dataTable rowIndexVar="index" var="perfil" value="#{usuarioMB.entity.perfis}"
+                             emptyMessage="#{xmsg['noRecordFound']}">
+                    <x:initializer/>
+                    <p:column styleClass="uix-datatable-index">
+                        <h:outputText value="#{index+1}"/>
+                    </p:column>
+                    <p:column headerText="#{msg['perfil.descricao']}">
+                        <h:outputText value="#{perfil.descricao}"/>
+                    </p:column>
+                    <p:column styleClass="uix-datatable-actions" exportable="false">
+                        <p:commandButton oncomplete="PF('widgetPerfilDetail').show();"  
+                                         action="#{perfilMB.detail}"
+                                         icon="ui-icon-zoomin" process="@form" update=":formDetailPerfil" >
+                            <f:setPropertyActionListener value="#{perfil}" target="#{perfilMB.entity}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:tab>
+            <p:tab title="#{msg['usuario.historicosSituacao']}">
+
+                <p:dataTable value="#{usuarioMB.entity.historicosSituacao}" var="historicoSituacao"
+                             emptyMessage="#{xmsg['noRecordFound']}" rowIndexVar="index">
+                    <x:initializer/>
+                    <p:column styleClass="uix-datatable-index">
+                        <h:outputText value="#{index+1}"/>
+                    </p:column>
+                    <p:column headerText="#{msg['historicoSituacaoUsuario.dataSituacao']}" style="text-align: center;">
+                        <h:outputText value="#{historicoSituacao.dataSituacao}">
+                            <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="#{msg['historicoSituacaoUsuario.situacaoUsuario']}" style="text-align: center;">
+                        <h:outputText value="#{historicoSituacao.situacaoUsuario.descricao}"/>
+                    </p:column>
+                    <p:column headerText="#{msg['historicoSituacaoUsuario.usuarioAlteracao']}">
+                        <h:outputText value="#{historicoSituacao.usuarioAlteracao.nome}">
+                            <x:initializer/>
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+
+            </p:tab>
+
+            <p:tab title="#{msg['usuario.menuUsuario']}">
+
+                <div style="min-height: 400px; overflow-y: scroll;">
+
+                    <h:outputText value="#{msg['usuario.menuUsuarioInfo']}"  styleClass="help-block"/>
+                    <div class="hidden-xs">
+                        <p:menubar model="#{usuarioMB.menuModel}" />
+                    </div>
+                    <div class="hidden-lg hidden-sm hidden-md">
+                        <p:panelMenu  style="width: 100%" model="#{usuarioMB.menuModel}"/>
+                    </div>
+                </div>
+
+            </p:tab>
+
+            <p:tab title="#{msg['ultimosAcessos']}">
+
+                <x:dataTableActions target=":formDetailUsuario:tabViewUsuario:dataTableAcessoSistema" 
+                                    widgetVar="dataTableAcessoSistemaWidget" fileName="Acessos - #{usuarioMB.entity.nome}" />
+
+                <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
+                             var="acessoSistema" rowIndexVar="index" id="dataTableAcessoSistema"
+                             widgetVar="dataTableAcessoSistemaWidget"
+                             currentPageReportTemplate="#{usuarioMB.ultimosAcessos.currentPageReportTemplate}"
+                             paginatorTemplate="#{usuarioMB.ultimosAcessos.paginatorTemplate}"
+                             value="#{usuarioMB.ultimosAcessos}" lazy="true" >
+                    <p:column style="text-align: center;">
+                        <h:outputText value="#{index+1}"/>
+                    </p:column>
+                    <p:column headerText="#{msg['acessoSistema.dataHora']}" sortBy="#{acessoSistema.dataHora}"
+                              style="text-align: center;" filterBy="#{acessoSistema.dataHora}">
+                        <f:facet name="header">
+                            #{msg['acessoSistema.dataHora']}
+                            <x:dateFilter/>
+                        </f:facet>
+                        <h:outputText value="#{acessoSistema.dataHora}">
+                            <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="#{msg['acessoSistema.ip']}" sortBy="#{acessoSistema.ip}"
+                              filterBy="#{acessoSistema.ip}"
+                              >
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['acessoSistema.ip']}"/>
+                        </f:facet>
+                        <h:outputText value="#{acessoSistema.ip}"/>
+                    </p:column>
+                    <p:column headerText="#{msg['acessoSistema.userAgent']}" sortBy="#{acessoSistema.userAgent}"
+                              filterBy="#{acessoSistema.userAgent}"
+                              >
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['acessoSistema.userAgent']}"/>
+                        </f:facet>
+                        <h:outputText value="#{acessoSistema.userAgent}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:tab>
+
+        </p:tabView>
+        <div class="uix-center">
+            <p:commandButton type="button" value="#{xmsg['close']}" onclick="PF('widgetUsuarioDetail').hide()" />
+            <x:securityArea rolesAllowed="usuario.audit">
+                <x:audit for="#{usuarioMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+</ui:composition>

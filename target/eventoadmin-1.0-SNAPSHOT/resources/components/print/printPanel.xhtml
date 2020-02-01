@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="title"/>
+        <cc:attribute name="printRendered" type="boolean" default="true"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <div id="#{cc.attrs.clientId}">
+
+            <h:panelGroup rendered="#{cc.attrs.printRendered}">
+                <div class="text-center">
+                    <p:commandButton type="button" title="#{msg['imprimir']}" icon="ui-icon-print" value="#{msg['imprimir']}">
+                        <p:printer target="printPanel"/>
+                    </p:commandButton>
+                </div>
+                <br/>
+            </h:panelGroup>
+
+            <h:panelGroup id="printPanel" >
+                <div class="print-panel">
+                    <style media="screen" tyle="text/css">
+                        .no-screen{display: none;}
+                        table { page-break-inside:auto !important}
+                        div   { page-break-inside:avoid !important; }
+                        tr    { page-break-inside:avoid !important; page-break-after:auto }
+                        thead { display:table-header-group !important}
+                        tfoot { display:table-footer-group !important}
+                        .ui-dt-c{page-break-inside: avoid !important;}
+                    </style>
+                    <style media="print" tyle="text/css">
+                        .overflow-scroll, .overflow-scroll-y, .overflow-scroll-x{overflow: auto !important; overflow-y: auto !important; max-height: none !important; }
+                        .no-print{display: none;}
+                        .print-title{font-size: 12px !important; text-align: center; font-weight: bold; border-bottom: 2px solid #5a5a5a}
+                        .print-header{margin-left: 12px;}
+                        .print-header .system-name{font-weight: bold; font-size: 13px !important;}
+                        .print-header .client-name{font-size: 12px !important;}
+                        .print-header .client-address{font-size: 11px !important;}
+                        .print-panel, .print-panel td, .print-panel span, .print-panel div{font-size: 10px;}
+                        .print-panel .font-10-print, .font-10-print td, .font-10-print th, .font-10-print span, .font-10-print div{font-size: 10px !important;}
+                        .print-panel .font-9-print, .font-9-print td, .font-9-print th, .font-9-print span, .font-9-print div{font-size: 9px !important;}
+                        .print-panel .font-8-print, .font-8-print td, .font-8-print th, .font-8-print span, .font-8-print div{font-size: 8px !important;}
+                    </style>
+                    <div class="no-screen">
+
+
+                        <h:panelGrid columns="2">
+
+                            <h:graphicImage value="/images/logo.png" style="width: 130px" />
+
+                            <h:panelGroup layout="block" styleClass="print-header">
+                                <span class="system-name">#{reportMB.titulo}</span><br/>
+                                <span class="client-name">#{reportMB.nomeEmpresa}</span><br/> 
+                                <span class="client-address">#{reportMB.subTitulo}</span>
+                            </h:panelGroup>
+
+                        </h:panelGrid>
+                        <br/>
+                        <div class="print-title">
+                            <h:outputText value="#{cc.attrs.title}" />
+                        </div>
+                    </div>
+                    <cc:insertChildren/>
+                </div>
+            </h:panelGroup>
+        </div>
+    </cc:implementation>
+</html>

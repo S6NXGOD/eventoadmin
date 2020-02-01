@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="target"/>
+        <cc:attribute name="fileName"/>
+        <cc:attribute name="landscape" default="true"/>
+        <cc:attribute name="pageOnly" default="true"/>
+        <cc:attribute name="pageOnly" default="true"/>
+        <cc:attribute name="styleExporter" default="true"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:panelGroup layout="#{cc.attrs.styleExporter ? 'block' : 'span'}" class="#{cc.attrs.styleExporter ? 'text-right' : ''}" 
+                      style="#{cc.attrs.styleExporter ? 'margin-bottom: 2px;' : ''}" styleClass="no-print">
+            <p:menuButton value="Exportar Página Atual" styleClass="#{cc.attrs.styleExporter ? 'menu-export' : ''} no-print" rendered="#{cc.attrs.pageOnly}">
+                <p:menuitem value="Excel" immediate="true" ajax="false">
+                    <pe:exporter pageOnly="true" type="xlsx" target="#{cc.attrs.target}" fileName="#{cc.attrs.fileName}"/>
+                </p:menuitem>
+                <p:menuitem value="PDF" immediate="true" ajax="false">
+                    <pe:exporter pageOnly="true" cellFontSize="7" facetFontSize="7" preProcessor="#{customExporterMB.preProcessPDF}" orientation="#{cc.attrs.landscape ? 'Landscape' : 'Portrait'}" type="pdf" target="#{cc.attrs.target}" fileName="#{cc.attrs.fileName}"/>
+                </p:menuitem>
+                <p:menuitem value="CSV" immediate="true" ajax="false">
+                    <p:dataExporter pageOnly="true" type="csv" target="#{cc.attrs.target}" fileName="#{cc.attrs.fileName}"/>
+                </p:menuitem>
+            </p:menuButton>
+            <p:menuButton value="#{cc.attrs.pageOnly ? 'Exportar Tudo' : 'Exportar'}" styleClass="#{cc.attrs.styleExporter ? 'menu-export' : ''} no-print" >
+                <p:menuitem value="Excel" immediate="true" ajax="false">
+                    <pe:exporter  type="xlsx" target="#{cc.attrs.target}" fileName="#{cc.attrs.fileName}"/>
+                </p:menuitem>
+                <p:menuitem value="PDF" immediate="true" ajax="false">
+                    <pe:exporter orientation="#{cc.attrs.landscape ? 'Landscape' : 'Portrait'}" type="pdf" 
+                                  cellFontSize="7" facetFontSize="7" preProcessor="#{customExporterMB.preProcessPDF}" 
+                                 target="#{cc.attrs.target}" fileName="#{cc.attrs.fileName}"/>
+                </p:menuitem>
+                <p:menuitem value="CSV" immediate="true" ajax="false">
+                    <p:dataExporter type="csv" target="#{cc.attrs.target}" fileName="#{cc.attrs.fileName}"/>
+                </p:menuitem>
+            </p:menuButton>
+        </h:panelGroup>
+    </cc:implementation>
+</html>

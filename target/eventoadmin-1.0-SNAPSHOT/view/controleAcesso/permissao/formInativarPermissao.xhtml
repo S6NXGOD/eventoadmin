@@ -1,0 +1,48 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:custom="http://java.sun.com/jsf/composite/components"
+                 >
+    <h:form id="formInativarPermissao">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <h:outputLabel value="#{msg['permissao.descricao']}:" styleClass="control-label"/><br/>
+                <span class="uix-content-detail">
+                    <h:outputText value="#{permissaoMB.entity.descricao}"/>
+                </span>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <h:outputLabel value="#{msg['permissao.key']}:" styleClass="control-label"/><br/>
+                <span class="uix-content-detail">
+                    <h:outputText value="#{permissaoMB.entity.key}"/>
+                </span>
+            </div>
+        </div>
+        <p:separator/>
+        <div class="row">
+            <div class="form-group col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                <div class="checkbox">
+                    <label>
+                        <h:selectBooleanCheckbox value="#{permissaoMB.emCascata}" />
+                        #{msg['permissao.inativarPermissaoEmCascata']}
+                    </label>
+                </div>
+                <h:outputText value="#{msg['permissao.inativarPermissaoEmCascataInfo']}" styleClass="help-block"/>
+            </div>
+        </div>
+        <div>
+            <h:outputText value="#{msg['permissao.confirmaInativacao']}"/>
+            <br/>
+            <br/>
+            <x:securityArea rolesAllowed="permissao.create">
+                <p:commandButton process="@form" update="@form :formListPermissao" action="#{permissaoMB.inativar}"
+                                 oncomplete="PF('widgetPermissaoInativacao').hide();" value="#{xmsg['yes']}" />
+            </x:securityArea>
+            <p:commandButton type="button" onclick="PF('widgetPermissaoInativacao').hide();" value="#{xmsg['no']}" />
+        </div>
+    </h:form>
+</ui:composition>

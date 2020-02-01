@@ -1,0 +1,101 @@
+body{font-size: 12px;}
+.ui-inputfield[readonly],.ui-inputfield[disabled]{ background-color: #E6E6E6;}
+header{padding: 10px 20px;}
+footer {border-top: 1px solid #ddd;margin: 10px auto 0; padding: 20px; width: 98%;}
+.ui-widget{font-size: 12px;}
+select{padding: 4px;}
+.font-11, .font-11  td, .font-11  th{font-size:  11px;}
+.font-weight-normal, .font-weight-normal  td{font-weight: normal;}
+.grid-detail, grid-form{margin-top: 0;}
+.grid-detail td, grid-form td{padding: 4px 0;}
+.grid-detail td label, .grid-form > tbody > tr > td > label{margin: 0 5px 0 15px ; float: right; text-align: right;}
+.grid-detail td label{font-weight: bold;}
+.w-50{width: 50px;}
+.w-60{width: 60px;}
+.w-70{width: 70px;}
+.w-80{width: 80px;}
+.w-90{width: 90px;}
+.w-100{width: 100px;}
+.w-110{width: 110px;}
+.w-120{width: 120px;}
+.w-130{width: 130px;}
+.w-140{width: 140px;}
+.w-150{width: 150px;}
+.w-160{width: 160px;}
+.w-170{width: 170px;}
+.w-180{width: 180px;}
+.w-190{width: 190px;}
+.w-200{width: 200px;}
+.w-210{width: 210px;}
+.w-220{width: 220px;}
+.w-230{width: 230px;}
+.w-240{width: 240px;}
+.w-250{width: 250px;}
+.w-260{width: 260px;}
+.w-270{width: 270px;}
+.w-280{width: 280px;}
+.w-290{width: 290px;}
+.w-300{width: 300px;}
+.w-310{width: 310px;}
+.w-320{width: 320px;}
+.w-330{width: 330px;}
+.w-340{width: 340px;}
+.w-350{width: 350px;}
+.w-100p{width: 100%}
+.ui-tabs{margin-bottom: 2px;}
+.ui-datatable th{text-align: center !important;  white-space: normal;}
+.datatable-auditing th, .datatable-auditing td, .datatable-auditing td .ui-dt-c, .datatable-auditing td .ui-dt-c span{white-space: normal !important;}
+.ui-datatable th{text-align: center !important;}
+.legenda-tabela{font-size: 9px !important; font-weight: normal !important; margin-bottom: 1px; width: 62px; border: 0 !important;}
+.ui-dialog.ui-widget-content .ui-dialog-content {font-size: 12px; margin-bottom: 10px;}
+.ui-fieldset{margin: 3px 0;}
+.ui-fieldset-legend{width: auto;font-size: 13px;height: auto;padding: 0px 15px;margin: 5px 0 5px 5px;}
+.ui-menu .ui-menu-parent .ui-menu-child {min-width: 180px; width: auto;}
+.grid-permissao a{text-decoration: none;}
+.grid-permissao .ui-panel-content{padding: 2px;}
+.grid-permissao .ui-datagrid-content{border: 0;}
+.panel-permissao{margin-bottom: 5px;}
+.link-permissao{vertical-align:middle;display:block;}
+.caminho-permissao {font-size: 10px;  display: block; line-height: 11px; font-weight: normal; padding-top: 3px;text-align: center; color: #8B8989;}
+.nome-permissao {display: block;font-size: 15px; font-weight: bold; padding-top: 3px; text-align: center; color: #000}
+.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {float: left; margin-right: 2px; margin-left: 0;}
+input[type="radio"], input[type="checkbox"] {margin: 0; min-height: 0; padding-left: 0; margin-right: 3px;}
+.radio, .checkbox {padding-left: 0; margin: 0;}
+.radio td, .checkbox td{    padding: 4px;}
+.ui-toolbar{margin: 5px 0 10px 0;}
+.ui-datatable th input.ui-column-filter{width: 95% !important; }
+.ui-datatable th select.ui-column-filter{width: 95% !important; }
+.ui-toolbar .ui-button{margin: 0 3px 0 0;}
+.ui-toolbar .ui-button span{font-size: 14px;}
+.navbar .ui-panelmenu .ui-panelmenu-header{font-size: 14px;}
+/*menu bar*/
+.ui-menu.ui-menubar{}
+.ui-menu .ui-menuitem {margin: 0;}
+.ui-menu.ui-menubar .ui-menu-parent .ui-menu-child {padding: 0;}
+.ui-menu > ul > li > a{padding: 10px 10px !important;border: 0}
+.ui-menu > ul > li ul li{width: 230px !important;}
+.ui-menu > ul > li > ul > li{width: 190px !important;}
+.ui-menu > ul > li ul .ui-menuitem-link {padding: 8px 0 !important; font-size: 13px;}
+.acesso-rapido .ui-autocomplete-input {height: 34px;}
+select.form-control{height: 34px;}
+section.conteudo {padding: 0 20px; font-size: 12px;}
+section.conteudo .page-header {margin: 10px 0 0 0; font-size: 20px }
+section.conteudo h1.page-header  span{vertical-align: middle;}
+.ui-datatable .ui-datatable-tablewrapper tbody > tr > td {padding: 3px; white-space: normal;}
+.ui-datatable thead > tr > th {white-space: normal !important;}
+/*login*/
+.login-wraper {width: 300px;margin: 10% auto;-moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);position: relative;padding: 10px;height: auto;background: white;text-align: left;}
+.login-wraper h1{font-family: 'Raleway', sans-serif;font-weight: lighter;text-align: center;font-size: 23px;padding: 0;margin: 0}
+.login-wraper .login-body{margin: 10px auto;padding: 15px 0 10px}
+.login-wraper .login-body .input-append,.login-wraper .login-body .input-prepend {width: 350px;}
+.login-wraper .login-body input[type=text],.login-wraper .login-body input[type=password]{width: 100%}
+@media (max-width: 600px) {
+    .login-wraper {width: auto;height: auto;margin: 10% auto;}
+}
+@media (max-width: 800px) {
+    .login-wraper {margin: 10% auto;}
+}
+.ui-dialog.ui-widget-content .ui-dialog-title{font-size: 18px;}
+.ui-datatable table{ table-layout: auto; }
+.ui-datatable tr.ui-widget-content:hover, .ui-panelgrid tr.ui-widget-content:hover, .ui-treetable tr.ui-widget-content:hover{background-color: #EBEBEB;}
+.uix-form-detail .control-label { margin-bottom: 0; margin-top: 8px;}

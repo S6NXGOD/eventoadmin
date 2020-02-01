@@ -1,0 +1,82 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces">
+    <script type="text/javascript">
+        PrimeFaces.widget.Schedule.prototype._oldInit = PrimeFaces.widget.Schedule.prototype.init;
+        PrimeFaces.widget.Schedule.prototype.init = function (cfg) {
+            cfg.columnFormat = {
+                month: 'ddd',
+                week: 'ddd DD/M',
+                day: 'dddd DD/MM'
+            };
+
+            this._oldInit.apply(this, arguments);
+        };
+
+        PrimeFaces.locales['pt'] = {
+            closeText: 'Fechar',
+            prevText: 'Anterior',
+            nextText: 'Próximo',
+            currentText: 'Começo',
+            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+            weekHeader: 'Semana',
+            firstDay: 0,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            timeOnlyTitle: 'Só Horas',
+            timeText: 'Tempo',
+            hourText: 'Hora',
+            minuteText: 'Minuto',
+            secondText: 'Segundo',
+            ampm: false,
+            month: 'Mês',
+            week: 'Semana',
+            day: 'Dia',
+            allDayText: 'Todo o Dia'
+        };
+
+
+    </script>
+    <style type="text/css">
+        .emp1 { background: #269abc !important; border-color: #932c39!important; }
+        .left {
+            text-align: left;
+        }
+
+        .right div {
+            float: right;
+        }
+    </style>
+
+    <h:form id="formAgendamento" >
+        <x:modalMessages autoUpdate="true"/>
+        <p:tabView >
+            <p:tab title="Agenda de Reservas">
+                <h:panelGrid columnClasses="value" >
+                    <p:schedule id="schedule" value="#{reservaMB.eventModel}" widgetVar="myschedule" 
+                                timeZone="GMT-3" axisFormat="HH:mm" locale="pt" slotMinutes="30" allDaySlot="false" 
+                                draggable="false" resizable="false" initialDate="#{now}">
+                        <p:ajax event="eventSelect" listener="#{reservaMB.onEventSelect}" process="@form" update="@form"  />
+                    </p:schedule>
+                </h:panelGrid>
+            </p:tab>
+        </p:tabView>
+
+    </h:form>
+
+    <p:dialog widgetVar="widgetReserva" header="Cadastrar Reserva" appendTo="@(body)" 
+              modal="true" styleClass="uix-dialog-fluid" showEffect="clip" hideEffect="clip">
+
+    </p:dialog>
+    <p:dialog widgetVar="widgetReservaDetail" header="#{msg['reserva.detail']}" appendTo="@(body)" 
+              modal="true" styleClass="uix-dialog-fluid" showEffect="clip" hideEffect="clip">
+    </p:dialog>
+</ui:composition>

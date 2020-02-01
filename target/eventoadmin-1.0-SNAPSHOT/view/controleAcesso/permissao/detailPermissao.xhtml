@@ -1,0 +1,127 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:custom="http://java.sun.com/jsf/composite/components"
+                 >
+    <h:form id="formDetailPermissao" styleClass="uix-form-detail">
+        <p:accordionPanel multiple="true" activeIndex="0,1,2,3">
+            <p:tab title="#{msg['dadosGerais']}">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['permissao.descricao']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{permissaoMB.entity.descricao}"/>
+                            </span>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['permissao.key']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{permissaoMB.entity.key}"/>
+                            </span>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['permissao.permissaoPai']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{permissaoMB.entity.permissaoPai.descricao}">
+                                    <x:initializer/>
+                                </h:outputText>
+                            </span>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['permissao.global']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{permissaoMB.entity.global}" converter="yesNoConverter"/>
+                            </span>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['permissao.ativo']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{permissaoMB.entity.ativo}" converter="yesNoConverter"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h:outputLabel value="#{msg['permissao.url']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{permissaoMB.entity.url}"/>
+                            </span>
+                        </div>
+
+
+                    </div>
+                </div>
+            </p:tab>
+            <p:tab title="#{msg['permissao.dadosMenu']}">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                            <h:outputLabel value="#{msg['permissao.possuiMenu']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{permissaoMB.entity.possuiMenu}" converter="yesNoConverter"/>
+                            </span>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                            <h:outputLabel value="#{msg['permissao.nomeMenu']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{permissaoMB.entity.nomeMenu}"/>
+                            </span>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                            <h:outputLabel value="#{msg['permissao.urlMenu']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{permissaoMB.entity.nomeMenu}"/>
+                            </span>
+                        </div>
+
+
+                    </div>
+                </div>
+            </p:tab>
+            <p:tab title="#{msg['permissao.permissoesFilhas']}">
+                <p:dataTable emptyMessage="#{xmsg['noRecordFound']}" rowIndexVar="index" styleClass="table-responsive"
+                             var="permissao" value="#{permissaoMB.entity.permissoesFilhas}">
+                    <x:initializer/>
+                    <p:column styleClass="uix-datatable-index">
+                        <h:outputText value="#{index+1}" />
+                    </p:column>
+
+                    <p:column headerText="#{msg['permissao.descricao']}" >
+                        <h:outputText value="#{permissao.descricao}"/>
+                    </p:column>
+                    <p:column headerText="#{msg['permissao.key']}" >
+                        <h:outputText value="#{permissao.key}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:tab>
+            <p:tab title="#{msg['permissao.perfis']}">
+                <p:dataTable emptyMessage="#{xmsg['noRecordFound']}" rowIndexVar="index" styleClass="table-responsive"
+                             var="perfil" value="#{permissaoMB.entity.perfis}">
+                    <x:initializer/>
+                    <p:column styleClass="uix-datatable-index">
+                        <h:outputText value="#{index+1}" />
+                    </p:column>
+                    <p:column headerText="#{msg['perfil.descricao']}" >
+                        <h:outputText value="#{perfil.descricao}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:tab>
+        </p:accordionPanel>
+        <p:separator/>
+        <div style="text-align: center;">
+            <p:commandButton type="button" value="#{xmsg['close']}" onclick="PF('widgetPermissaoDetail').hide()" />
+            <x:securityArea rolesAllowed="permissao.audit">
+                <x:audit for="#{permissaoMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+</ui:composition>

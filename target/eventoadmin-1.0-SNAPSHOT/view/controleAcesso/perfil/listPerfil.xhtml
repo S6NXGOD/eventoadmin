@@ -1,0 +1,75 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:custom="http://java.sun.com/jsf/composite/components"
+                 >
+    <ui:param name="title" value="#{msg['perfil.list']}" />
+    <ui:define name="body">
+        <ui:include src="menuPerfil.xhtml" />
+        <h:form id="formListPerfil">
+            <x:modalMessages/>
+            <x:dataTableActions target=":formListPerfil:dataTablePerfil" widgetVar="widgetDataTablePerfil" fileName="perfil_export" />
+            <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
+                         id="dataTablePerfil" var="perfil" value="#{perfilMB.dataModel}" lazy="true" styleClass="table-responsive"
+                         currentPageReportTemplate="#{perfilMB.dataModel.currentPageReportTemplate}"
+                         paginatorTemplate="#{perfilMB.dataModel.paginatorTemplate}"
+                         rowIndexVar="index" widgetVar="widgetDataTablePerfil">
+
+                <p:column styleClass="uix-datatable-index" >
+                    <h:outputText value="#{index+1}" />
+                </p:column>
+
+                <p:column headerText="#{msg['perfil.descricao']}" sortBy="#{perfil.descricao}"
+                          filterBy="#{perfil.descricao}">
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['perfil.descricao']}"/>
+                    </f:facet>
+                    <h:outputText value="#{perfil.descricao}"/>
+                </p:column>
+
+                <p:column headerText="#{msg['perfil.ativo']}" sortBy="#{perfil.ativo}"
+                          style="text-align: center;">
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['perfil.ativo']}"/>
+                    </f:facet>
+                    <h:outputText value="#{perfil.ativo}" converter ="yesNoConverter" />
+                </p:column>
+
+                <p:column styleClass="uix-datatable-actions" exportable="false">
+                    <f:facet name="header">
+                        <h:outputText value="#{xmsg['actions']}"/>
+                    </f:facet>
+                    <p:commandButton oncomplete="PF('widgetPerfilDetail').show();"  
+                                     action="#{perfilMB.detail}"
+                                     icon="ui-icon-zoomin" process="@form" update=":formDetailPerfil" >
+                        <f:setPropertyActionListener value="#{perfil}" target="#{perfilMB.entity}" />
+                    </p:commandButton>
+                    <x:securityArea rolesAllowed="perfil.create">
+                        <p:button icon="ui-icon-pencil" outcome="createPerfil" >
+                            <f:param name="id" value="#{perfil.id}" />
+                        </p:button>
+                    </x:securityArea>
+                    <x:securityArea rolesAllowed="perfil.delete">
+                        <p:commandButton icon="ui-icon-trash" process="@form" update="@form" action="#{perfilMB.delete}" >
+                            <f:setPropertyActionListener value="#{perfil.id}" target="#{perfilMB.id}" />
+                            <x:confirmation message="#{xmsg['confirmDelete']} - #{perfil}" />
+                        </p:commandButton>
+                    </x:securityArea>
+                </p:column>
+            </p:dataTable>
+            <div class="uix-audit-delete">
+                <x:securityArea rolesAllowed="perfil.audit">
+                    <x:auditDelete for="#{classMB.perfil}"/>
+                </x:securityArea>
+            </div>
+        </h:form>
+
+        <p:dialog widgetVar="widgetPerfilDetail" header="#{msg['perfil.detail']}" appendTo="@(body)" modal="true" styleClass="uix-dialog-fluid">
+            <ui:include src="detailPerfil.xhtml" />
+        </p:dialog>
+    </ui:define>
+</ui:composition>

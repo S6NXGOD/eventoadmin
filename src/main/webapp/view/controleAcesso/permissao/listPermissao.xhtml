@@ -1,0 +1,160 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:custom="http://java.sun.com/jsf/composite/components"
+                 >
+    <ui:param name="title" value="#{msg['permissao.list']}" />
+    <ui:define name="body">
+        <ui:include src="menuPermissao.xhtml" />
+        <h:form id="formListPermissao">
+
+            <x:modalMessages/>
+            <p:tabView dynamic="true">
+                <p:tab title="#{msg['permissao.verNaTabela']}">
+                    <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
+                                 var="permissao" value="#{permissaoMB.dataModel}" lazy="true"
+                                 styleClass="table-responsive" 
+                                 currentPageReportTemplate="#{permissaoMB.dataModel.currentPageReportTemplate}"
+                                 paginatorTemplate="#{permissaoMB.dataModel.paginatorTemplate}"
+                                 rowIndexVar="index" widgetVar="widgetDataTablePermissao">
+
+                        <p:column styleClass="uix-datatable-index">
+                            <h:outputText value="#{index+1}" />
+                        </p:column>
+
+                        <p:column headerText="#{msg['permissao.descricao']}" sortBy="#{permissao.descricao}"
+                                  filterBy="#{permissao.descricao}">
+                            <h:outputText value="#{permissao.descricao}"/>
+                        </p:column>
+                        <p:column headerText="#{msg['permissao.key']}" sortBy="#{permissao.key}"
+                                  filterBy="#{permissao.key}">
+                            <h:outputText value="#{permissao.key}"/>
+                        </p:column>
+                        <p:column headerText="#{msg['permissao.permissaoPai']}" sortBy="#{permissao.permissaoPai.descricao}"
+                                  filterBy="#{permissao.permissaoPai.descricao}">
+                            <h:outputText value="#{permissao.permissaoPai.descricao}">
+                                <x:initializer/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="#{msg['permissao.possuiMenu']}" sortBy="#{permissao.possuiMenu}" 
+                                  filterBy="#{permissao.possuiMenu}" filterOptions="#{booleanSelectItensEmptyOption}" styleClass="text-center">
+                            <h:outputText value="#{permissao.possuiMenu}" converter="yesNoConverter"/>
+                        </p:column>
+                        <p:column headerText="#{msg['permissao.global']}" sortBy="#{permissao.global}"
+                                  filterBy="#{permissao.global}" filterOptions="#{booleanSelectItensEmptyOption}"
+                                  styleClass="text-center">
+                            <h:outputText value="#{permissao.global}" converter="yesNoConverter"/>
+                        </p:column>
+                        <p:column headerText="#{msg['permissao.ativo']}" sortBy="#{permissao.ativo}"
+                                  filterBy="#{permissao.ativo}" filterOptions="#{booleanSelectItensEmptyOption}"
+                                  styleClass="text-center">
+                            <h:outputText value="#{permissao.ativo}" converter="yesNoConverter"/>
+                        </p:column>
+                        <p:column styleClass="uix-datatable-actions">
+                            <f:facet name="header">
+                                <h:outputText value="#{xmsg['actions']}"/>
+                            </f:facet>
+                            <p:commandButton oncomplete="PF('widgetPermissaoDetail').show();"  icon="ui-icon-zoomin" process="@form" update=":formDetailPermissao" title="#{xmsg['detail']}">
+                                <f:setPropertyActionListener value="#{permissao}" target="#{permissaoMB.entity}" />
+                            </p:commandButton>
+                            <x:securityArea rolesAllowed="permissao.create" >
+                                <p:button icon="ui-icon-pencil" outcome="createPermissao" title="#{xmsg['edit']}" >
+                                    <f:param name="id" value="#{permissao.id}" />
+                                </p:button>
+                            </x:securityArea>
+                            <x:securityArea rolesAllowed="permissao.delete">
+                                <p:commandButton icon="ui-icon-trash" process="@form" update="@form" action="#{permissaoMB.delete}" title="#{xmsg['delete']}" >
+                                    <f:setPropertyActionListener value="#{permissao.id}" target="#{permissaoMB.id}" />
+                                    <x:confirmation message="#{xmsg['confirmDelete']} - #{permissao.descricao}" />
+                                </p:commandButton>
+                            </x:securityArea>
+                        </p:column>
+                    </p:dataTable>
+                    <div class="uix-audit-delete">
+                        <x:securityArea rolesAllowed="permissao.audit">
+                            <x:auditDelete for="#{classMB.permissao}"/>
+                        </x:securityArea>
+                    </div>
+                </p:tab>
+                <p:tab title="#{msg['permissao.verNaArvore']}">
+                    <p:treeTable value="#{permissaoMB.permissoes}" var="permissao">  
+                        <p:column headerText="#{msg['permissao']}">  
+                            <h:outputText value="#{permissao.descricao}"  style="font-size: 12px;" />  
+                            <h:panelGroup rendered="#{not permissao.ativo}" style="color: red;">
+                                (<h:outputText value="#{permissao.ativo}" converter="activeInactiveConverter" />)
+                            </h:panelGroup>
+                            <p:spacer width="5"/>
+                            <h:panelGroup style="font-size: 10px;">
+                                <p:commandButton oncomplete="PF('widgetPermissaoDetail').show();"  icon="ui-icon-zoomin" process="@this" update=":formDetailPermissao"
+                                                 title="#{xmsg['detail']}" >
+                                    <f:setPropertyActionListener target="#{permissaoMB.entity}" value="#{permissao}"/>
+                                </p:commandButton>
+                                <x:securityArea rolesAllowed="permissao.create">
+                                    <p:button icon="ui-icon-pencil" outcome="createPermissao" title="#{xmsg['edit']}">
+                                        <f:param name="id" value="#{permissao.id}" />
+                                    </p:button>
+                                </x:securityArea>
+                                <x:securityArea rolesAllowed="permissao.inativacao">
+                                    <p:commandButton icon="ui-icon-locked" process="@this" update=":formInativarPermissao" title="#{msg['inativar']}" 
+                                                     oncomplete="PF('widgetPermissaoInativacao').show()" rendered="#{permissao.ativo}"  >
+                                        <f:setPropertyActionListener value="#{permissao}" target="#{permissaoMB.entity}" />
+                                    </p:commandButton>
+                                </x:securityArea>
+                                <x:securityArea rolesAllowed="permissao.ativacao">
+                                    <p:commandButton icon="ui-icon-unlocked" process="@this" update=":formAtivarPermissao"  title="#{msg['ativar']}" 
+                                                     oncomplete="PF('widgetPermissaoAtivacao').show()"  rendered="#{not permissao.ativo}" >
+                                        <f:setPropertyActionListener value="#{permissao}" target="#{permissaoMB.entity}" />
+                                    </p:commandButton>
+                                </x:securityArea>
+                                <x:securityArea rolesAllowed="permissao.delete">
+                                    <p:commandButton icon="ui-icon-trash" process="@this" update="@form" action="#{permissaoMB.deleteArvore}" title="#{xmsg['delete']}" >
+                                        <f:setPropertyActionListener value="#{permissao.id}" target="#{permissaoMB.id}" />
+                                        <x:confirmation message="#{xmsg['confirmDelete']} - #{permissao.descricao}" />
+                                    </p:commandButton>
+                                </x:securityArea>
+                            </h:panelGroup>
+                        </p:column>  
+                    </p:treeTable>  
+                </p:tab>
+                <p:tab title="#{msg['permissao.ordenacao']}">
+                    <p:tree value="#{permissaoMB.permissoes}" var="permissao" draggable="true" droppable="true" >  
+                        <p:treeNode>
+                            <h:outputText value="#{permissao.descricao}"  style="font-size: 12px;" />  
+                        </p:treeNode>
+                    </p:tree>  
+
+                    <div class="uix-center">
+
+                        <x:securityArea rolesAllowed="permissao.create">
+                            <p:commandButton process="@form" update="@form" action="#{permissaoMB.salvarOrdenacao}" value="#{xmsg['save']}" />
+                        </x:securityArea>
+                    </div>
+
+                </p:tab>
+
+
+            </p:tabView>
+
+
+
+
+        </h:form>
+
+        <p:dialog widgetVar="widgetPermissaoDetail" header="#{msg['permissao.detail']}" appendTo="@(body)" modal="true" styleClass="uix-dialog-fluid">
+            <ui:include src="detailPermissao.xhtml" />
+        </p:dialog>
+
+        <p:dialog widgetVar="widgetPermissaoInativacao" header="#{msg['permissao.inativarPermissao']}" appendTo="@(body)" modal="true" styleClass="uix-dialog-fluid">
+            <ui:include src="formInativarPermissao.xhtml"/>
+        </p:dialog>
+
+        <p:dialog widgetVar="widgetPermissaoAtivacao" header="#{msg['permissao.ativarPermissao']}" appendTo="@(body)" modal="true" styleClass="uix-dialog-fluid">
+            <ui:include src="formAtivarPermissao.xhtml"/>
+        </p:dialog>
+
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,56 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:custom="http://java.sun.com/jsf/composite/components"
+                 >
+    <h:form id="formDetailErroSistema">
+
+
+        <p:accordionPanel multiple="true" activeIndex="0,1">
+            <p:tab title="#{msg['dadosGerais']}">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['erroSistema.data']}:" styleClass="control-label" /><br/>
+                            <h:outputText value="#{erroSistemaMB.entity.data}" styleClass="uix-content-detail">
+                                <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}" />
+                            </h:outputText>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['erroSistema.usuario']}:" styleClass="control-label" /><br/>
+                            <h:outputText value="#{erroSistemaMB.entity.usuario.nome}" styleClass="uix-content-detail"/>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+
+                            <h:outputLabel value="#{msg['erroSistema.funcionalidade']}:" styleClass="control-label" /><br/>
+                            <h:outputText value="#{erroSistemaMB.entity.funcionalidade}" styleClass="uix-content-detail"/>
+                        </div>
+                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                            <h:outputLabel value="#{msg['erroSistema.url']}:" styleClass="control-label" /><br/>
+                            <h:outputText value="#{erroSistemaMB.entity.url}"/>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h:outputLabel value="#{msg['erroSistema.informacaoNavegador']}:" styleClass="control-label" /><br/>
+                            <h:outputText value="#{erroSistemaMB.entity.informacaoNavegador}" styleClass="uix-content-detail"/>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <p:commandButton type="button" value="#{xmsg['close']}" onclick="PF('widgetErroSistemaDetail').hide()" />
+                </div>
+            </p:tab>
+            <p:tab title="#{msg['erroSistema.pilhaErro']}">
+                <h:outputText value="#{erroSistemaMB.entity.pilhaErroFormatada}" escape="false"/>
+            </p:tab>
+        </p:accordionPanel>
+
+    </h:form>
+</ui:composition>

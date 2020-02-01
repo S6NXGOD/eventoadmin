@@ -1,0 +1,28 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces">
+    <h:form id="formDetailPais" styleClass="uix-form-detail">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['pais.sigla']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{paisMB.entity.sigla}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['pais.nome']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{paisMB.entity.nome}" styleClass="uix-content-detail"/>
+                </div>
+           </div>
+         </div>
+        <p:separator/>
+        <div class="uix-center">
+            <p:commandButton type="button" value="#{xmsg['close']}" onclick="PF('widgetPaisDetail').hide()" />
+            <x:securityArea rolesAllowed="pais.audit">
+                <x:audit for="#{paisMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+</ui:composition>

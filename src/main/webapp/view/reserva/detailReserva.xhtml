@@ -1,0 +1,86 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces">
+    <h:form id="formDetailReserva" styleClass="uix-form-detail">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['reserva.sede']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{reservaMB.entity.sede}" styleClass="uix-content-detail">
+                        <x:initializer/>
+                    </h:outputText>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="Espaço:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{reservaMB.entity.espaco}" styleClass="uix-content-detail">
+                        <x:initializer/>
+                    </h:outputText>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['reserva.cliente']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{reservaMB.entity.cliente}" styleClass="uix-content-detail">
+                        <x:initializer/>
+                    </h:outputText>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['reserva.pacote']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{reservaMB.entity.pacote}" styleClass="uix-content-detail">
+                        <x:initializer/>
+                    </h:outputText>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="Check-In:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{reservaMB.entity.checkin}" styleClass="uix-content-detail">
+                        <f:convertDateTime />
+                    </h:outputText>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="Check-Out:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{reservaMB.entity.checkout}" styleClass="uix-content-detail">
+                        <f:convertDateTime />
+                    </h:outputText>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="Tipo da Reserva:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{reservaMB.entity.tiporeserva}" styleClass="uix-content-detail">
+                        <x:initializer/>
+                    </h:outputText>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="Observação:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{reservaMB.entity.observacao}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="Tipo de Pagamento:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{reservaMB.entity.tipopagamento.descricao}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="Valor Pago:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{reservaMB.entity.valorpago}" styleClass="uix-content-detail">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+                    </h:outputText>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="Valor da Reserva:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{reservaMB.entity.valorReserva}" styleClass="uix-content-detail">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+                    </h:outputText>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['reserva.pagamento']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{reservaMB.entity.pagamento}" converter ="yesNoConverter"  styleClass="uix-content-detail"/>
+                </div>
+           </div>
+         </div>
+        <p:separator/>
+        <div class="uix-center">
+            <p:commandButton type="button" value="#{xmsg['close']}" onclick="PF('widgetReservaDetail').hide()" />
+            <x:securityArea rolesAllowed="reserva.audit">
+                <x:audit for="#{reservaMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+</ui:composition>

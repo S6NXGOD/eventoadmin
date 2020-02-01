@@ -1,0 +1,82 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:custom="http://java.sun.com/jsf/composite/components"
+                 >
+    <ui:param name="title" value="#{msg['acessoSistema.list']}" />
+    <ui:define name="body">
+        <h:form id="formListAcessoSistema">
+            <x:modalMessages/>
+            <x:dataTableActions target=":formListAcessoSistema:dataTableAcessoSistema" 
+                                widgetVar="dataTableAcessoSistemaWidget" fileName="acessoSistema_export" />
+
+            <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" 
+                         emptyMessage="#{xmsg['noRecordFound']}"
+                         var="acessoSistema" rowIndexVar="index" id="dataTableAcessoSistema"
+                         widgetVar="dataTableAcessoSistemaWidget"
+                         currentPageReportTemplate="#{acessoSistemaMB.dataModel.currentPageReportTemplate}"
+                         paginatorTemplate="#{acessoSistemaMB.dataModel.paginatorTemplate}"
+                         value="#{acessoSistemaMB.dataModel}" lazy="true" >
+                <p:column styleClass="uix-datatable-index">
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+                <p:column sortBy="#{acessoSistema.dataHora}"
+                          filterBy="#{acessoSistema.dataHora}"
+                          style="text-align: center;">
+                    <f:facet name="header">
+                        #{msg['acessoSistema.dataHora']}
+                        <x:dateFilter/>
+                    </f:facet>
+                    <h:outputText value="#{acessoSistema.dataHora}">
+                        <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['acessoSistema.ip']}" sortBy="#{acessoSistema.ip}"
+                          filterBy="#{acessoSistema.ip}"
+                          >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['acessoSistema.ip']}"/>
+                    </f:facet>
+                    <h:outputText value="#{acessoSistema.ip}"/>
+                </p:column>
+                <p:column headerText="#{msg['acessoSistema.usuario']}" sortBy="#{acessoSistema.usuario.nome}"
+                          filterBy="#{acessoSistema.usuario.nome}"
+                          >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['acessoSistema.usuario']}"/>
+                    </f:facet>
+                    <h:outputText value="#{acessoSistema.usuario.nome}"/>
+                </p:column>
+                <p:column headerText="#{msg['acessoSistema.userAgent']}" sortBy="#{acessoSistema.userAgent}"
+                          filterBy="#{acessoSistema.userAgent}"
+                          >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['acessoSistema.userAgent']}"/>
+                    </f:facet>
+                    <h:outputText value="#{acessoSistema.userAgent}"/>
+                </p:column>
+                <p:column styleClass="uix-datatable-actions" exportable="false">
+                    <f:facet name="header">
+                        <h:outputText value="#{xmsg['actions']}"/>
+                    </f:facet>
+                    <p:commandButton oncomplete="PF('widgetAcessoSistemaDetail').show();"  icon="ui-icon-zoomin" process="@form" update=":formDetailAcessoSistema" >
+                        <f:setPropertyActionListener value="#{acessoSistema}" target="#{acessoSistemaMB.entity}" />
+                    </p:commandButton>
+                    <x:securityArea rolesAllowed="acessoSistema.create">
+                        <p:button icon="ui-icon-pencil" outcome="createAcessoSistema" >
+                            <f:param name="id" value="#{acessoSistema.id}" />
+                        </p:button>
+                    </x:securityArea>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+        <p:dialog widgetVar="widgetAcessoSistemaDetail" header="#{msg['acessoSistema.detail']}" appendTo="@(body)" modal="true" styleClass="uix-dialog-fluid">
+            <ui:include src="detailAcessoSistema.xhtml" />
+        </p:dialog>
+    </ui:define>
+</ui:composition>

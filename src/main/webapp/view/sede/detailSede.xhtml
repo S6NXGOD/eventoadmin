@@ -1,0 +1,66 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces">
+    <h:form id="formDetailSede" styleClass="uix-form-detail">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['sede.scopo']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{sedeMB.entity.scopo}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['sede.nome']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{sedeMB.entity.nome}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['sede.razaoSocial']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{sedeMB.entity.razaoSocial}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['sede.cidade']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{sedeMB.entity.cidade}" styleClass="uix-content-detail">
+                        <x:initializer/>
+                    </h:outputText>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['sede.endereco']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{sedeMB.entity.endereco}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['sede.cnpj']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{sedeMB.entity.cnpj}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['sede.cep']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{sedeMB.entity.cep}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['sede.telefone']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{sedeMB.entity.telefone}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['sede.whatsapp']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{sedeMB.entity.whatsapp}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['sede.email']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{sedeMB.entity.email}" styleClass="uix-content-detail"/>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['sede.ativa']}:" styleClass="control-label" /><br/>
+                    <h:outputText value="#{sedeMB.entity.ativa}" converter ="yesNoConverter"  styleClass="uix-content-detail"/>
+                </div>
+           </div>
+         </div>
+        <p:separator/>
+        <div class="uix-center">
+            <p:commandButton type="button" value="#{xmsg['close']}" onclick="PF('widgetSedeDetail').hide()" />
+            <x:securityArea rolesAllowed="sede.audit">
+                <x:audit for="#{sedeMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+</ui:composition>

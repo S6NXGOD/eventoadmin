@@ -1,0 +1,107 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces"
+                 >
+    <h:form>
+        <x:modalMessages/>
+        <p:tabView>
+            <p:tab title="#{xmsg.generalData}">
+                <h:panelGroup id="panelConfiguracaoEmail">
+
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <h:outputLabel value="* #{msg['configuracaoEmail.nome']}:" />
+                                <p:inputText value="#{configuracaoEmailMB.entity.nome}" maxlength="255" styleClass="form-control"  />
+                            </div>
+
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <h:outputLabel value="* #{msg['configuracaoEmail.email']}:" />
+                                <p:inputText value="#{configuracaoEmailMB.entity.email}" maxlength="255"  styleClass="form-control" />
+                            </div>
+
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <h:outputLabel value="* #{msg['configuracaoEmail.hostName']}:" />
+                                <p:inputText value="#{configuracaoEmailMB.entity.hostName}" maxlength="255"  styleClass="form-control" />
+                            </div>
+                            
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <h:outputLabel value="* #{msg['configuracaoEmail.usuario']}:" />
+                                <p:inputText value="#{configuracaoEmailMB.entity.usuario}" maxlength="255"  styleClass="form-control" />
+                            </div>
+
+                            <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                <h:outputLabel value="* #{msg['configuracaoEmail.senha']}:" />
+                                <p:inputText value="#{configuracaoEmailMB.entity.senha}" maxlength="255"  styleClass="form-control" />
+                            </div>
+
+                            <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                <h:outputLabel value="* #{msg['configuracaoEmail.smtpPort']}:" />
+                                <p:inputMask mask="9?999999999" slotChar="" value="#{configuracaoEmailMB.entity.smtpPort}" styleClass="form-control"  />
+                            </div>
+
+                            <div class="form-group col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <h:selectBooleanCheckbox value="#{configuracaoEmailMB.entity.tls}" />
+                                        #{msg['configuracaoEmail.tls']}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <h:selectBooleanCheckbox value="#{configuracaoEmailMB.entity.ssl}" />
+                                        #{msg['configuracaoEmail.ssl']}
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <p:separator/>
+                    <h:outputText value="#{xmsg['requiredFieldsForm']}"/>
+                    <div style="text-align: center;">
+                        <x:securityArea rolesAllowed="configuracaoEmail.create">
+                            <p:commandButton process="panelConfiguracaoEmail" update="@form" action="#{configuracaoEmailMB.save}" value="#{xmsg['save']}" />
+                        </x:securityArea>
+                        <x:securityArea rolesAllowed="configuracaoEmail.audit">
+                            <x:audit for="#{configuracaoEmailMB.entity}"/>
+                        </x:securityArea>
+                    </div>
+                </h:panelGroup>
+            </p:tab>
+            <p:tab title="#{msg['configuracaoEmail.testarEnvio']}">
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-md-6 col-sm-6 col-xs-12">
+
+                            <h:outputLabel value="* #{msg['configuracaoEmail.para']}:" />
+                            <p:inputText value="#{configuracaoEmailMB.email}" maxlength="255" styleClass="form-control"  />
+                        </div>
+                        <div class="form-group col-lg-12 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="* #{msg['configuracaoEmail.tituloMensagem']}:" />
+                            <p:inputText value="#{configuracaoEmailMB.titulo}" maxlength="255" styleClass="form-control"  />
+                        </div>
+                        <div class="form-group col-lg-12 col-md-6 col-sm-6 col-xs-12">
+
+                            <h:outputLabel value="* #{msg['configuracaoEmail.mensagem']}:" />
+                            <p:inputTextarea autoResize="false" value="#{configuracaoEmailMB.mensagem}" styleClass="form-control"  />
+                        </div>
+                    </div>
+
+                </div>
+                <br/>
+                <div class="text-center">
+                    <p:commandButton process="@form" update="@form" action="#{configuracaoEmailMB.enviarEmail()}" value="#{msg['enviar']}" />
+                </div>
+
+            </p:tab>
+        </p:tabView>
+    </h:form>
+</ui:composition>

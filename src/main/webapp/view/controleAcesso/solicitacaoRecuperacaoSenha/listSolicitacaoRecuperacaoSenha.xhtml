@@ -1,0 +1,82 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces"
+                 >
+    <ui:param name="title" value="#{msg['solicitacaoRecuperacaoSenha.list']}" />
+    <ui:define name="body">
+        <ui:include src="menuSolicitacaoRecuperacaoSenha.xhtml" />
+        <h:form id="formListSolicitacaoRecuperacaoSenha">
+            <x:modalMessages/>
+            <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
+                         var="solicitacaoRecuperacaoSenha" rowIndexVar="index" widgetVar="dataTableSolicitacaoRecuperacaoSenhaWidget"
+                         currentPageReportTemplate="#{solicitacaoRecuperacaoSenhaMB.dataModel.currentPageReportTemplate}"
+                         styleClass="table-responsive"
+                         paginatorTemplate="#{solicitacaoRecuperacaoSenhaMB.dataModel.paginatorTemplate}"
+                         value="#{solicitacaoRecuperacaoSenhaMB.dataModel}" lazy="true" >
+                <p:column styleClass="uix-datatable-index">
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+                <p:column headerText="#{msg['solicitacaoRecuperacaoSenha.email']}" sortBy="#{solicitacaoRecuperacaoSenha.email}"
+                          filterBy="#{solicitacaoRecuperacaoSenha.email}"   >
+                        <h:outputText value="#{solicitacaoRecuperacaoSenha.email}"/>
+                </p:column>
+                <p:column headerText="#{msg['solicitacaoRecuperacaoSenha.ativo']}" sortBy="#{solicitacaoRecuperacaoSenha.ativo}"
+                          filterBy="#{solicitacaoRecuperacaoSenha.ativo}" filterOptions="#{booleanSelectItensEmptyOption}"  style="text-align: center;">
+                        <h:outputText value="#{solicitacaoRecuperacaoSenha.ativo}" converter ="yesNoConverter" />
+                </p:column>
+                <p:column headerText="#{msg['solicitacaoRecuperacaoSenha.dataCadastro']}" sortBy="#{solicitacaoRecuperacaoSenha.dataCadastro}"
+                          filterBy="#{solicitacaoRecuperacaoSenha.dataCadastro}"   style="text-align: center;">
+                        <f:facet name="header">
+                            #{msg['solicitacaoRecuperacaoSenha.dataCadastro']}
+                            <x:dateFilter/>
+                        </f:facet>
+                        <h:outputText value="#{solicitacaoRecuperacaoSenha.dataCadastro}">
+                             <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}" />
+                        </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['solicitacaoRecuperacaoSenha.dataValidade']}" sortBy="#{solicitacaoRecuperacaoSenha.dataValidade}"
+                          style="text-align: center;">
+                        <h:outputText value="#{solicitacaoRecuperacaoSenha.dataValidade}">
+                             <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}" />
+                        </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['solicitacaoRecuperacaoSenha.dataAlteracaoSenha']}" sortBy="#{solicitacaoRecuperacaoSenha.dataAlteracaoSenha}"
+                          filterBy="#{solicitacaoRecuperacaoSenha.dataAlteracaoSenha}"   style="text-align: center;">
+                        <f:facet name="header">
+                            #{msg['solicitacaoRecuperacaoSenha.dataAlteracaoSenha']}
+                            <x:dateFilter/>
+                        </f:facet>
+                        <h:outputText value="#{solicitacaoRecuperacaoSenha.dataAlteracaoSenha}">
+                            <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}" />
+                        </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['solicitacaoRecuperacaoSenha.usuario']}" sortBy="#{solicitacaoRecuperacaoSenha.usuario.nome}"
+                          filterBy="#{solicitacaoRecuperacaoSenha.usuario.nome}"   >
+                        <h:outputText value="#{solicitacaoRecuperacaoSenha.usuario.nome}"/>
+                </p:column>
+                <p:column headerText="#{msg['solicitacaoRecuperacaoSenha.tipoRecuperacaoSenha']}"
+                          filterBy="#{solicitacaoRecuperacaoSenha.tipoRecuperacaoSenha}"  
+                          filterOptions="#{findAllBean.getSelect(classMB.tipoRecuperacaoSenha)}">
+                        <h:outputText value="#{solicitacaoRecuperacaoSenha.tipoRecuperacaoSenha.descricao}"/>
+                </p:column>
+                <p:column styleClass="uix-datatable-actions">
+                    <f:facet name="header">
+                        <h:outputText value="#{xmsg['actions']}"/>
+                    </f:facet>
+                    <p:commandButton oncomplete="PF('widgetSolicitacaoRecuperacaoSenhaDetail').show();"  icon="ui-icon-zoomin" 
+                                     process="@form" update=":formDetailSolicitacaoRecuperacaoSenha" title="#{xmsg['detail']}" >
+                        <f:setPropertyActionListener value="#{solicitacaoRecuperacaoSenha}" target="#{solicitacaoRecuperacaoSenhaMB.entity}" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+        <p:dialog widgetVar="widgetSolicitacaoRecuperacaoSenhaDetail" header="#{msg['solicitacaoRecuperacaoSenha.detail']}" appendTo="@(body)" modal="true" styleClass="uix-dialog-fluid">
+            <ui:include src="detailSolicitacaoRecuperacaoSenha.xhtml" />
+        </p:dialog>
+    </ui:define>
+</ui:composition>

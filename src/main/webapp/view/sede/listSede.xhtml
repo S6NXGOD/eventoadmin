@@ -1,0 +1,108 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces">
+    <ui:param name="title" value="#{msg['sede.list']}" />
+    <ui:define name="body">
+        <ui:include src="menuSede.xhtml" />
+        <h:form id="formListSede">
+            <x:modalMessages/>
+
+            <x:dataTableActions fileName="sede_export" target=":formListSede:dataTableSede"
+                                widgetVar="dataTableSedeWidget"  />
+
+            <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
+                         var="sede" rowIndexVar="index" id="dataTableSede" widgetVar="dataTableSedeWidget" styleClass="table-responsive"
+                         currentPageReportTemplate="#{sedeMB.dataModel.currentPageReportTemplate}"
+                         paginatorTemplate="#{sedeMB.dataModel.paginatorTemplate}"
+                         value="#{sedeMB.dataModel}" lazy="true" >
+                <p:column styleClass="uix-datatable-index">
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+                <p:column headerText="#{msg['sede.nome']}" sortBy="#{sede.nome}"
+                          filterBy="#{sede.nome}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['sede.nome']}" />
+                    </f:facet>
+                    <h:outputText value="#{sede.nome}"/>
+                </p:column>
+                <p:column headerText="#{msg['sede.razaoSocial']}" 
+                          >
+                    <f:facet name="header">
+                        <h:outputText value="Razão Social" />
+                    </f:facet>
+                    <h:outputText value="#{sede.razaoSocial}"/>
+                </p:column>
+                <p:column headerText="#{msg['sede.scopo']}" 
+                          >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['sede.scopo']}" />
+                    </f:facet>
+                    <h:outputText value="#{sede.scopo.descricao}"/>
+                </p:column>
+                <p:column headerText="#{msg['sede.cnpj']}" sortBy="#{sede.cnpj}"
+                          filterBy="#{sede.cnpj}"   >
+                    <f:facet name="header">
+                        <h:outputText value="CNPJ" />
+                    </f:facet>
+                    <h:outputText value="#{sede.cnpj}"/>
+                </p:column>
+                <p:column headerText="#{msg['sede.telefone']}" sortBy="#{sede.telefone}"
+                          filterBy="#{sede.telefone}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['sede.telefone']}" />
+                    </f:facet>
+                    <h:outputText value="#{sede.telefone}"/>
+                </p:column>
+                <p:column headerText="#{msg['sede.whatsapp']}" sortBy="#{sede.whatsapp}"
+                          filterBy="#{sede.whatsapp}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['sede.whatsapp']}" />
+                    </f:facet>
+                    <h:outputText value="#{sede.whatsapp}"/>
+                </p:column>
+                <p:column headerText="#{msg['sede.ativa']}" sortBy="#{sede.ativa}"
+                          filterBy="#{sede.ativa}" filterOptions="#{booleanSelectItensEmptyOption}"  style="text-align: center;">
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['sede.ativa']}" />
+                    </f:facet>
+                    <h:outputText value="#{sede.ativa}" converter ="yesNoConverter" />
+                </p:column>
+                <p:column styleClass="uix-datatable-actions" exportable="false" headerText="#{xmsg['actions']}">
+                    <f:facet name="header">
+                        <h:outputText value="#{xmsg['actions']}"/>
+                    </f:facet>
+                    <p:commandButton oncomplete="PF('widgetSedeDetail').show();"  icon="ui-icon-zoomin" 
+                                     process="@form" update=":formDetailSede" title="#{xmsg['detail']}" >
+                        <f:setPropertyActionListener value="#{sede}" target="#{sedeMB.entity}" />
+                    </p:commandButton>
+                    <x:securityArea rolesAllowed="sede.create">
+                        <p:button icon="ui-icon-pencil" outcome="createSede" title="#{xmsg['edit']}">
+                            <f:param name="id" value="#{sede.id}" />
+                        </p:button>
+                    </x:securityArea>
+                    <x:securityArea rolesAllowed="sede.delete">
+                        <p:commandButton icon="ui-icon-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
+                                         action="#{sedeMB.delete}" >
+                            <f:setPropertyActionListener value="#{sede.id}" target="#{sedeMB.id}" />
+                            <x:confirmation message="#{xmsg['confirmDelete']} - #{sede}" />
+                        </p:commandButton>
+                    </x:securityArea>
+                </p:column>
+            </p:dataTable>
+            <div class="uix-audit-delete">
+                <x:securityArea rolesAllowed="sede.audit">
+                    <x:auditDelete for="#{sedeMB.entityClass}"/>
+                </x:securityArea>
+            </div>  
+        </h:form>
+
+        <p:dialog widgetVar="widgetSedeDetail" header="#{msg['sede.detail']}" appendTo="@(body)" 
+                  modal="true" styleClass="uix-dialog-fluid" >
+            <ui:include src="detailSede.xhtml" />
+        </p:dialog>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,130 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:custom="http://java.sun.com/jsf/composite/components"
+                 >
+    <h:form id="formCreatePermissao">
+        <x:modalMessages/>
+        <p:fieldset legend="#{msg['dadosGerais']}">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="form-group col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <h:outputLabel value="* #{msg['permissao.descricao']}:" />
+                        <p:inputText value="#{permissaoMB.entity.descricao}" maxlength="255" styleClass="form-control"  />
+                    </div>
+                    <div class="form-group col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <h:outputLabel value="* #{msg['permissao.key']}:" />
+                        <p:inputText value="#{permissaoMB.entity.key}" maxlength="255"  styleClass="form-control"/>
+                    </div>
+                    <div class="form-group col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <h:outputLabel value="#{msg['permissao.permissaoPai']}:" />
+
+                        <h:panelGroup layout="block" id="panelPermissaoPai" styleClass="form-control">
+                            <h:panelGroup id="conteudoPanelPermissaoPai" >
+                                <h:outputText value="#{permissaoMB.entity.permissaoPai.descricao} - #{permissaoMB.entity.permissaoPai.key}" >
+                                    <x:initializer/>
+                                </h:outputText>
+                                <p:commandButton type="button" icon="ui-icon-carat-1-s" 
+                                                 id="buttonPermissaoPai" styleClass="pull-right"
+                                                 style="font-size: 10px;"/>
+                            </h:panelGroup>
+                        </h:panelGroup>
+
+                        <p:overlayPanel for="panelPermissaoPai" styleClass="w-100p" widgetVar="overlayPermissaoPai" >
+                            <p:tree value="#{perfilMB.permissoes}" var="permissao" styleClass="w-100p"
+                                    selectionMode="single"  style="max-height: 400px; overflow-y: scroll" >
+                                <p:ajax event="select" update=":formCreatePermissao:conteudoPanelPermissaoPai @this"
+                                        listener="#{permissaoMB.entity.setPermissaoPai(permissao)}" oncomplete="PF('overlayPermissaoPai').hide()" />
+                                <p:treeNode collapsedIcon="ui-icon-folder-collapsed" >
+                                    <h:panelGroup styleClass="#{permissao == permissaoMB.entity.permissaoPai ? 'ui-state-highlight' : ''}">
+                                        <h:outputText value="#{permissao.descricao}" style="font-weight: bold"/>  
+                                        <h:outputText value=" (#{permissao.key})" styleClass="font-11"  /> 
+                                    </h:panelGroup>
+                                </p:treeNode>
+                            </p:tree>
+                        </p:overlayPanel>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                        <h:outputLabel value="#{msg['permissao.url']}:" />
+                        <p:inputTextarea value="#{permissaoMB.entity.url}"  rows="3" styleClass="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+
+
+                    <div class="form-group col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                        <div class="checkbox">
+                            <label>
+                                <h:selectBooleanCheckbox value="#{permissaoMB.entity.global}" />
+                                #{msg['permissao.global']}
+                            </label>
+                        </div>
+                        <h:outputText value="#{msg['permissao.globalInfo']}" styleClass="help-block"/>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                        <div class="checkbox">
+                            <label>
+                                <h:selectBooleanCheckbox value="#{permissaoMB.entity.ativo}" />
+                                #{msg['permissao.ativo']}
+                            </label>
+                        </div>
+                        <h:outputText value="#{msg['permissao.ativoInfo']}" styleClass="help-block"/>
+                    </div>
+                </div>
+            </div>
+        </p:fieldset>
+        <p:fieldset legend="#{msg['permissao.dadosMenu']}">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="form-group col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                        <div class="checkbox">
+                            <label>
+                                <h:selectBooleanCheckbox value="#{permissaoMB.entity.possuiMenu}" />
+                                #{msg['permissao.possuiMenu']}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                        <h:outputLabel value="#{msg['permissao.nomeMenu']}:" />
+                        <p:inputText value="#{permissaoMB.entity.nomeMenu}" styleClass="form-control" maxlength="255" />
+                        <h:outputText value="#{msg['permissao.nomeMenuInfo']}" styleClass="help-block"/>
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <h:outputLabel value="#{msg['permissao.urlMenu']}:" />
+                        <p:inputText value="#{permissaoMB.entity.urlMenu}" styleClass="form-control"  />
+                        <h:outputText value="#{msg['permissao.urlMenuInfo']}" styleClass="help-block"/>
+                    </div>
+
+                </div>
+            </div>
+        </p:fieldset>
+
+
+        <h:outputText value="#{xmsg['requiredFieldsForm']}"/>
+        <div class="uix-center">
+            <x:securityArea rolesAllowed="permissao.create">
+                <p:commandButton process="@form" update="@form" action="#{permissaoMB.save}" value="#{xmsg['save']}" />
+            </x:securityArea>
+            <x:securityArea rolesAllowed="permissao.audit">
+                <x:audit for="#{permissaoMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+
+</ui:composition>

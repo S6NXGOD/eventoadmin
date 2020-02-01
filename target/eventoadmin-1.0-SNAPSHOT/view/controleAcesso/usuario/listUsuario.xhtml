@@ -1,0 +1,113 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:custom="http://java.sun.com/jsf/composite/components"
+                 >
+    <ui:param name="title" value="#{msg['usuario.list']}" />
+    <ui:define name="body">
+        <ui:include src="menuUsuario.xhtml" />
+        <h:form id="formListUsuario">
+            <x:modalMessages/>
+            <x:dataTableActions target=":formListUsuario:dataTableUsuario" widgetVar="dataTableUsuarioWidget" fileName="usuario_export" />
+
+            <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
+                         var="usuario" rowIndexVar="index" styleClass="table-responsive" 
+                         currentPageReportTemplate="#{usuarioMB.dataModel.currentPageReportTemplate}"
+                         id="dataTableUsuario" widgetVar="dataTableUsuarioWidget"
+                         paginatorTemplate="#{usuarioMB.dataModel.paginatorTemplate}"
+                         value="#{usuarioMB.dataModel}" lazy="true" >
+                <p:column styleClass="uix-datatable-index">
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+                <p:column headerText="#{msg['usuario.nome']}" sortBy="#{usuario.nome}"
+                          filterBy="#{usuario.nome}"
+                          >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['usuario.nome']}"/>
+                    </f:facet>
+                    <h:outputText value="#{usuario.nome}"/>
+                </p:column>
+                <p:column headerText="#{msg['usuario.cpf']}" sortBy="#{usuario.cpf}"
+                          filterBy="#{usuario.cpf}" styleClass="text-center"
+                          >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['usuario.cpf']}"/>
+                    </f:facet>
+                    <h:outputText converter="cpfConverter" value="#{usuario.cpf}"/>
+                </p:column>
+                <p:column headerText="#{msg['usuario.userLogin']}" sortBy="#{usuario.userLogin}"
+                          filterBy="#{usuario.userLogin}"
+                          >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['usuario.userLogin']}"/>
+                    </f:facet>
+                    <h:outputText value="#{usuario.userLogin}"/>
+                </p:column>
+                <p:column headerText="#{msg['usuario.email']}" sortBy="#{usuario.email}"
+                          filterBy="#{usuario.email}"
+                          >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['usuario.email']}"/>
+                    </f:facet>
+                    <h:outputText value="#{usuario.email}"/>
+                </p:column>
+                <p:column headerText="#{msg['usuario.situacaoUsuario']}" sortBy="#{usuario.situacaoUsuario}"
+                          filterBy="#{usuario.situacaoUsuario}"
+                          filterOptions="#{findAllBean.getSelect(classMB.situacaoUsuario)}"
+                          styleClass="text-center">
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['usuario.situacaoUsuario']}"/>
+                    </f:facet>
+                    <h:outputText value="#{usuario.situacaoUsuario.descricao}" />
+                </p:column>
+                <p:column headerText="#{msg['usuario.superUsuario']}" sortBy="#{usuario.superUsuario}"
+                          filterBy="#{usuario.superUsuario}" rendered="#{sessaoUsuarioMB.user.superUsuario}"
+                          filterOptions="#{booleanSelectItensEmptyOption}"
+                          styleClass="text-center">
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['usuario.superUsuario']}"/>
+                    </f:facet>
+                    <h:outputText value="#{usuario.superUsuario}" converter ="yesNoConverter" />
+                </p:column>
+                <p:column styleClass="uix-datatable-actions" exportable="false">
+                    <f:facet name="header">
+                        <h:outputText value="#{xmsg['actions']}"/>
+                    </f:facet>
+                    <p:commandButton oncomplete="PF('widgetUsuarioDetail').show();"  icon="ui-icon-zoomin"
+                                     action="#{usuarioMB.detail}" process="@form" update=":formDetailUsuario" >
+                        <f:setPropertyActionListener value="#{usuario}" target="#{usuarioMB.entity}" />
+                    </p:commandButton>
+                    <x:securityArea rolesAllowed="usuario.create">
+                        <p:button icon="ui-icon-pencil" outcome="createUsuario" >
+                            <f:param name="id" value="#{usuario.id}" />
+                        </p:button>
+                    </x:securityArea>
+                    <x:securityArea rolesAllowed="usuario.delete">
+                        <p:commandButton icon="ui-icon-trash" process="@form" update="@form" action="#{usuarioMB.delete}" >
+                            <f:setPropertyActionListener value="#{usuario.id}" target="#{usuarioMB.id}" />
+                            <x:confirmation message="#{xmsg['confirmDelete']} - #{usuario}" />
+                        </p:commandButton>
+                    </x:securityArea>
+                </p:column>
+            </p:dataTable>
+            <div class="uix-audit-delete">
+                <x:securityArea rolesAllowed="usuario.audit">
+                    <x:auditDelete for="#{classMB.usuario}"/>
+                </x:securityArea>
+            </div>
+        </h:form>
+
+        <p:dialog widgetVar="widgetUsuarioDetail" header="#{msg['usuario.detail']}" appendTo="@(body)" modal="true" styleClass="uix-dialog-fluid">
+            <ui:include src="detailUsuario.xhtml" />
+        </p:dialog>
+
+        <p:dialog widgetVar="widgetPerfilDetail" header="#{msg['perfil.detail']}" appendTo="@(body)" modal="true" styleClass="uix-dialog-fluid">
+            <ui:include src="/view/controleAcesso/perfil/detailPerfil.xhtml" />
+        </p:dialog>
+
+    </ui:define>
+</ui:composition>

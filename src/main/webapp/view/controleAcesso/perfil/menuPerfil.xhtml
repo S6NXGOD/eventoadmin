@@ -1,0 +1,19 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:custom="http://java.sun.com/jsf/composite/components"
+                 >
+    <p:toolbar>
+        <p:toolbarGroup align="left">  
+            <x:securityArea rolesAllowed="perfil.list">
+                <p:button icon="ui-icon-search" value="#{xmsg['list']}" outcome="listPerfil" />
+            </x:securityArea>
+            <x:securityArea rolesAllowed="perfil.create">
+                <p:button icon="ui-icon-plus" value="#{xmsg['create']}" outcome="createPerfil" />
+            </x:securityArea>
+        </p:toolbarGroup>
+    </p:toolbar>
+</ui:composition>

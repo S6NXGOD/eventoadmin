@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="value" />
+        <cc:attribute name="size"/>
+        <cc:attribute name="readOnly" default="false" />
+        <cc:attribute name="required" default="false" />
+        <cc:attribute name="requiredMessage" />
+        <cc:attribute name="readOnlyInputText" default="false" />
+        <cc:attribute name="showOn" default="button"/>
+        <cc:attribute name="navigator" default="true" />
+        <cc:attribute name="style" />
+        <cc:attribute name="styleClass" />
+        <cc:attribute name="dataHora" default="false" />
+        <cc:attribute name="exibirFormato" default="true" />
+        <cc:attribute name="disabled" />
+        <cc:clientBehavior name="dateSelect" event="dateSelect"  targets="calendar"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+        <p:calendar id="calendar" value="#{cc.attrs.value}" 
+                    required="#{cc.attrs.required}" requiredMessage="#{cc.attrs.requiredMessage}"
+                    size="#{not empty cc.attrs.size ? cc.attrs.size : cc.attrs.dataHora ? '16' : '13'}" style="#{cc.attrs.style}" styleClass="#{cc.attrs.styleClass}"
+                    readonlyInput="#{cc.attrs.readOnlyInputText}" showOn="#{cc.attrs.showOn}"
+                    disabled="#{cc.attrs.disabled}"
+                    pattern="#{cc.attrs.dataHora ? formatMB.format.dataHora : formatMB.format.data}" navigator="#{cc.attrs.navigator}"/>
+
+        <h:outputText rendered="#{cc.attrs.exibirFormato}" style="font-size: 10px;"
+                      value=" (#{cc.attrs.dataHora ? formatMB.format.dataHoraTradizida : formatMB.format.dataTraduzida})" />
+
+        <h:panelGroup rendered="#{not cc.attrs.readOnly and not cc.attrs.disabled}">
+            <script type="text/javascript">
+             /*<![CDATA[*/
+             $(document).ready(function() {
+                 var $calendarElement =   $('#'+'#{cc.attrs.clientId}'.replace(/:/g,'\\:')+'\\:calendar_input');
+                 $calendarElement.mask('#{cc.attrs.dataHora ? formatMB.format.mascaraDataHora : formatMB.format.mascaraData}',{placeholder:''});
+             });
+             /*]]>*/
+            </script>
+        </h:panelGroup>
+
+    </cc:implementation>
+</html>

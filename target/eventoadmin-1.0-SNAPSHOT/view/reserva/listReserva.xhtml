@@ -1,0 +1,149 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces">
+    <ui:param name="title" value="#{msg['reserva.list']}" />
+    <ui:define name="body">
+        <ui:include src="menuReserva.xhtml" />
+        <h:form id="formListReserva">
+            <x:modalMessages/>
+
+            <x:dataTableActions fileName="reserva_export" target=":formListReserva:dataTableReserva"
+                                     widgetVar="dataTableReservaWidget"  />
+
+            <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
+                         var="reserva" rowIndexVar="index" id="dataTableReserva" widgetVar="dataTableReservaWidget" styleClass="table-responsive"
+                         currentPageReportTemplate="#{reservaMB.dataModel.currentPageReportTemplate}"
+                         paginatorTemplate="#{reservaMB.dataModel.paginatorTemplate}"
+                         value="#{reservaMB.dataModel}" lazy="true" >
+                <p:column styleClass="uix-datatable-index">
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+                <p:column headerText="#{msg['reserva.sede']}" sortBy="#{reserva.sede}"
+                       >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['reserva.sede']}" />
+                    </f:facet>
+                    <h:outputText value="#{reserva.sede}">
+                        <x:initializer/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['reserva.espaco']}" sortBy="#{reserva.espaco}"
+                       >
+                    <f:facet name="header">
+                        <h:outputText value="Espaço" />
+                    </f:facet>
+                    <h:outputText value="#{reserva.espaco}">
+                        <x:initializer/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['reserva.cliente']}" filterBy="#{reserva.cliente}"
+                       >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['reserva.cliente']}" />
+                    </f:facet>
+                    <h:outputText value="#{reserva.cliente}">
+                        <x:initializer/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['reserva.pacote']}" sortBy="#{reserva.pacote}"
+                       >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['reserva.pacote']}" />
+                    </f:facet>
+                    <h:outputText value="#{reserva.pacote}">
+                        <x:initializer/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['reserva.checkin']}" sortBy="#{reserva.checkin}"
+                    filterBy="#{reserva.checkin}"   style="text-align: center;">
+                    <f:facet name="header">
+                        <h:outputText value="Check-In" />
+                        <x:dateFilter/>
+                    </f:facet>
+                    <h:outputText value="#{reserva.checkin}">
+                        <f:convertDateTime />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['reserva.checkout']}" sortBy="#{reserva.checkout}"
+                    filterBy="#{reserva.checkout}"   style="text-align: center;">
+                    <f:facet name="header">
+                        <h:outputText value="Check-Out" />
+                        <x:dateFilter/>
+                    </f:facet>
+                    <h:outputText value="#{reserva.checkout}">
+                        <f:convertDateTime />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['reserva.tiporeserva']}" sortBy="#{reserva.tiporeserva}"
+                       >
+                    <f:facet name="header">
+                        <h:outputText value="Tipo Reserva" />
+                    </f:facet>
+                    <h:outputText value="#{reserva.tiporeserva}">
+                        <x:initializer/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['reserva.valorpago']}" sortBy="#{reserva.valorpago}"
+                       style="text-align: right;">
+                    <f:facet name="header">
+                        <h:outputText value="Valor Pago" />
+                    </f:facet>
+                    <h:outputText value="#{reserva.valorpago}">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['reserva.valorReserva']}" sortBy="#{reserva.valorReserva}"
+                       style="text-align: right;">
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['reserva.valorReserva']}" />
+                    </f:facet>
+                    <h:outputText value="#{reserva.valorReserva}">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['reserva.pagamento']}" sortBy="#{reserva.pagamento}"
+                    filterBy="#{reserva.pagamento}" filterOptions="#{booleanSelectItensEmptyOption}"  style="text-align: center;">
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['reserva.pagamento']}" />
+                    </f:facet>
+                    <h:outputText value="#{reserva.pagamento}" converter ="yesNoConverter" />
+                </p:column>
+                <p:column styleClass="uix-datatable-actions" exportable="false" headerText="#{xmsg['actions']}">
+                    <f:facet name="header">
+                        <h:outputText value="#{xmsg['actions']}"/>
+                    </f:facet>
+                    <p:commandButton oncomplete="PF('widgetReservaDetail').show();"  icon="ui-icon-zoomin" 
+                                     process="@form" update=":formDetailReserva" title="#{xmsg['detail']}" >
+                        <f:setPropertyActionListener value="#{reserva}" target="#{reservaMB.entity}" />
+                    </p:commandButton>
+                    <x:securityArea rolesAllowed="reserva.create">
+                        <p:button icon="ui-icon-pencil" outcome="createReserva" title="#{xmsg['edit']}">
+                            <f:param name="id" value="#{reserva.id}" />
+                        </p:button>
+                    </x:securityArea>
+                    <x:securityArea rolesAllowed="reserva.delete">
+                        <p:commandButton icon="ui-icon-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
+                                         action="#{reservaMB.delete}" >
+                            <f:setPropertyActionListener value="#{reserva.id}" target="#{reservaMB.id}" />
+                            <x:confirmation message="#{xmsg['confirmDelete']} - #{reserva}" />
+                        </p:commandButton>
+                    </x:securityArea>
+                </p:column>
+            </p:dataTable>
+            <div class="uix-audit-delete">
+                <x:securityArea rolesAllowed="reserva.audit">
+                    <x:auditDelete for="#{reservaMB.entityClass}"/>
+                </x:securityArea>
+            </div>  
+        </h:form>
+
+        <p:dialog widgetVar="widgetReservaDetail" header="#{msg['reserva.detail']}" appendTo="@(body)" 
+                  modal="true" styleClass="uix-dialog-fluid" >
+                  <ui:include src="detailReserva.xhtml" />
+        </p:dialog>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,72 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces">
+    <ui:param name="title" value="#{msg['cidade.list']}" />
+    <ui:define name="body">
+        <ui:include src="menuCidade.xhtml" />
+        <h:form id="formListCidade">
+            <x:modalMessages/>
+
+            <x:dataTableActions fileName="cidade_export" target=":formListCidade:dataTableCidade"
+                                     widgetVar="dataTableCidadeWidget"  />
+
+            <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
+                         var="cidade" rowIndexVar="index" id="dataTableCidade" widgetVar="dataTableCidadeWidget" styleClass="table-responsive"
+                         currentPageReportTemplate="#{cidadeMB.dataModel.currentPageReportTemplate}"
+                         paginatorTemplate="#{cidadeMB.dataModel.paginatorTemplate}"
+                         value="#{cidadeMB.dataModel}" lazy="true" >
+                <p:column headerText="#{msg['cidade.estado']}" sortBy="#{cidade.estado}"
+                       >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['cidade.estado']}" />
+                    </f:facet>
+                    <h:outputText value="#{cidade.estado}">
+                        <x:initializer/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['cidade.nome']}" sortBy="#{cidade.nome}"
+                    filterBy="#{cidade.nome}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['cidade.nome']}" />
+                    </f:facet>
+                    <h:outputText value="#{cidade.nome}"/>
+                </p:column>
+                <p:column styleClass="uix-datatable-actions" exportable="false" headerText="#{xmsg['actions']}">
+                    <f:facet name="header">
+                        <h:outputText value="#{xmsg['actions']}"/>
+                    </f:facet>
+                    <p:commandButton oncomplete="PF('widgetCidadeDetail').show();"  icon="ui-icon-zoomin" 
+                                     process="@form" update=":formDetailCidade" title="#{xmsg['detail']}" >
+                        <f:setPropertyActionListener value="#{cidade}" target="#{cidadeMB.entity}" />
+                    </p:commandButton>
+                    <x:securityArea rolesAllowed="cidade.create">
+                        <p:button icon="ui-icon-pencil" outcome="createCidade" title="#{xmsg['edit']}">
+                            <f:param name="id" value="#{cidade.id}" />
+                        </p:button>
+                    </x:securityArea>
+                    <x:securityArea rolesAllowed="cidade.delete">
+                        <p:commandButton icon="ui-icon-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
+                                         action="#{cidadeMB.delete}" >
+                            <f:setPropertyActionListener value="#{cidade.id}" target="#{cidadeMB.id}" />
+                            <x:confirmation message="#{xmsg['confirmDelete']} - #{cidade}" />
+                        </p:commandButton>
+                    </x:securityArea>
+                </p:column>
+            </p:dataTable>
+            <div class="uix-audit-delete">
+                <x:securityArea rolesAllowed="cidade.audit">
+                    <x:auditDelete for="#{cidadeMB.entityClass}"/>
+                </x:securityArea>
+            </div>  
+        </h:form>
+
+        <p:dialog widgetVar="widgetCidadeDetail" header="#{msg['cidade.detail']}" appendTo="@(body)" 
+                  modal="true" styleClass="uix-dialog-fluid" >
+                  <ui:include src="detailCidade.xhtml" />
+        </p:dialog>
+    </ui:define>
+</ui:composition>

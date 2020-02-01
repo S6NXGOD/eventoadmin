@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+<faces-config version="2.0"
+              xmlns="http://java.sun.com/xml/ns/javaee" 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+    <application>
+        <locale-config>
+            <default-locale>pt_BR</default-locale>
+            <supported-locale>en</supported-locale>
+            <supported-locale>es</supported-locale>
+            <supported-locale>pt_BR</supported-locale>
+        </locale-config>
+        <resource-bundle>
+            <base-name>com.xpert.i18n.CustomResourceBundle</base-name>
+            <var>msg</var>
+        </resource-bundle>
+    </application>
+    <factory>
+        <exception-handler-factory>
+            br.com.eventoadmin.handle.ApplicationExceptionHandlerFactory
+        </exception-handler-factory>
+    </factory>
+    <lifecycle>
+        <phase-listener>com.xpert.faces.listener.MultiPageMessagesSupport</phase-listener>
+    </lifecycle>
+    <validator>
+        <validator-class>com.xpert.core.validation.BeanValidator</validator-class>
+        <validator-id>javax.faces.Bean</validator-id>
+    </validator>
+</faces-config>

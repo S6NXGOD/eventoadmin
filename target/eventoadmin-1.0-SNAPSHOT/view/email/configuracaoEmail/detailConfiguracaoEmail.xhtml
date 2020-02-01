@@ -1,0 +1,75 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces"
+                 >
+    <h:form id="formDetailConfiguracaoEmail" styleClass="uix-form-detail">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['configuracaoEmail.nome']}:" styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{configuracaoEmailMB.entity.nome}"/>
+                    </span>
+                </div>
+                
+                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['configuracaoEmail.hostName']}:"  styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{configuracaoEmailMB.entity.hostName}"/>
+                    </span>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['configuracaoEmail.email']}:"  styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{configuracaoEmailMB.entity.email}"/>
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['configuracaoEmail.usuario']}:"  styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{configuracaoEmailMB.entity.usuario}"/>
+                    </span>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['configuracaoEmail.senha']}:"  styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{configuracaoEmailMB.entity.senha}"/>
+                    </span>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['configuracaoEmail.smtpPort']}:"  styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{configuracaoEmailMB.entity.smtpPort}"/>
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['configuracaoEmail.tls']}:"  styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{configuracaoEmailMB.entity.tls}" converter ="yesNoConverter" />
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['configuracaoEmail.ssl']}:"  styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{configuracaoEmailMB.entity.ssl}" converter ="yesNoConverter" />
+                    </span>
+                </div>
+               
+            </div>
+        </div>
+        <p:separator/>
+        <div class="text-center">
+            <p:commandButton type="button" value="#{xmsg['close']}" onclick="PF('widgetConfiguracaoEmailDetail').hide()" />
+            <x:securityArea rolesAllowed="configuracaoEmail.audit">
+                <x:audit for="#{configuracaoEmailMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+</ui:composition>

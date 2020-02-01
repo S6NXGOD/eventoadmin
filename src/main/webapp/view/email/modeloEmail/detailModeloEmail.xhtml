@@ -1,0 +1,46 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces"
+                 >
+    <h:form id="formDetailModeloEmail" styleClass="uix-form-detail">
+        <p:fieldset legend="#{msg['dadosGerais']}">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <h:outputLabel value="#{msg['modeloEmail.assunto']}:" styleClass="control-label"/><br/>
+                        <span class="uix-content-detail">
+                            <h:outputText value="#{modeloEmailMB.entity.assunto}"/>
+                        </span>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <h:outputLabel value="#{msg['modeloEmail.tipoAssuntoEmail']}:" styleClass="control-label"/><br/>
+                        <span class="uix-content-detail">
+                            <h:outputText value="#{modeloEmailMB.entity.tipoAssuntoEmail.descricao}"/>
+                        </span>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <h:outputLabel value="#{msg['modeloEmail.configuracaoEmail']}:" styleClass="control-label"/><br/>
+                        <span class="uix-content-detail">
+                            <h:outputText value="#{modeloEmailMB.entity.configuracaoEmail}"/>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </p:fieldset>
+        <p:fieldset legend="#{msg['modeloEmail.layout']}">
+
+            <h:outputText value="#{modeloEmailMB.entity.layout}" escape="false"/>
+
+        </p:fieldset>
+        <div class="text-center">
+            <p:commandButton type="button" value="#{xmsg['close']}" onclick="PF('widgetModeloEmailDetail').hide()" />
+            <x:securityArea rolesAllowed="modeloEmail.audit">
+                <x:audit for="#{modeloEmailMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+</ui:composition>

@@ -1,0 +1,26 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:custom="http://java.sun.com/jsf/composite/tag"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces"
+                 >
+
+    <ui:define name="body" >
+        <div style="padding: 20px;">
+
+            <span style="font-weight: bold; font-size: 13px;">
+                <h:outputText value="Um erro inseperado aconteceu" />
+            </span>
+            <br/>
+            <p:separator />
+            <h:panelGroup rendered="#{not empty erroSistema}">
+                <h:outputText value="Detalhes do Erro:" /><br/><br/>
+                <h:outputText value="#{erroSistema}" escape="false" />
+            </h:panelGroup>
+
+        </div>
+    </ui:define>
+</ui:composition>

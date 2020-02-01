@@ -1,0 +1,88 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:custom="http://java.sun.com/jsf/composite/components"
+                 >
+    <ui:param name="title" value="#{msg['erroSistema.list']}" />
+    <ui:define name="body">
+        <h:form id="formListErroSistema">
+            <x:modalMessages/>
+            <x:dataTableActions target=":formListErroSistema:dataTableErroSistema" 
+                                widgetVar="dataTableErroSistemaWidget" fileName="erroSistema_export" />
+
+            <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
+                         var="erroSistema" rowIndexVar="index" styleClass="font-11" id="dataTableErroSistema"
+                         widgetVar="dataTableErroSistemaWidget"
+                         currentPageReportTemplate="#{erroSistemaMB.dataModel.currentPageReportTemplate}"
+                         paginatorTemplate="#{erroSistemaMB.dataModel.paginatorTemplate}"
+                         value="#{erroSistemaMB.dataModel}" lazy="true" >
+                <p:column headerText="#{msg['erroSistema.id']}" sortBy="#{erroSistema.id}"
+                          filterBy="#{erroSistema.id}"
+                          styleClass="uix-datatable-index">
+                    <h:outputText value="#{erroSistema.id}"/>
+                </p:column>
+                <p:column sortBy="#{erroSistema.data}" filterBy="#{erroSistema.data}"
+                          style="text-align: center;">
+                    <f:facet name="header">
+                        #{msg['erroSistema.data']}
+                        <x:dateFilter/>
+                    </f:facet>
+                    <h:outputText value="#{erroSistema.data}">
+                        <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['erroSistema.funcionalidade']}" sortBy="#{erroSistema.funcionalidade}"
+                          filterBy="#{erroSistema.funcionalidade}"
+                          >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['erroSistema.funcionalidade']}"/>
+                    </f:facet>
+                    <h:outputText value="#{erroSistema.funcionalidade}"/>
+                </p:column>
+                <p:column headerText="#{msg['erroSistema.pilhaErro']}" sortBy="#{erroSistema.pilhaErro}"
+                          filterBy="#{erroSistema.pilhaErro}"
+                          >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['erroSistema.pilhaErro']}"/>
+                    </f:facet>
+                    <h:outputText styleClass="font-11" value="#{erroSistema.resumo}"/>
+                </p:column>
+                <p:column headerText="#{msg['erroSistema.usuario']}" sortBy="#{erroSistema.usuario.nome}"
+                          filterBy="#{erroSistema.usuario.nome}"
+                          >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['erroSistema.usuario']}"/>
+                    </f:facet>
+                    <h:outputText value="#{erroSistema.usuario.nome}"/>
+                </p:column>
+                <p:column styleClass="uix-datatable-actions" exportable="false">
+                    <f:facet name="header">
+                        <h:outputText value="#{xmsg['actions']}"/>
+                    </f:facet>
+                    <p:commandButton oncomplete="PF('widgetErroSistemaDetail').show();"  icon="ui-icon-zoomin" process="@form" update=":formDetailErroSistema" >
+                        <f:setPropertyActionListener value="#{erroSistema}" target="#{erroSistemaMB.entity}" />
+                    </p:commandButton>
+                    <x:securityArea rolesAllowed="erroSistema.create">
+                        <p:button icon="ui-icon-pencil" outcome="createErroSistema" >
+                            <f:param name="id" value="#{erroSistema.id}" />
+                        </p:button>
+                    </x:securityArea>
+                    <x:securityArea rolesAllowed="erroSistema.delete">
+                        <p:commandButton icon="ui-icon-trash" process="@form" update="@form" action="#{erroSistemaMB.delete}" >
+                            <f:setPropertyActionListener value="#{erroSistema.id}" target="#{erroSistemaMB.id}" />
+                            <x:confirmation message="#{xmsg['confirmDelete']} - #{erroSistema}" />
+                        </p:commandButton>
+                    </x:securityArea>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+        <p:dialog widgetVar="widgetErroSistemaDetail" header="#{msg['erroSistema.detail']}" appendTo="@(body)" modal="true" styleClass="uix-dialog-fluid">
+            <ui:include src="detailErroSistema.xhtml" />
+        </p:dialog>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,12 @@
+<xpert-config>
+
+    <auditing>
+        <auditing-impl>br.com.eventoadmin.modelo.audit.Auditing</auditing-impl>
+        <metadata-impl>br.com.eventoadmin.modelo.audit.Metadata</metadata-impl>
+        <auditing-listener>br.com.eventoadmin.application.AuditingListenerImpl</auditing-listener>
+    </auditing>
+    
+    <entity-manager-factory>br.com.eventoadmin.application.EntityManagerFactoryImpl</entity-manager-factory>
+    <resource-bundle>bundles.messages</resource-bundle>
+
+</xpert-config>

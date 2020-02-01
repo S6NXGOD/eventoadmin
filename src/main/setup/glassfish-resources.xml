@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Resource Definitions//EN" "http://glassfish.org/dtds/glassfish-resources_1_5.dtd">
+<resources>
+    <!-- 
+    Abaixo deve ser comentado caso seja configuracao diretamente no servidor
+    -->
+    <jdbc-resource enabled="true" jndi-name="jdbc/eventoadminDS" object-type="user" pool-name="eventoadmin">
+        <description/>
+    </jdbc-resource>
+    <jdbc-connection-pool name="eventoadmin"  
+                          datasource-classname="org.postgresql.ds.PGSimpleDataSource" 
+                          res-type="javax.sql.DataSource">
+        <property name="User" value="postgres"></property>
+        <property name="DatabaseName" value="webeventos"></property>
+        <property name="Password" value="Senha"></property>
+        <property name="PortNumber" value="5432"></property>
+        <property name="ServerName" value="localhost"></property>
+    </jdbc-connection-pool>
+</resources>

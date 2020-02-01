@@ -1,0 +1,126 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces">
+
+
+    <h:form id="formCreateReserva" >
+        <p:fieldset legend="#{xmsg['generalData']}">
+            <x:modalMessages/>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="sede" value="* #{msg['reserva.sede']}:" />
+                        <h:selectOneMenu id="sede" value="#{reservaMB.entity.sede}" converter="entityConverter" styleClass="form-control" >
+                            <x:initializer/>
+                            <f:selectItem itemLabel="#{xmsg['select']}" />
+                            <f:selectItems value="#{findAllBean.get(classMB.sede)}" 
+                                           var="sede"
+                                           itemLabel="#{sede.nome}"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="espaco" value="Espaço:" />
+                        <h:selectOneMenu id="espaco" value="#{reservaMB.entity.espaco}" converter="entityConverter" styleClass="form-control" >
+                            <x:initializer/>
+                            <f:selectItem itemLabel="#{xmsg['select']}" />
+                            <f:selectItems value="#{reservaMB.entity.espaco}" 
+                                           var="espaco"
+                                           itemLabel="#{espaco.nome}">
+                                <x:initializer/>
+                            </f:selectItems>
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="cliente" value="* #{msg['reserva.cliente']}:" />
+                        <h:selectOneMenu id="cliente" value="#{reservaMB.entity.cliente}" converter="entityConverter" styleClass="form-control" >
+                            <x:initializer/>
+                            <f:selectItem itemLabel="#{xmsg['select']}" />
+                            <f:selectItems value="#{findAllBean.get(classMB.cliente)}" 
+                                           var="cliente"
+                                           itemLabel="#{cliente}"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="pacote" value="#{msg['reserva.pacote']}:" />
+                        <h:selectOneMenu id="pacote" value="#{reservaMB.entity.pacote}" converter="entityConverter" styleClass="form-control" >
+                            <x:initializer/>
+                            <f:selectItem itemLabel="#{xmsg['select']}" />
+                            <f:selectItems value="#{findAllBean.get(classMB.pacote)}" 
+                                           var="pacote"
+                                           itemLabel="#{pacote}"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="checkin" value="* Check-In:" />
+                        <p:calendar id="checkin" value="#{reservaMB.entity.checkin}" 
+                                    showOn="button" pattern="dd/MM/yyyy" styleClass="uix-calendar" placeholder="DD/MM/AAAA" >
+                            <x:mask/>
+                        </p:calendar>
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="checkout" value="* Check-Out:" />
+                        <p:calendar id="checkout" value="#{reservaMB.entity.checkout}" 
+                                    showOn="button" pattern="dd/MM/yyyy" styleClass="uix-calendar" placeholder="DD/MM/AAAA" >
+                            <x:mask/>
+                        </p:calendar>
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="tiporeserva" value="Tipo de Reserva:" />
+                        <h:selectOneMenu id="tiporeserva" value="#{reservaMB.entity.tiporeserva}" converter="entityConverter" styleClass="form-control" >
+                            <x:initializer/>
+                            <f:selectItem itemLabel="#{xmsg['select']}" />
+                            <f:selectItems value="#{findAllBean.get(classMB.tipoReserva)}" 
+                                           var="tipoReserva"
+                                           itemLabel="#{tipoReserva}"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="observacao" value="Observação:" />
+                        <p:inputText id="observacao" value="#{reservaMB.entity.observacao}" maxlength="150"  styleClass="form-control"  />
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="tipopagamento" value="* Tipo Pagamento:" />
+                        <h:selectOneMenu id="tipopagamento" value="#{reservaMB.entity.tipopagamento}"  styleClass="form-control" >
+                            <f:selectItem itemLabel="#{xmsg['select']}" />
+                            <f:selectItems value="#{findAllBean.get(classMB.tipoPagamento)}" 
+                                           var="tipoPagamento"
+                                           itemLabel="#{tipoPagamento.descricao}"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="valorpago" value="Valor Pago:" />
+                        <x:inputNumber id="valorpago" value="#{reservaMB.entity.valorpago}" styleClass="form-control" limit="6" placeholder="R$ 00,00" />
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="valorReserva" value="Valor da Reserva:" />
+                        <x:inputNumber id="valorReserva" value="#{reservaMB.entity.valorReserva}" styleClass="form-control" limit="6" placeholder="R$ 00,00"/>
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <div class="checkbox">
+                            <label>
+                                <h:selectBooleanCheckbox id="pagamento" value="#{reservaMB.entity.pagamento}" />
+                                #{msg['reserva.pagamento']}
+                            </label>
+                        </div>
+                        <h:outputText value="Marque se o pagamento já foi efetuado!" styleClass="help-block"/>
+                    </div>
+
+                </div>
+            </div>
+        </p:fieldset>
+        <h:outputText value="#{xmsg['requiredFieldsForm']}"/>
+        <div class="uix-center">
+            <x:securityArea rolesAllowed="reserva.create">
+                <p:commandButton process="@form" update="@form" action="#{reservaMB.save}" value="#{xmsg['save']}" />
+            </x:securityArea>
+            <x:securityArea rolesAllowed="reserva.audit">
+                <x:audit for="#{reservaMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+
+</ui:composition>

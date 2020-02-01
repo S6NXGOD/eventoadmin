@@ -1,0 +1,33 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces"
+                 >
+
+    <ui:param name="title" value="Maker" />
+    <ui:define name="body">
+        <p:tabView rendered="#{sessaoUsuarioMB.user.superUsuario}">
+            <p:tab title="Maker">
+
+                <x:maker managedBean="br.com.eventoadmin.mb"   
+                          businessObject="br.com.eventoadmin.bo"   
+                          dao="br.com.eventoadmin.dao"   
+                          daoImpl="br.com.eventoadmin.dao.impl"   
+                          baseDAO="br.com.eventoadmin.application.BaseDAOImpl"   
+                          viewPath="/view"
+                          resourceBundle="msg"   
+                          template="/template/mainTemplate.xhtml"/>  
+
+            </p:tab>
+            <p:tab title="Geração de Dados">
+                <h:form>
+                    <p:messages/>
+                    <p:commandButton action="#{geracaoDadosMB.gerarDados}" value="Gerar Dados" update="@form" process="@this"/>
+                </h:form>
+            </p:tab>
+        </p:tabView>
+    </ui:define>
+</ui:composition>

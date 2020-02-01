@@ -1,0 +1,65 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:custom="http://java.sun.com/jsf/composite/components"
+                 >
+    <h:form id="formMenuUsuario">
+        <p:accordionPanel activeIndex="0,1,2" rendered="#{not empty usuarioMB.entity}">
+            <p:tab title="#{msg['dadosGerais']}">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel value="#{msg['usuario.nome']}:" styleClass="control-label" /><br/>
+                        <span class="uix-content-detail">
+                            <h:outputText value="#{usuarioMB.entity.nome}"/>
+                        </span>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel value="#{msg['usuario.email']}:" styleClass="control-label" /><br/>
+                        <span class="uix-content-detail">
+                            <h:outputText value="#{usuarioMB.entity.email}"/>
+                        </span>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel value="#{msg['usuario.userLogin']}:" styleClass="control-label" /><br/>
+                        <span class="uix-content-detail">
+                            <h:outputText value="#{usuarioMB.entity.userLogin}"/>
+                        </span>
+                    </div>
+                </div>
+            </p:tab>
+            <p:tab title="#{msg['usuario.perfisAcesso']}">
+                <p:dataTable rowIndexVar="index" var="perfil" value="#{usuarioMB.entity.perfis}"
+                             emptyMessage="#{xmsg['noRecordFound']}">
+                    <x:initializer/>
+                    <p:column styleClass="uix-datatable-index">
+                        <h:outputText value="#{index+1}"/>
+                    </p:column>
+                    <p:column headerText="#{msg['perfil.descricao']}">
+                        <h:outputText value="#{perfil.descricao}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:tab>
+
+            <p:tab title="#{msg['usuario.menuUsuario']}">
+                <div style="min-height: 400px; overflow-y: scroll;">
+                    <h:outputText value="#{msg['usuario.menuUsuarioInfo']}"  styleClass="help-block"/>
+                    <div class="hidden-xs">
+                        <p:menubar model="#{usuarioMB.menuModel}" />
+                    </div>
+                    <div class="hidden-lg hidden-sm hidden-md">
+                        <p:panelMenu  style="width: 100%" model="#{usuarioMB.menuModel}"/>
+                    </div>
+                    <br/>
+                    <div class="uix-center">
+                        <p:commandButton type="button" value="#{xmsg['close']}" onclick="PF('widgetMenuUsuario').hide()" />
+                    </div>
+                </div>
+
+
+            </p:tab>
+        </p:accordionPanel>
+    </h:form>
+</ui:composition>

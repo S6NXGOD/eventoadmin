@@ -1,0 +1,53 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces">
+    <ui:param name="title" value="#{msg['tipoReserva.list']}" />
+    <ui:define name="body">
+        <ui:include src="menuTipoReserva.xhtml" />
+        <h:form id="formListTipoReserva">
+            <x:modalMessages/>
+
+            <x:dataTableActions fileName="tipoReserva_export" target=":formListTipoReserva:dataTableTipoReserva"
+                                widgetVar="dataTableTipoReservaWidget"  />
+
+            <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
+                         var="tipoReserva" rowIndexVar="index" id="dataTableTipoReserva" widgetVar="dataTableTipoReservaWidget" styleClass="table-responsive"
+                         currentPageReportTemplate="#{tipoReservaMB.dataModel.currentPageReportTemplate}"
+                         paginatorTemplate="#{tipoReservaMB.dataModel.paginatorTemplate}"
+                         value="#{tipoReservaMB.dataModel}" lazy="true" >
+                <p:column headerText="#{msg['tipoReserva.nome']}"    >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['tipoReserva.nome']}" />
+                    </f:facet>
+                    <h:outputText value="#{tipoReserva.nome}"/>
+                </p:column>
+                <p:column styleClass="uix-datatable-actions" exportable="false" headerText="#{xmsg['actions']}">
+                    <f:facet name="header">
+                        <h:outputText value="#{xmsg['actions']}"/>
+                    </f:facet>
+                    <x:securityArea rolesAllowed="tipoReserva.create">
+                        <p:button icon="ui-icon-pencil" outcome="createTipoReserva" title="#{xmsg['edit']}">
+                            <f:param name="id" value="#{tipoReserva.id}" />
+                        </p:button>
+                    </x:securityArea>
+                    <x:securityArea rolesAllowed="tipoReserva.delete">
+                        <p:commandButton icon="ui-icon-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
+                                         action="#{tipoReservaMB.delete}" >
+                            <f:setPropertyActionListener value="#{tipoReserva.id}" target="#{tipoReservaMB.id}" />
+                            <x:confirmation message="#{xmsg['confirmDelete']} - #{tipoReserva}" />
+                        </p:commandButton>
+                    </x:securityArea>
+                </p:column>
+            </p:dataTable>
+            <div class="uix-audit-delete">
+                <x:securityArea rolesAllowed="tipoReserva.audit">
+                    <x:auditDelete for="#{tipoReservaMB.entityClass}"/>
+                </x:securityArea>
+            </div>  
+        </h:form>
+    </ui:define>
+</ui:composition>

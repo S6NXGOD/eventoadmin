@@ -1,0 +1,53 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces">
+    <ui:param name="title" value="#{msg['ultimosAcessos']}" />
+    <ui:define name="body">
+        <h:form id="formListAcessoSistema">
+            <x:modalMessages/>
+            <x:dataTableActions target=":formListAcessoSistema:dataTableAcessoSistema" 
+                                widgetVar="dataTableAcessoSistemaWidget" fileName="acessoSistema_export" />
+            <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
+                         var="acessoSistema" rowIndexVar="index" id="dataTableAcessoSistema"
+                         widgetVar="dataTableAcessoSistemaWidget"
+                         currentPageReportTemplate="#{acessoSistemaUsuarioMB.dataModel.currentPageReportTemplate}"
+                         paginatorTemplate="#{acessoSistemaUsuarioMB.dataModel.paginatorTemplate}"
+                         value="#{acessoSistemaUsuarioMB.dataModel}" lazy="true" >
+                <p:column style="text-align: center;">
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+                <p:column headerText="#{msg['acessoSistema.dataHora']}" sortBy="#{acessoSistema.dataHora}"
+                          style="text-align: center;" filterBy="#{acessoSistema.dataHora}">
+                    <f:facet name="header">
+                        #{msg['acessoSistema.dataHora']}
+                        <x:dateFilter/>
+                    </f:facet>
+                    <h:outputText value="#{acessoSistema.dataHora}">
+                        <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['acessoSistema.ip']}" sortBy="#{acessoSistema.ip}"
+                          filterBy="#{acessoSistema.ip}"
+                          >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['acessoSistema.ip']}"/>
+                    </f:facet>
+                    <h:outputText value="#{acessoSistema.ip}"/>
+                </p:column>
+                <p:column headerText="#{msg['acessoSistema.userAgent']}" sortBy="#{acessoSistema.userAgent}"
+                          filterBy="#{acessoSistema.userAgent}"
+                          >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['acessoSistema.userAgent']}"/>
+                    </f:facet>
+                    <h:outputText value="#{acessoSistema.userAgent}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+    </ui:define>
+</ui:composition>

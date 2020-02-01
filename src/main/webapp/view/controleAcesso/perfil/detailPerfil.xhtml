@@ -1,0 +1,98 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:custom="http://java.sun.com/jsf/composite/components"
+                 >
+    <h:form id="formDetailPerfil" styleClass="uix-form-detail">
+        <p:tabView>
+            <p:tab title="#{msg['dadosGerais']}">
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['perfil.descricao']}:" styleClass="control-label" /><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{perfilMB.entity.descricao}"/>
+                            </span>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+                            <h:outputLabel value="#{msg['perfil.ativo']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{perfilMB.entity.ativo}" converter ="yesNoConverter" />
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </p:tab>
+            <p:tab title="#{msg['acessosDoPerfil']}">
+                <div style="height: 380px; overflow: scroll;">
+                    <p:tree value="#{perfilMB.permissoes}" var="permissao"
+                            selectionMode="checkbox" 
+                            styleClass="disable-tree"
+                            selection="#{perfilMB.permissoesSelecionadas}">  
+                        <p:treeNode>  
+                            <h:outputText value="#{permissao.descricao}" />  
+                        </p:treeNode>  
+                    </p:tree>  
+                </div>
+            </p:tab>
+            <p:tab title="#{msg['perfil.permissoesMenu']}">
+                <div style="height: 380px; overflow: scroll;">
+                    <p:tree value="#{perfilMB.permissoesMenu}" var="permissao"
+                            selectionMode="checkbox" 
+                            styleClass="disable-tree" 
+                            selection="#{perfilMB.permissoesSelecionadasMenu}">  
+                        <p:treeNode>  
+                            <h:outputText value="#{permissao.descricao}" />  
+                        </p:treeNode>  
+                    </p:tree>  
+                    <script>
+                        Xpert.disableTree(".disable-tree");
+                    </script>
+                </div>
+            </p:tab>
+            <p:tab title="#{msg['perfil.usuarios']}">
+                <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
+                             var="usuario" rowIndexVar="index" styleClass="font-11 table-responsive"
+                             value="#{perfilMB.entity.usuarios}" >
+                    <x:initializer/>
+                    <p:column styleClass="uix-datatable-index">
+                        <h:outputText value="#{index+1}"/>
+                    </p:column>
+                    <p:column headerText="#{msg['usuario.nome']}" sortBy="#{usuario.nome}"
+                              >
+                        <h:outputText value="#{usuario.nome}"/>
+                    </p:column>
+                    <p:column headerText="#{msg['usuario.userLogin']}" sortBy="#{usuario.userLogin}"
+                              >
+                        <h:outputText value="#{usuario.userLogin}"/>
+                    </p:column>
+                    <p:column headerText="#{msg['usuario.email']}" sortBy="#{usuario.email}" >
+                        <h:outputText value="#{usuario.email}"/>
+                    </p:column>
+                    <p:column headerText="#{msg['usuario.situacaoUsuario']}" sortBy="#{usuario.situacaoUsuario}"
+                              style="text-align: center;">
+                        <h:outputText value="#{usuario.situacaoUsuario.descricao}" />
+                    </p:column>
+                    <p:column headerText="#{msg['usuario.senhaCadastrada']}" sortBy="#{usuario.senhaCadastrada}"
+                              style="text-align: center;">
+                        <h:outputText value="#{usuario.senhaCadastrada}" converter ="yesNoConverter" />
+                    </p:column>
+                </p:dataTable>
+            </p:tab>
+        </p:tabView>
+
+
+        <div style="text-align: center;">
+            <p:commandButton type="button" value="#{xmsg['close']}" onclick="PF('widgetPerfilDetail').hide()" />
+            <x:securityArea rolesAllowed="perfil.audit">
+                <x:audit for="#{perfilMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+</ui:composition>

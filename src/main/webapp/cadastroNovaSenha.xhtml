@@ -1,0 +1,64 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:custom="http://java.sun.com/jsf/composite/tag"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:of="http://omnifaces.org/functions"
+                 >
+
+    <ui:param name="title" value="#{msg['solicitacaoRecuperacaoSenha.solicitacaoNovaSenha']}" />
+    <ui:define name="menu"/>
+    <ui:define name="body">
+
+        <h:panelGroup rendered="#{sessaoUsuarioMB.solicitacaoRecuperacaoSenha.dataNaValidade == true}">
+
+
+            <h:form>
+                <x:info value="#{msg['solicitacaoRecuperacaoSenha.informeNovaSenha']}"/>
+                <x:modalMessages/>
+
+                <div class="row">
+                    <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel value="* #{msg['usuario.novaSenha']}:" />
+                        <p:password feedback="true" autocomplete="false"
+                                    value="#{alterPasswordMB.password}" maxlength="20" styleClass="form-control"  
+                                    promptLabel="#{msg['informeUmaSenha']}"
+                                    goodLabel="#{msg['boa']}" 
+                                    strongLabel="#{msg['muitoBoa']}"  weakLabel="#{msg['fraca']}"/>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+
+                        <h:outputLabel value="* #{msg['usuario.senhaConfirmacao']}:" />
+                        <p:password feedback="false" value="#{alterPasswordMB.confirmPassword}" maxlength="20"  styleClass="form-control"   autocomplete="false"/>
+
+                    </div>
+                </div>
+                <h:outputText value="#{xmsg['requiredFieldsForm']}"/>
+                <p:spacer height="5"/>
+                <div style="text-align: center;">
+                    <p:commandButton process="@form" update="@form" action="#{alterPasswordMB.saveSolicitacaoRecuperacaoSenha}" value="#{xmsg['save']}" />
+                </div>
+            </h:form>
+
+        </h:panelGroup>
+        <h:panelGroup rendered="#{empty sessaoUsuarioMB.solicitacaoRecuperacaoSenha or sessaoUsuarioMB.solicitacaoRecuperacaoSenha.dataNaValidade == false}">
+
+
+            <h:form>
+                <x:warn value="#{msg['solicitacaoRecuperacaoSenha.invalidaOuExpirada']}"/>
+                <br/>
+                <div style="text-align: center;">
+                    <p:button value="#{msg['paginaInicial']}" outcome="/index.jsf"/>
+                </div>
+            </h:form>
+        </h:panelGroup>
+
+    </ui:define>
+</ui:composition>

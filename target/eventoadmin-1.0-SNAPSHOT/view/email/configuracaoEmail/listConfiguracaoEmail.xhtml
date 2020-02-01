@@ -1,0 +1,108 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces"
+                 >
+    <ui:param name="title" value="#{msg['configuracaoEmail.list']}" />
+    <ui:define name="body">
+        <ui:include src="menuConfiguracaoEmail.xhtml" />
+        <h:form id="formListConfiguracaoEmail">
+            <x:modalMessages/>            
+            <x:dataTableActions target=":formListConfiguracaoEmail:dataTableConfiguracaoEmail" 
+                                widgetVar="dataTableConfiguracaoEmailWidget" fileName="configuracaoEmail_export" />
+
+            <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
+                         var="configuracaoEmail" rowIndexVar="index" widgetVar="dataTableConfiguracaoEmailWidget"
+                         styleClass="table-responsive" id="dataTableConfiguracaoEmail"
+                         currentPageReportTemplate="#{configuracaoEmailMB.dataModel.currentPageReportTemplate}"
+                         paginatorTemplate="#{configuracaoEmailMB.dataModel.paginatorTemplate}"
+                         value="#{configuracaoEmailMB.dataModel}" lazy="true" >
+                <p:column styleClass="uix-datatable-index">
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+                <p:column headerText="#{msg['configuracaoEmail.nome']}" sortBy="#{configuracaoEmail.nome}"
+                          filterBy="#{configuracaoEmail.nome}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['configuracaoEmail.nome']}"/>
+                    </f:facet>
+                    <h:outputText value="#{configuracaoEmail.nome}"/>
+                </p:column>
+                <p:column headerText="#{msg['configuracaoEmail.email']}" sortBy="#{configuracaoEmail.email}"
+                          filterBy="#{configuracaoEmail.email}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['configuracaoEmail.email']}"/>
+                    </f:facet>
+                    <h:outputText value="#{configuracaoEmail.email}"/>
+                </p:column>
+                <p:column headerText="#{msg['configuracaoEmail.senha']}" sortBy="#{configuracaoEmail.senha}"
+                          filterBy="#{configuracaoEmail.senha}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['configuracaoEmail.senha']}"/>
+                    </f:facet>
+                    <h:outputText value="#{configuracaoEmail.senha}"/>
+                </p:column>
+                <p:column headerText="#{msg['configuracaoEmail.smtpPort']}" sortBy="#{configuracaoEmail.smtpPort}"
+                          filterBy="#{configuracaoEmail.smtpPort}"   >
+                     <f:facet name="header">
+                        <h:outputText value="#{msg['configuracaoEmail.smtpPort']}"/>
+                    </f:facet>
+                    <h:outputText value="#{configuracaoEmail.smtpPort}"/>
+                </p:column>
+                <p:column headerText="#{msg['configuracaoEmail.tls']}" sortBy="#{configuracaoEmail.tls}"
+                          filterBy="#{configuracaoEmail.tls}" filterOptions="#{booleanSelectItensEmptyOption}"  style="text-align: center;">
+                      <f:facet name="header">
+                        <h:outputText value="#{msg['configuracaoEmail.tls']}"/>
+                    </f:facet>
+                    <h:outputText value="#{configuracaoEmail.tls}" converter ="yesNoConverter" />
+                </p:column>
+                <p:column headerText="#{msg['configuracaoEmail.ssl']}" sortBy="#{configuracaoEmail.ssl}"
+                          filterBy="#{configuracaoEmail.ssl}" filterOptions="#{booleanSelectItensEmptyOption}"  style="text-align: center;">
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['configuracaoEmail.ssl']}"/>
+                    </f:facet>
+                    <h:outputText value="#{configuracaoEmail.ssl}" converter ="yesNoConverter" />
+                </p:column>
+                <p:column headerText="#{msg['configuracaoEmail.hostName']}" sortBy="#{configuracaoEmail.hostName}"
+                          filterBy="#{configuracaoEmail.hostName}"   >
+                     <f:facet name="header">
+                        <h:outputText value="#{msg['configuracaoEmail.hostName']}"/>
+                    </f:facet>
+                    <h:outputText value="#{configuracaoEmail.hostName}"/>
+                </p:column>
+                <p:column styleClass="uix-datatable-actions" exportable="false">
+                    <f:facet name="header">
+                        <h:outputText value="#{xmsg['actions']}"/>
+                    </f:facet>
+                    <p:commandButton oncomplete="PF('widgetConfiguracaoEmailDetail').show();"  icon="ui-icon-zoomin" 
+                                     process="@form" update=":formDetailConfiguracaoEmail" title="#{xmsg['detail']}" >
+                        <f:setPropertyActionListener value="#{configuracaoEmail}" target="#{configuracaoEmailMB.entity}" />
+                    </p:commandButton>
+                    <x:securityArea rolesAllowed="configuracaoEmail.create">
+                        <p:button icon="ui-icon-pencil" outcome="createConfiguracaoEmail" title="#{xmsg['edit']}">
+                            <f:param name="id" value="#{configuracaoEmail.id}" />
+                        </p:button>
+                    </x:securityArea>
+                    <x:securityArea rolesAllowed="configuracaoEmail.delete">
+                        <p:commandButton icon="ui-icon-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
+                                         action="#{configuracaoEmailMB.delete}" >
+                            <f:setPropertyActionListener value="#{configuracaoEmail.id}" target="#{configuracaoEmailMB.id}" />
+                            <x:confirmation message="#{xmsg['confirmDelete']} - #{configuracaoEmail}" />
+                        </p:commandButton>
+                    </x:securityArea>
+                </p:column>
+            </p:dataTable>
+            <div class="uix-audit-delete">
+                <x:securityArea rolesAllowed="configuracaoEmail.audit">
+                    <x:auditDelete for="#{configuracaoEmailMB.entityClass}"/>
+                </x:securityArea>
+            </div>
+        </h:form>
+
+        <p:dialog widgetVar="widgetConfiguracaoEmailDetail" header="#{msg['configuracaoEmail.detail']}" appendTo="@(body)" modal="true" styleClass="uix-dialog-fluid">
+            <ui:include src="detailConfiguracaoEmail.xhtml" />
+        </p:dialog>
+    </ui:define>
+</ui:composition>

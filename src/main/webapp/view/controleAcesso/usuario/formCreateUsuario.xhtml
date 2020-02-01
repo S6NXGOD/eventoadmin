@@ -1,0 +1,136 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:custom="http://java.sun.com/jsf/composite/components"
+                 >
+    <h:form>
+        <x:modalMessages/>
+
+        <p:tabView>
+            <p:tab title="#{msg['dadosGerais']}">
+
+
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="form-group col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                            <h:outputLabel value="* #{msg['usuario.nome']}:" />
+                            <p:inputText value="#{usuarioMB.entity.nome}" maxlength="255" styleClass="form-control"/>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="form-group col-lg-2 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="* #{msg['usuario.cpf']}:" />
+                            <x:cpf value="#{usuarioMB.entity.cpf}" styleClass="form-control" />
+                        </div>
+
+                        <div class="form-group col-lg-2 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['usuario.rg']}:" />
+                            <p:inputText value="#{usuarioMB.entity.rg}" maxlength="255" styleClass="form-control" />
+                        </div>
+
+                        <div class="form-group col-lg-2 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="* #{msg['usuario.userLogin']}:" />
+                            <p:inputText value="#{usuarioMB.entity.userLogin}" maxlength="255" styleClass="form-control"/>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <h:outputLabel value="* #{msg['usuario.email']}:" />
+                            <p:inputText value="#{usuarioMB.entity.email}" maxlength="255" styleClass="form-control"/>
+                            <h:outputText value="#{msg['usuario.emailInfo']}" styleClass="help-block"/>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h:outputLabel value=" #{msg['usuario.situacaoUsuario']}:" />
+                            <h:selectOneRadio value="#{usuarioMB.entity.situacaoUsuario}"  >
+                                <f:selectItems value="#{findAllBean.get(classMB.situacaoUsuario)}" 
+                                               var="situacaoUsuario"
+                                               itemLabel="#{situacaoUsuario.descricao}"/>
+                            </h:selectOneRadio>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <h:panelGroup rendered="#{sessaoUsuarioMB.user.superUsuario}" >
+                            <div class="form-group col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <h:selectBooleanCheckbox value="#{usuarioMB.entity.superUsuario}" />
+                                        #{msg['usuario.superUsuario']}
+                                    </label>
+                                </div>
+                                <h:outputText value="#{msg['usuario.superUsuarioInfo']}" styleClass="help-block"/>
+                            </div>
+                        </h:panelGroup>                        
+
+                    </div>
+                </div>
+            </p:tab>
+            <p:tab title="#{msg['usuario.perfisAcesso']}">
+                <h:selectManyCheckbox value="#{usuarioMB.entity.perfis}" converter="entityConverter" styleClass="checkbox">
+                    <x:initializer/>
+                    <x:spread columns="3"/>
+                    <f:selectItems value="#{findAllBean.get(classMB.perfil)}" 
+                                   var="perfil" itemDisabled="#{not sessaoUsuarioMB.user.superUsuario and not sessaoUsuarioMB.user.perfis.contains(perfil)}"
+                                   itemLabel="#{perfil}"/>
+                </h:selectManyCheckbox>
+                <h:outputText value="#{msg['usuario.perfisUsuarioInfo']}" styleClass="help-block"/>
+            </p:tab>
+            <p:tab title="#{msg['usuario.historicosSituacao']}">
+
+                <p:dataTable value="#{usuarioMB.entity.historicosSituacao}" var="historicoSituacao"
+                             emptyMessage="#{xmsg['noRecordFound']}" rowIndexVar="index" styleClass="table-responsive">
+                    <x:initializer/>
+                    <p:column styleClass="uix-datatable-index">
+                        <h:outputText value="#{index+1}"/>
+                    </p:column>
+                    <p:column headerText="#{msg['historicoSituacaoUsuario.dataSituacao']}" style="text-align: center;">
+                        <h:outputText value="#{historicoSituacao.dataSituacao}">
+                            <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="#{msg['historicoSituacaoUsuario.situacaoUsuario']}" style="text-align: center;">
+                        <h:outputText value="#{historicoSituacao.situacaoUsuario.descricao}"/>
+                    </p:column>
+                    <p:column headerText="#{msg['historicoSituacaoUsuario.usuarioAlteracao']}">
+                        <h:outputText value="#{historicoSituacao.usuarioAlteracao.nome}">
+                            <x:initializer/>
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+
+            </p:tab>
+        </p:tabView>
+        <h:outputText value="#{xmsg['requiredFieldsForm']}"/>
+        <div style="text-align: center;">
+            <x:securityArea rolesAllowed="usuario.create">
+                <p:commandButton process="@form" update="@form" action="#{usuarioMB.save}" value="#{xmsg['save']}" />
+                <p:commandButton process="@this" update="@form"  rendered="#{not empty usuarioMB.entity.id}"
+                                 action="#{usuarioMB.enviarEmailRecuperacaoSenha}" value="#{msg['solicitacaoRecuperacaoSenha.enviarEmailRecuperacaoSenha']}" >
+                    <x:confirmation message="#{msg['solicitacaoRecuperacaoSenha.confirmaEnviarEmailRecuperacaoSenha']}"/>
+                </p:commandButton>
+                <p:commandButton process="@this" update=":formMenuUsuario"  oncomplete="PF('widgetMenuUsuario').show()"
+                                 rendered="#{not empty usuarioMB.entity.id}" title="#{msg['usuario.menuUsuarioVisualizar']}"
+                                 action="#{usuarioMB.carregarMenuUsuario}" value="#{msg['usuario.menuUsuario']}" />
+            </x:securityArea>
+            <x:securityArea rolesAllowed="usuario.audit">
+                <x:audit for="#{usuarioMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+
+    <p:dialog widgetVar="widgetMenuUsuario" header="#{msg['usuario.menuUsuario']}" appendTo="@(body)" modal="true" styleClass="uix-dialog-fluid">
+        <ui:include src="formMenuUsuario.xhtml"/>
+    </p:dialog>
+
+
+</ui:composition>

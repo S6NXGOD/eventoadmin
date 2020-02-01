@@ -1,0 +1,85 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces">
+    <ui:param name="title" value="#{msg['pacote.list']}" />
+    <ui:define name="body">
+        <ui:include src="menuPacote.xhtml" />
+        <h:form id="formListPacote">
+            <x:modalMessages/>
+
+            <x:dataTableActions fileName="pacote_export" target=":formListPacote:dataTablePacote"
+                                widgetVar="dataTablePacoteWidget"  />
+
+            <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
+                         var="pacote" rowIndexVar="index" id="dataTablePacote" widgetVar="dataTablePacoteWidget" styleClass="table-responsive"
+                         currentPageReportTemplate="#{pacoteMB.dataModel.currentPageReportTemplate}"
+                         paginatorTemplate="#{pacoteMB.dataModel.paginatorTemplate}"
+                         value="#{pacoteMB.dataModel}" lazy="true" >
+                <p:column headerText="#{msg['pacote.id']}" sortBy="#{pacote.id}"   >
+                    <f:facet name="header">
+                        <h:outputText value="Código" />
+                    </f:facet>
+                    <h:outputText value="#{pacote.id}"/>
+                </p:column>
+                <p:column headerText="#{msg['pacote.nome']}" sortBy="#{pacote.nome}"
+                          filterBy="#{pacote.nome}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['pacote.nome']}" />
+                    </f:facet>
+                    <h:outputText value="#{pacote.nome}"/>
+                </p:column>
+                <p:column headerText="#{msg['pacote.descricao']}" sortBy="#{pacote.descricao}"
+                          filterBy="#{pacote.descricao}"   >
+                    <f:facet name="header">
+                        <h:outputText value="Descrição" />
+                    </f:facet>
+                    <h:outputText value="#{pacote.descricao}"/>
+                </p:column>
+                <p:column headerText="#{msg['pacote.valor']}" sortBy="#{pacote.valor}"
+                          style="text-align: right;">
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['pacote.valor']}" />
+                    </f:facet>
+                    <h:outputText value="#{pacote.valor}">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+                    </h:outputText>
+                </p:column>
+                <p:column styleClass="uix-datatable-actions" exportable="false" headerText="#{xmsg['actions']}">
+                    <f:facet name="header">
+                        <h:outputText value="#{xmsg['actions']}"/>
+                    </f:facet>
+                    <p:commandButton oncomplete="PF('widgetPacoteDetail').show();"  icon="ui-icon-zoomin" 
+                                     process="@form" update=":formDetailPacote" title="#{xmsg['detail']}" >
+                        <f:setPropertyActionListener value="#{pacote}" target="#{pacoteMB.entity}" />
+                    </p:commandButton>
+                    <x:securityArea rolesAllowed="pacote.create">
+                        <p:button icon="ui-icon-pencil" outcome="createPacote" title="#{xmsg['edit']}">
+                            <f:param name="id" value="#{pacote.id}" />
+                        </p:button>
+                    </x:securityArea>
+                    <x:securityArea rolesAllowed="pacote.delete">
+                        <p:commandButton icon="ui-icon-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
+                                         action="#{pacoteMB.delete}" >
+                            <f:setPropertyActionListener value="#{pacote.id}" target="#{pacoteMB.id}" />
+                            <x:confirmation message="#{xmsg['confirmDelete']} - #{pacote}" />
+                        </p:commandButton>
+                    </x:securityArea>
+                </p:column>
+            </p:dataTable>
+            <div class="uix-audit-delete">
+                <x:securityArea rolesAllowed="pacote.audit">
+                    <x:auditDelete for="#{pacoteMB.entityClass}"/>
+                </x:securityArea>
+            </div>  
+        </h:form>
+
+        <p:dialog widgetVar="widgetPacoteDetail" header="#{msg['pacote.detail']}" appendTo="@(body)" 
+                  modal="true" styleClass="uix-dialog-fluid" >
+            <ui:include src="detailPacote.xhtml" />
+        </p:dialog>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,17 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces">
+    <p:toolbar>
+        <p:toolbarGroup align="left">
+                        <x:securityArea rolesAllowed="pais.list">
+                <p:button icon="ui-icon-search" value="#{xmsg['list']}" outcome="listPais" />
+            </x:securityArea>
+            <x:securityArea rolesAllowed="pais.create">
+                <p:button icon="ui-icon-plus" value="#{xmsg['create']}" outcome="createPais" />
+            </x:securityArea>
+        </p:toolbarGroup>
+    </p:toolbar>
+</ui:composition>

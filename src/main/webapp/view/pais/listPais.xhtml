@@ -1,0 +1,61 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces">
+    <ui:param name="title" value="#{msg['pais.list']}" />
+    <ui:define name="body">
+        <ui:include src="menuPais.xhtml" />
+        <h:form id="formListPais">
+            <x:modalMessages/>
+
+            <x:dataTableActions fileName="pais_export" target=":formListPais:dataTablePais"
+                                widgetVar="dataTablePaisWidget"  />
+
+            <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
+                         var="pais" rowIndexVar="index" id="dataTablePais" widgetVar="dataTablePaisWidget" styleClass="table-responsive"
+                         currentPageReportTemplate="#{paisMB.dataModel.currentPageReportTemplate}"
+                         paginatorTemplate="#{paisMB.dataModel.paginatorTemplate}"
+                         value="#{paisMB.dataModel}" lazy="true" >
+                <p:column headerText="#{msg['pais.sigla']}" sortBy="#{pais.sigla}"
+                          filterBy="#{pais.sigla}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['pais.sigla']}" />
+                    </f:facet>
+                    <h:outputText value="#{pais.sigla}"/>
+                </p:column>
+                <p:column headerText="#{msg['pais.nome']}" sortBy="#{pais.nome}"
+                          filterBy="#{pais.nome}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['pais.nome']}" />
+                    </f:facet>
+                    <h:outputText value="#{pais.nome}"/>
+                </p:column>
+                <p:column styleClass="uix-datatable-actions" exportable="false" headerText="#{xmsg['actions']}">
+                    <f:facet name="header">
+                        <h:outputText value="#{xmsg['actions']}"/>
+                    </f:facet>
+                    <x:securityArea rolesAllowed="pais.create">
+                        <p:button icon="ui-icon-pencil" outcome="createPais" title="#{xmsg['edit']}">
+                            <f:param name="id" value="#{pais.id}" />
+                        </p:button>
+                    </x:securityArea>
+                    <x:securityArea rolesAllowed="pais.delete">
+                        <p:commandButton icon="ui-icon-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
+                                         action="#{paisMB.delete}" >
+                            <f:setPropertyActionListener value="#{pais.id}" target="#{paisMB.id}" />
+                            <x:confirmation message="#{xmsg['confirmDelete']} - #{pais}" />
+                        </p:commandButton>
+                    </x:securityArea>
+                </p:column>
+            </p:dataTable>
+            <div class="uix-audit-delete">
+                <x:securityArea rolesAllowed="pais.audit">
+                    <x:auditDelete for="#{paisMB.entityClass}"/>
+                </x:securityArea>
+            </div>  
+        </h:form>
+    </ui:define>
+</ui:composition>

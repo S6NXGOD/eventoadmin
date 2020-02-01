@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="value" />
+        <cc:attribute name="size" default="5"/>
+        <cc:attribute name="readOnly" default="false" />
+        <cc:attribute name="required" default="false" />
+        <cc:attribute name="requiredMessage" />
+        <cc:attribute name="showOn" default="button"/>
+        <cc:attribute name="navigator" default="true" />
+        <cc:attribute name="style" />
+        <cc:attribute name="styleClass" />
+        <cc:attribute name="disabled" />
+        <cc:attribute name="readonly" />
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+
+        <p:inputMask mask="#{formatMB.format.mascaraHoraMinuto}"  
+                     value="#{cc.attrs.value}"
+                     required="#{cc.attrs.required}" requiredMessage="#{cc.attrs.requiredMessage}"
+                     readonly="#{cc.attrs.readonly}" size="#{cc.attrs.size}" 
+                     style="#{cc.attrs.style}" 
+                     styleClass="#{cc.attrs.styleClass}"
+                     converterMessage="#{msg['business.horaInvalida']}"
+                     disabled="#{cc.attrs.disabled}">
+            <f:convertDateTime pattern="#{formatMB.format.horaMinuto}"/>
+        </p:inputMask>
+
+    </cc:implementation>
+</html>

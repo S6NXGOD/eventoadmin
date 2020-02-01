@@ -1,0 +1,71 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces"
+                 >
+    <h:form id="formDetailSolicitacaoRecuperacaoSenha" styleClass="uix-form-detail">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.email']}:" styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText styleClass="uix-content-detail" value="#{solicitacaoRecuperacaoSenhaMB.entity.email}"/>
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.ativo']}:" styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.ativo}" converter ="yesNoConverter" />
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.dataCadastro']}:" styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.dataCadastro}">
+                            <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}" />
+                        </h:outputText>
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.dataValidade']}:" styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.dataValidade}">
+                            <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}" />
+                        </h:outputText>
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.dataAlteracaoSenha']}:" styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.dataAlteracaoSenha}">
+                            <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}" />
+                        </h:outputText>
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.usuario']}:" styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.usuario.nome}"/>
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.tipoRecuperacaoSenha']}:" styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.tipoRecuperacaoSenha.descricao}"/>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+        <p:separator/>
+        <div class="text-center">
+            <p:commandButton type="button" value="#{xmsg['close']}" onclick="PF('widgetSolicitacaoRecuperacaoSenhaDetail').hide()" />
+            <x:securityArea rolesAllowed="solicitacaoRecuperacaoSenha.audit">
+                <x:audit for="#{solicitacaoRecuperacaoSenhaMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+</ui:composition>

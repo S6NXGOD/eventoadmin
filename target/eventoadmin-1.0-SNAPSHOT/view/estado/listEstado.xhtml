@@ -1,0 +1,71 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces">
+    <ui:param name="title" value="#{msg['estado.list']}" />
+    <ui:define name="body">
+        <ui:include src="menuEstado.xhtml" />
+        <h:form id="formListEstado">
+            <x:modalMessages/>
+
+            <x:dataTableActions fileName="estado_export" target=":formListEstado:dataTableEstado"
+                                widgetVar="dataTableEstadoWidget"  />
+
+            <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
+                         var="estado" rowIndexVar="index" id="dataTableEstado" widgetVar="dataTableEstadoWidget" styleClass="table-responsive"
+                         currentPageReportTemplate="#{estadoMB.dataModel.currentPageReportTemplate}"
+                         paginatorTemplate="#{estadoMB.dataModel.paginatorTemplate}"
+                         value="#{estadoMB.dataModel}" lazy="true" >
+                <p:column headerText="#{msg['estado.pais']}" sortBy="#{estado.pais}"
+                          >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['estado.pais']}" />
+                    </f:facet>
+                    <h:outputText value="#{estado.pais}">
+                        <x:initializer/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['estado.sigla']}" sortBy="#{estado.sigla}"
+                          filterBy="#{estado.sigla}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['estado.sigla']}" />
+                    </f:facet>
+                    <h:outputText value="#{estado.sigla}"/>
+                </p:column>
+                <p:column headerText="#{msg['estado.nome']}" sortBy="#{estado.nome}"
+                          filterBy="#{estado.nome}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['estado.nome']}" />
+                    </f:facet>
+                    <h:outputText value="#{estado.nome}"/>
+                </p:column>
+                <p:column styleClass="uix-datatable-actions" exportable="false" headerText="#{xmsg['actions']}">
+                    <f:facet name="header">
+                        <h:outputText value="#{xmsg['actions']}"/>
+                    </f:facet>
+                    <x:securityArea rolesAllowed="estado.create">
+                        <p:button icon="ui-icon-pencil" outcome="createEstado" title="#{xmsg['edit']}">
+                            <f:param name="id" value="#{estado.id}" />
+                        </p:button>
+                    </x:securityArea>
+                    <x:securityArea rolesAllowed="estado.delete">
+                        <p:commandButton icon="ui-icon-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
+                                         action="#{estadoMB.delete}" >
+                            <f:setPropertyActionListener value="#{estado.id}" target="#{estadoMB.id}" />
+                            <x:confirmation message="#{xmsg['confirmDelete']} - #{estado}" />
+                        </p:commandButton>
+                    </x:securityArea>
+                </p:column>
+            </p:dataTable>
+            <div class="uix-audit-delete">
+                <x:securityArea rolesAllowed="estado.audit">
+                    <x:auditDelete for="#{estadoMB.entityClass}"/>
+                </x:securityArea>
+            </div>  
+        </h:form>
+
+    </ui:define>
+</ui:composition>

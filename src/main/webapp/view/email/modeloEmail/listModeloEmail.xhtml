@@ -1,0 +1,81 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces"
+                 >
+    <ui:param name="title" value="#{msg['modeloEmail.list']}" />
+    <ui:define name="body">
+        <ui:include src="menuModeloEmail.xhtml" />
+        <h:form id="formListModeloEmail">
+            <x:modalMessages/>
+            <x:dataTableActions target=":formListModeloEmail:dataTableModeloEmail" 
+                                widgetVar="dataTableModeloEmailWidget" fileName="configuracaoEmail_export" />
+
+            <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
+                         var="modeloEmail" rowIndexVar="index" widgetVar="dataTableModeloEmailWidget"
+                         styleClass="table-responsive" id="dataTableModeloEmail"
+                         currentPageReportTemplate="#{modeloEmailMB.dataModel.currentPageReportTemplate}"
+                         paginatorTemplate="#{modeloEmailMB.dataModel.paginatorTemplate}"
+                         value="#{modeloEmailMB.dataModel}" lazy="true" >
+                <p:column styleClass="uix-datatable-index">
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+                <p:column headerText="#{msg['modeloEmail.assunto']}" sortBy="#{modeloEmail.assunto}"
+                          filterBy="#{modeloEmail.assunto}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['modeloEmail.assunto']}"/>
+                    </f:facet>
+                    <h:outputText value="#{modeloEmail.assunto}"/>
+                </p:column>
+
+                <p:column headerText="#{msg['modeloEmail.tipoAssuntoEmail']}" sortBy="#{modeloEmail.tipoAssuntoEmail}"
+                          filterBy="#{modeloEmail.tipoAssuntoEmail}"  filterOptions="#{findAllBean.getSelect(classMB.tipoAssuntoEmail)}" >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['modeloEmail.tipoAssuntoEmail']}"/>
+                    </f:facet>
+                    <h:outputText value="#{modeloEmail.tipoAssuntoEmail.descricao}"/>
+                </p:column>
+                <p:column headerText="#{msg['modeloEmail.configuracaoEmail']}" sortBy="#{modeloEmail.configuracaoEmail}"
+                          filterBy="#{modeloEmail.configuracaoEmail.id}" filterOptions="#{findAllBean.getSelect(classMB.configuracaoEmail)}"   >
+                    <f:facet name="header">
+                        <h:outputText value="#{msg['modeloEmail.configuracaoEmail']}"/>
+                    </f:facet>
+                    <h:outputText value="#{modeloEmail.configuracaoEmail}"/>
+                </p:column>
+                <p:column styleClass="uix-datatable-actions" exportable="false">
+                    <f:facet name="header">
+                        <h:outputText value="#{xmsg['actions']}"/>
+                    </f:facet>
+                    <p:commandButton oncomplete="PF('widgetModeloEmailDetail').show();"  icon="ui-icon-zoomin" 
+                                     process="@form" update=":formDetailModeloEmail" title="#{xmsg['detail']}" >
+                        <f:setPropertyActionListener value="#{modeloEmail}" target="#{modeloEmailMB.entity}" />
+                    </p:commandButton>
+                    <x:securityArea rolesAllowed="modeloEmail.create">
+                        <p:button icon="ui-icon-pencil" outcome="createModeloEmail" title="#{xmsg['edit']}">
+                            <f:param name="id" value="#{modeloEmail.id}" />
+                        </p:button>
+                    </x:securityArea>
+                    <x:securityArea rolesAllowed="modeloEmail.delete">
+                        <p:commandButton icon="ui-icon-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
+                                         action="#{modeloEmailMB.delete}" >
+                            <f:setPropertyActionListener value="#{modeloEmail.id}" target="#{modeloEmailMB.id}" />
+                            <x:confirmation message="#{xmsg['confirmDelete']} - #{modeloEmail}" />
+                        </p:commandButton>
+                    </x:securityArea>
+                </p:column>
+            </p:dataTable>
+            <div class="uix-audit-delete">
+                <x:securityArea rolesAllowed="modeloEmail.audit">
+                    <x:auditDelete for="#{modeloEmailMB.entityClass}"/>
+                </x:securityArea>
+            </div>
+        </h:form>
+
+        <p:dialog widgetVar="widgetModeloEmailDetail" header="#{msg['modeloEmail.detail']}" appendTo="@(body)" modal="true" styleClass="uix-dialog-fluid">
+            <ui:include src="detailModeloEmail.xhtml" />
+        </p:dialog>
+    </ui:define>
+</ui:composition>

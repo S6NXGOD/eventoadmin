@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      dir="ltr" lang="en-US" xml:lang="en"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:x="http://xpert.com/faces"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+
+    <f:view locale="#{localeBean.locale}">
+        <h:head>
+            <ui:include src="imports.xhtml"/>
+        </h:head>
+        <h:body>
+            <ui:include src="/template/ajaxStatus.xhtml" /> 
+            <header>
+            </header>
+            <section class="container">  
+                <div class="row">
+                    <div class="col-xs-12">                        
+                        <div class="login-wraper">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="text-center">
+                                        <IMG SRC="#{request.contextPath}/images/logo.png" height="55px" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="login-body">
+                                <ui:insert name="body"/>       
+                            </div>
+                            <div class="text-center">
+                                <div class="text-center">
+                                    <a href="https://nextcompany.com.br/" target="_blank"><IMG SRC="#{request.contextPath}/images/footer.png" height="30"/></a>
+                                </div>
+                                <small>Desenvolvido por <a href="https://nextcompany.com.br/"  target="_blank">Nextcompany</a></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>    
+        </h:body>
+    </f:view>
+
+</html>
