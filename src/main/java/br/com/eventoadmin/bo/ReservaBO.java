@@ -28,7 +28,7 @@ public class ReservaBO extends AbstractBusinessObject<Reserva> {
 
     @Override
     public List<UniqueField> getUniqueFields() {
-        return new UniqueFields().add(new UniqueField("checkin", "checkout"), "Já existe uma reserva nas datas selecionadas");
+        return new UniqueFields().add(new UniqueField("checkin", "checkout"), "Já existe uma reserva nas datas selecionadas").add("checkin").add("checkout");
     }
 
     @Override

@@ -49,15 +49,15 @@
                      </div>
                       <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
                          <h:outputLabel for="cep" value="CEP:" />
-                         <p:inputText id="cep" value="#{sedeMB.entity.cep}" maxlength="8"  styleClass="form-control"  />
+                         <p:inputMask mask="#{formatMB.format.codigoPostal}" id="cep" value="#{sedeMB.entity.cep}" maxlength="8"  styleClass="form-control"  />
                      </div>
                       <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
                          <h:outputLabel for="telefone" value="#{msg['sede.telefone']}:" />
-                         <p:inputText id="telefone" value="#{sedeMB.entity.telefone}" maxlength="15"  styleClass="form-control"  />
+                         <p:inputMask mask="#{formatMB.format.telefone}" id="telefone" value="#{sedeMB.entity.telefone}" maxlength="15"  styleClass="form-control"  />
                      </div>
                       <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
                          <h:outputLabel for="whatsapp" value="#{msg['sede.whatsapp']}:" />
-                         <p:inputText id="whatsapp" value="#{sedeMB.entity.whatsapp}" maxlength="15"  styleClass="form-control"  />
+                         <p:inputMask mask="#{formatMB.format.telefone}" id="whatsapp" value="#{sedeMB.entity.whatsapp}" maxlength="15"  styleClass="form-control"  />
                      </div>
                       <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
                          <h:outputLabel for="email" value="#{msg['sede.email']}:" />

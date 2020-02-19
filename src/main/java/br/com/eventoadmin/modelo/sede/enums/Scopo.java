@@ -5,9 +5,9 @@ package br.com.eventoadmin.modelo.sede.enums;
  * @author Joao Pedro
  */
 public enum Scopo {
-    scopo1(1, "Sede de Evento"),
-    scopo2(2, "Cliente"),
-    scopo3(3, "Filial");
+    Sede(1, "Sede de Evento"),
+    Cliente(2, "Cliente"),
+    Filial(3, "Filial");
 
     private Scopo(int num, String descricao) {
         this.descricao = descricao;

@@ -6,11 +6,11 @@
                  xmlns:x="http://xpert.com/faces">
     <p:toolbar>
         <p:toolbarGroup align="left">
-                        <x:securityArea rolesAllowed="reserva.list">
-                <p:button icon="ui-icon-search" value="#{xmsg['list']}" outcome="listReserva" />
+            <x:securityArea rolesAllowed="reserva.list">
+                <p:button icon="ui-icon-circle-zoomin" value="#{xmsg['list']}" outcome="listReserva" />
             </x:securityArea>
             <x:securityArea rolesAllowed="reserva.create">
-                <p:button icon="ui-icon-plus" value="#{xmsg['create']}" outcome="createReserva" />
+                <p:button icon="ui-icon-calendar" value="#{xmsg['create']}" outcome="createReserva" />
             </x:securityArea>
         </p:toolbarGroup>
     </p:toolbar>

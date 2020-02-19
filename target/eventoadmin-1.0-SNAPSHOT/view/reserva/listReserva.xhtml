@@ -49,15 +49,6 @@
                         <x:initializer/>
                     </h:outputText>
                 </p:column>
-                <p:column headerText="#{msg['reserva.pacote']}" sortBy="#{reserva.pacote}"
-                       >
-                    <f:facet name="header">
-                        <h:outputText value="#{msg['reserva.pacote']}" />
-                    </f:facet>
-                    <h:outputText value="#{reserva.pacote}">
-                        <x:initializer/>
-                    </h:outputText>
-                </p:column>
                 <p:column headerText="#{msg['reserva.checkin']}" sortBy="#{reserva.checkin}"
                     filterBy="#{reserva.checkin}"   style="text-align: center;">
                     <f:facet name="header">
@@ -76,24 +67,6 @@
                     </f:facet>
                     <h:outputText value="#{reserva.checkout}">
                         <f:convertDateTime />
-                    </h:outputText>
-                </p:column>
-                <p:column headerText="#{msg['reserva.tiporeserva']}" sortBy="#{reserva.tiporeserva}"
-                       >
-                    <f:facet name="header">
-                        <h:outputText value="Tipo Reserva" />
-                    </f:facet>
-                    <h:outputText value="#{reserva.tiporeserva}">
-                        <x:initializer/>
-                    </h:outputText>
-                </p:column>
-                <p:column headerText="#{msg['reserva.valorpago']}" sortBy="#{reserva.valorpago}"
-                       style="text-align: right;">
-                    <f:facet name="header">
-                        <h:outputText value="Valor Pago" />
-                    </f:facet>
-                    <h:outputText value="#{reserva.valorpago}">
-                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
                     </h:outputText>
                 </p:column>
                 <p:column headerText="#{msg['reserva.valorReserva']}" sortBy="#{reserva.valorReserva}"

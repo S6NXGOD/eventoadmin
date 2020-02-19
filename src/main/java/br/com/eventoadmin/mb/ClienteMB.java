@@ -45,7 +45,7 @@ public class ClienteMB extends AbstractBaseBean<Cliente> implements Serializable
                                 .replace("PHONE", fone));
             }
         } else {
-            FacesMessageUtils.error("Cliente não encontrado!!");
+            FacesMessageUtils.error("Whatsapp do cliente não encontrado.");
         }
     }
 

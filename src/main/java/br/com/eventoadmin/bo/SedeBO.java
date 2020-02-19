@@ -8,6 +8,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import br.com.eventoadmin.modelo.sede.Sede;
+import com.xpert.core.validation.UniqueFields;
 
 /**
  *
@@ -18,7 +19,7 @@ public class SedeBO extends AbstractBusinessObject<Sede> {
 
     @EJB
     private SedeDAO sedeDAO;
-    
+
     @Override
     public SedeDAO getDAO() {
         return sedeDAO;
@@ -26,7 +27,8 @@ public class SedeBO extends AbstractBusinessObject<Sede> {
 
     @Override
     public List<UniqueField> getUniqueFields() {
-        return null;
+        return new UniqueFields().add(new UniqueField("cnpj"), "Já existe uma sede com este CNPJ")
+                .add(new UniqueField("razaoSocial"),"Já existe uma sede com esta Razão Social");
     }
 
     @Override

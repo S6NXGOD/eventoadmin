@@ -8,6 +8,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import br.com.eventoadmin.modelo.pacote.Pacote;
+import com.xpert.core.validation.UniqueFields;
 
 /**
  *
@@ -26,7 +27,7 @@ public class PacoteBO extends AbstractBusinessObject<Pacote> {
 
     @Override
     public List<UniqueField> getUniqueFields() {
-        return null;
+        return new UniqueFields().add("nome");
     }
 
     @Override

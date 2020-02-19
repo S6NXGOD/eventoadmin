@@ -8,6 +8,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import br.com.eventoadmin.modelo.reserva.TipoReserva;
+import com.xpert.core.validation.UniqueFields;
 
 /**
  *
@@ -26,7 +27,7 @@ public class TipoReservaBO extends AbstractBusinessObject<TipoReserva> {
 
     @Override
     public List<UniqueField> getUniqueFields() {
-        return null;
+        return new UniqueFields().add(new UniqueField("nome"), "Este tipo de reserva já existe");
     }
 
     @Override
