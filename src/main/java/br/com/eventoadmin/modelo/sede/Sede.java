@@ -52,7 +52,7 @@ public class Sede implements Serializable {
     @Size(max = 14)
     private String cnpj;
 
-    @Size(max = 8)
+    @Size(max = 10)
     private String cep;
 
     @Size(max = 15)

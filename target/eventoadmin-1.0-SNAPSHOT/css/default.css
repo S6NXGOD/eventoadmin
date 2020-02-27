@@ -1,10 +1,13 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400&display=swap);
 body{font-size: 12px;}
+.bodyLogin{font-size: 12px;background-image: url('../images/fundo-login.png');background-size: 100%;background-repeat: no-repeat; font-family: 'Montserrat',sans-serif;}
 .ui-inputfield[readonly],.ui-inputfield[disabled]{ background-color: #E6E6E6;}
 header{padding: 10px 20px;}
 footer {border-top: 1px solid #ddd;margin: 10px auto 0; padding: 20px; width: 98%;}
 .ui-widget{font-size: 12px;}
 select{padding: 4px;}
-.font-11, .font-11  td, .font-11  th{font-size:  11px;}
+.header-main{padding: 10px 20px;background-color: #003580}
+.font-11, .font-11  td, .font-11  th{font-size:  11px;color: white;font-family: 'Montserrat'}
 .font-weight-normal, .font-weight-normal  td{font-weight: normal;}
 .grid-detail, grid-form{margin-top: 0;}
 .grid-detail td, grid-form td{padding: 4px 0;}
@@ -70,7 +73,7 @@ input[type="radio"], input[type="checkbox"] {margin: 0; min-height: 0; padding-l
 .navbar .ui-panelmenu .ui-panelmenu-header{font-size: 14px;}
 /*menu bar*/
 .ui-menu.ui-menubar{}
-.ui-menu .ui-menuitem {margin: 0;}
+.ui-menu .ui-menuitem {margin: 0;font-family: 'Montserrat';font-size: 16px;}
 .ui-menu.ui-menubar .ui-menu-parent .ui-menu-child {padding: 0;}
 .ui-menu > ul > li > a{padding: 10px 10px !important;border: 0}
 .ui-menu > ul > li ul li{width: 230px !important;}
@@ -79,16 +82,25 @@ input[type="radio"], input[type="checkbox"] {margin: 0; min-height: 0; padding-l
 .acesso-rapido .ui-autocomplete-input {height: 34px;}
 select.form-control{height: 34px;}
 section.conteudo {padding: 0 20px; font-size: 12px;}
-section.conteudo .page-header {margin: 10px 0 0 0; font-size: 20px }
+section.conteudo .page-header {margin: 10px 0 0 0; font-size: 20px;font-family: 'Montserrat' }
 section.conteudo h1.page-header  span{vertical-align: middle;}
 .ui-datatable .ui-datatable-tablewrapper tbody > tr > td {padding: 3px; white-space: normal;}
 .ui-datatable thead > tr > th {white-space: normal !important;}
 /*login*/
-.login-wraper {width: 300px;margin: 10% auto;-moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);position: relative;padding: 10px;height: auto;background: white;text-align: left;}
-.login-wraper h1{font-family: 'Raleway', sans-serif;font-weight: lighter;text-align: center;font-size: 23px;padding: 0;margin: 0}
-.login-wraper .login-body{margin: 10px auto;padding: 15px 0 10px}
+.login-wraper {width: 300px;margin: 10% auto;-moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);position: relative;padding: 10px;height: auto;background:white;text-align: left;}
+.login-wraper h1{font-family: 'Montserrat', sans-serif;font-weight: bold;text-align: center;font-size: 23px;padding: 0;margin: 0}
+.login-wraper .login-body{margin: 10px auto;padding: 15px 0 10px;}
 .login-wraper .login-body .input-append,.login-wraper .login-body .input-prepend {width: 350px;}
 .login-wraper .login-body input[type=text],.login-wraper .login-body input[type=password]{width: 100%}
+ul li.ui-menuitem-active>a{
+    background-image: none !important;
+    background-color:#003580 !important;    
+}
+
+li ul li.ui-menuitem-active>a{
+    background-image: none !important;
+    background-color:#003580 !important;    
+}
 @media (max-width: 600px) {
     .login-wraper {width: auto;height: auto;margin: 10% auto;}
 }

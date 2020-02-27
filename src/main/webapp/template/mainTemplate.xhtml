@@ -15,15 +15,15 @@
         </h:head>
         <h:body>
             <ui:include src="/template/ajaxStatus.xhtml" />  
-            <header>
-                <ui:insert name="header">
+            <header class="header-main">
+                <ui:insert name="header-main">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-left text-left logo">
                             <h:graphicImage value="/images/logo.png" alt="Logo" />
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-right text-right info">
                             <h:panelGroup  rendered="#{not empty sessaoUsuarioMB.user}">
-                                <h:outputText value="#{sessaoUsuarioMB.user.nome}"/><br/>
+                                <h:outputText value="#{sessaoUsuarioMB.user.nome}" style="color: white; font-family: 'Montserrat'"/><br/>
                                 <h:outputText value="#{now}" styleClass="font-11">
                                     <f:convertDateTime dateStyle="full" type="both" />
                                 </h:outputText>
