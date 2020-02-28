@@ -4,13 +4,14 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:p="http://primefaces.org/ui"
                  xmlns:x="http://xpert.com/faces">
+    <link rel="stylesheet" href="/resources/font-awesome-4.7.0/css/font-awesome.min.css"></link>
     <p:toolbar>
         <p:toolbarGroup align="left">
             <x:securityArea rolesAllowed="sede.list">
                 <p:button icon="ui-icon-circle-zoomin" value="#{xmsg['list']}" outcome="listSede" />
             </x:securityArea>
             <x:securityArea rolesAllowed="sede.create">
-                <p:button icon="ui-icon-suitcase" value="#{xmsg['create']}" outcome="createSede" />
+                <p:button icon="fa fa-building-o" value="#{xmsg['create']}" outcome="createSede" />
             </x:securityArea>
         </p:toolbarGroup>
     </p:toolbar>

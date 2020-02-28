@@ -26,6 +26,7 @@ public class ReservaBO extends AbstractBusinessObject<Reserva> {
         return reservaDAO;
     }
 
+    //Esta regra faz com que o sistema nao permita a criaçao de uma reserva com o mesmo checkin e checkout
     @Override
     public List<UniqueField> getUniqueFields() {
         return new UniqueFields().add(new UniqueField("checkin", "checkout"), "Já existe uma reserva nas datas selecionadas").add("checkin").add("checkout");
@@ -34,12 +35,16 @@ public class ReservaBO extends AbstractBusinessObject<Reserva> {
     @Override
     public void validate(Reserva reserva) throws BusinessException {
         BusinessException exception = new BusinessException();
+        
+        //Se o checkin for antes da data atual o sistema nao ira permitir o cadastro da reserva
         if (reserva.getCheckin().before(new Date())) {
             exception.add("business.checkinNewDate");
         }
+        //Se o checkin for depois do checkout o sistema nao ira permitir o cadastro da reserva
         if (reserva.getCheckin().after(reserva.getCheckout())) {
             exception.add("business.checkinDepois");
         }
+        //Toda vez que o metodo for chamado as regras serao auditadas
         exception.check();
     }
 

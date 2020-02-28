@@ -43,29 +43,12 @@
                     </f:facet>
                     <h:outputText value="#{cliente.email}"/>
                 </p:column>
-                <p:column headerText="#{msg['cliente.telefone']}" sortBy="#{cliente.telefone}"
-                          filterBy="#{cliente.telefone}"   >
-                    <f:facet name="header">
-                        <h:outputText value="#{msg['cliente.telefone']}" />
-                    </f:facet>
-                    <h:outputText value="#{cliente.telefone}"/>
-                </p:column>
                 <p:column headerText="#{msg['cliente.whatsapp']}" sortBy="#{cliente.whatsapp}"
                           filterBy="#{cliente.whatsapp}"   >
                     <f:facet name="header">
                         <h:outputText value="#{msg['cliente.whatsapp']}" />
                     </f:facet>
                     <h:outputText value="#{cliente.whatsapp}"/>
-                </p:column>
-                <p:column headerText="#{msg['cliente.datacadastro']}" sortBy="#{cliente.datacadastro}"
-                          filterBy="#{cliente.datacadastro}"   style="text-align: center;">
-                    <f:facet name="header">
-                        <h:outputText value="Data Cadastro" />
-                        <x:dateFilter/>
-                    </f:facet>
-                    <h:outputText value="#{cliente.datacadastro}">
-                        <f:convertDateTime />
-                    </h:outputText>
                 </p:column>
                 <p:column styleClass="uix-datatable-actions" exportable="false" headerText="#{xmsg['actions']}">
                     <f:facet name="header">

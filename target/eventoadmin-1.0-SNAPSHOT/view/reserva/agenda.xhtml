@@ -55,11 +55,11 @@
             float: right;
         }
     </style>
-
+<link rel="stylesheet" href="/resources/font-awesome-4.7.0/css/font-awesome.min.css"></link>
     <h:form id="formAgendamento" >
         <x:modalMessages autoUpdate="true"/>
         <p:tabView >
-            <p:tab title="Agenda de Reservas">
+            <p:tab title="Agenda de Reservas" >            
                 <h:panelGrid columnClasses="value" >
                     <p:schedule id="schedule" value="#{reservaMB.eventModel}" widgetVar="myschedule" 
                                 timeZone="GMT-3" axisFormat="HH:mm" locale="pt" slotMinutes="30" allDaySlot="false" 

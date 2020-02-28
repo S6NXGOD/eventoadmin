@@ -64,6 +64,11 @@
             <version>1.8.4-SNAPSHOT</version>
         </dependency>
         <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>5.12.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>6.2</version>
@@ -71,7 +76,7 @@
         <dependency>
             <groupId>org.primefaces.extensions</groupId>
             <artifactId>primefaces-extensions</artifactId>
-            <version>6.2.2</version>
+            <version>6.2.11</version>
         </dependency>
         <dependency>
             <groupId>joda-time</groupId>

@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400&display=swap);
 body{font-size: 12px;}
-.bodyLogin{font-size: 12px;background-image: url('../images/fundo-login.png');background-size: 100%;background-repeat: no-repeat; font-family: 'Montserrat',sans-serif;}
+.bodyLogin{font-size: 12px;background-image: url('../images/fundo-login.png');background-size: 100%; font-family: 'Montserrat',sans-serif;}
 .ui-inputfield[readonly],.ui-inputfield[disabled]{ background-color: #E6E6E6;}
 header{padding: 10px 20px;}
 footer {border-top: 1px solid #ddd;margin: 10px auto 0; padding: 20px; width: 98%;}
