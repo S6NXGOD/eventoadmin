@@ -40,11 +40,11 @@
                     <h:outputText value="#{pacote.descricao}"/>
                 </p:column>
                 <p:column headerText="#{msg['pacote.valor']}" sortBy="#{pacote.valor}"
-                          style="text-align: right;">
+                          style="text-align: center;">
                     <f:facet name="header">
-                        <h:outputText value="#{msg['pacote.valor']}" />
+                        <h:outputText value="Valor"/>
                     </f:facet>
-                    <h:outputText value="#{pacote.valor}">
+                    <h:outputText value="R$ #{pacote.valor}" style="font-family: 'Oswald';color: green;">
                         <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
                     </h:outputText>
                 </p:column>

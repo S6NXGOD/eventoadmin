@@ -5,13 +5,14 @@
                  xmlns:p="http://primefaces.org/ui"
                  xmlns:x="http://xpert.com/faces"
                  >
+    <link rel="stylesheet" href="/resources/font-awesome-4.7.0/css/font-awesome.min.css"></link>
     <p:toolbar>
         <p:toolbarGroup align="left">  
             <x:securityArea rolesAllowed="configuracaoEmail.list">
                 <p:button icon="ui-icon-search" value="#{xmsg['list']}" outcome="listConfiguracaoEmail" />
             </x:securityArea>
             <x:securityArea rolesAllowed="configuracaoEmail.create">
-                <p:button icon="ui-icon-plus" value="#{xmsg['create']}" outcome="createConfiguracaoEmail" />
+                <p:button icon="fa fa-envelope" value="#{xmsg['create']}" outcome="createConfiguracaoEmail" />
             </x:securityArea>
         </p:toolbarGroup>
     </p:toolbar>

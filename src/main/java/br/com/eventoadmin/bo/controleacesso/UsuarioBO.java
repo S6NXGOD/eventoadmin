@@ -135,7 +135,7 @@ public class UsuarioBO extends AbstractBusinessObject<Usuario> {
     }
 
     /**
-     * retorn o usuario a partir do cpf
+     * retorna o usuario a partir do cpf
      *
      * @param cpf
      * @return

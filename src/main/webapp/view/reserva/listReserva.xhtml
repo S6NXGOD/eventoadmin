@@ -52,10 +52,10 @@
                 <p:column headerText="#{msg['reserva.checkin']}" sortBy="#{reserva.checkin}"
                     filterBy="#{reserva.checkin}"   style="text-align: center;">
                     <f:facet name="header">
-                        <h:outputText value="Check-In" />
+                        <h:outputText value="Check-In"/>
                         <x:dateFilter/>
                     </f:facet>
-                    <h:outputText value="#{reserva.checkin}">
+                    <h:outputText value="#{reserva.checkin}" style="font-family: 'Oswald'">
                         <f:convertDateTime />
                     </h:outputText>
                 </p:column>
@@ -74,7 +74,7 @@
                     <f:facet name="header">
                         <h:outputText value="#{msg['reserva.valorReserva']}" />
                     </f:facet>
-                    <h:outputText value="#{reserva.valorReserva}">
+                    <h:outputText value="R$ #{reserva.valorReserva}">
                         <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
                     </h:outputText>
                 </p:column>

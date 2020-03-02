@@ -1,4 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400&display=swap);
+@import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 body{font-size: 12px;}
 .bodyLogin{font-size: 12px;background-image: url('../images/fundo-login.png');background-size: 100%; font-family: 'Montserrat',sans-serif;}
 .ui-inputfield[readonly],.ui-inputfield[disabled]{ background-color: #E6E6E6;}
@@ -7,7 +9,7 @@ footer {border-top: 1px solid #ddd;margin: 10px auto 0; padding: 20px; width: 98
 .ui-widget{font-size: 12px;}
 select{padding: 4px;}
 .header-main{padding: 10px 20px;background-color: #003580}
-.font-11, .font-11  td, .font-11  th{font-size:  11px;color: white;font-family: 'Montserrat'}
+.font-11, .font-11  td, .font-11  th{font-size:  11px;color: white;font-family: 'Oswald'}
 .font-weight-normal, .font-weight-normal  td{font-weight: normal;}
 .grid-detail, grid-form{margin-top: 0;}
 .grid-detail td, grid-form td{padding: 4px 0;}
@@ -46,7 +48,7 @@ select{padding: 4px;}
 .w-350{width: 350px;}
 .w-100p{width: 100%}
 .ui-tabs{margin-bottom: 2px;}
-.ui-datatable th{text-align: center !important;  white-space: normal;}
+.ui-datatable th{text-align: center !important;  white-space: normal;font-family: 'Oswald';font-size: 13px;}
 .datatable-auditing th, .datatable-auditing td, .datatable-auditing td .ui-dt-c, .datatable-auditing td .ui-dt-c span{white-space: normal !important;}
 .ui-datatable th{text-align: center !important;}
 .legenda-tabela{font-size: 9px !important; font-weight: normal !important; margin-bottom: 1px; width: 62px; border: 0 !important;}
@@ -71,6 +73,7 @@ input[type="radio"], input[type="checkbox"] {margin: 0; min-height: 0; padding-l
 .ui-toolbar .ui-button{margin: 0 3px 0 0;}
 .ui-toolbar .ui-button span{font-size: 14px;}
 .navbar .ui-panelmenu .ui-panelmenu-header{font-size: 14px;}
+
 /*menu bar*/
 .ui-menu.ui-menubar{}
 .ui-menu .ui-menuitem {margin: 0;font-family: 'Montserrat';font-size: 16px;}
@@ -81,17 +84,33 @@ input[type="radio"], input[type="checkbox"] {margin: 0; min-height: 0; padding-l
 .ui-menu > ul > li ul .ui-menuitem-link {padding: 8px 0 !important; font-size: 13px;}
 .acesso-rapido .ui-autocomplete-input {height: 34px;}
 select.form-control{height: 34px;}
-section.conteudo {padding: 0 20px; font-size: 12px;}
+section.conteudo {padding: 0 20px; font-size: 12px;font-family: 'Oswald';}
 section.conteudo .page-header {margin: 10px 0 0 0; font-size: 20px;font-family: 'Montserrat' }
 section.conteudo h1.page-header  span{vertical-align: middle;}
 .ui-datatable .ui-datatable-tablewrapper tbody > tr > td {padding: 3px; white-space: normal;}
 .ui-datatable thead > tr > th {white-space: normal !important;}
+
 /*login*/
 .login-wraper {width: 300px;margin: 10% auto;-moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);position: relative;padding: 10px;height: auto;background:white;text-align: left;}
 .login-wraper h1{font-family: 'Montserrat', sans-serif;font-weight: bold;text-align: center;font-size: 23px;padding: 0;margin: 0}
 .login-wraper .login-body{margin: 10px auto;padding: 15px 0 10px;}
 .login-wraper .login-body .input-append,.login-wraper .login-body .input-prepend {width: 350px;}
 .login-wraper .login-body input[type=text],.login-wraper .login-body input[type=password]{width: 100%}
+.login-button{
+    display:inline-block;
+    padding:0.3em 1.2em;
+    margin:0 0.3em 0.3em 0;
+    border-radius:2em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Montserrat',sans-serif;
+    font-weight:300;
+    text-align:center;
+/*    transition: all 0.2s;*/
+}
+/*.login-button:hover{
+    background-color:#4095c6;
+}*/
 ul li.ui-menuitem-active>a{
     background-image: none !important;
     background-color:#003580 !important;    
@@ -111,3 +130,4 @@ li ul li.ui-menuitem-active>a{
 .ui-datatable table{ table-layout: auto; }
 .ui-datatable tr.ui-widget-content:hover, .ui-panelgrid tr.ui-widget-content:hover, .ui-treetable tr.ui-widget-content:hover{background-color: #EBEBEB;}
 .uix-form-detail .control-label { margin-bottom: 0; margin-top: 8px;}
+.uix-datatable-actions{font-size: 15px;}

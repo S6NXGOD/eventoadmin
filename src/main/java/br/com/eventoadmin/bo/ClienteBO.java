@@ -9,6 +9,8 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import br.com.eventoadmin.modelo.cliente.Cliente;
 import com.xpert.core.validation.UniqueFields;
+import com.xpert.utils.Encryption;
+import java.security.NoSuchAlgorithmException;
 
 /**
  *
@@ -39,4 +41,17 @@ public class ClienteBO extends AbstractBusinessObject<Cliente> {
         return true;
     }
 
+    @Override
+    public void save(Cliente cliente) throws BusinessException {
+        boolean novo = cliente.getId() == null;
+
+        if (novo) {
+            try {
+                cliente.setCpf(Encryption.getSHA256(cliente.getCpf()));
+            } catch (NoSuchAlgorithmException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+        super.save(cliente);
+    }
 }
