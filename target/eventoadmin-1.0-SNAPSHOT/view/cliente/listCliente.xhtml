@@ -5,6 +5,7 @@
                  xmlns:p="http://primefaces.org/ui"
                  template="/template/mainTemplate.xhtml"
                  xmlns:x="http://xpert.com/faces">
+    <link rel="stylesheet" href="/resources/font-awesome-4.7.0/css/font-awesome.min.css"></link>
     <ui:param name="title" value="#{msg['cliente.list']}" />
     <ui:define name="body">
         <ui:include src="menuCliente.xhtml" />
@@ -54,28 +55,26 @@
                     <f:facet name="header">
                         <h:outputText value="#{xmsg['actions']}"/>
                     </f:facet>
-                    <p:commandButton oncomplete="PF('widgetClienteDetail').show();"  icon="ui-icon-zoomin" 
-                                     process="@form" update=":formDetailCliente" title="#{xmsg['detail']}" >
+                    <p:commandButton oncomplete="PF('widgetClienteDetail').show();"  icon="fa fa-info-circle" 
+                                     process="@form" update=":formDetailCliente" title="#{xmsg['detail']}" style="background: #ffff00;">
                         <f:setPropertyActionListener value="#{cliente}" target="#{clienteMB.entity}" />
                     </p:commandButton>
                     <x:securityArea rolesAllowed="cliente.create">
-                        <p:button icon="ui-icon-pencil" outcome="createCliente" title="#{xmsg['edit']}">
+                        <p:button icon="fa fa-pencil-square-o " outcome="createCliente" title="#{xmsg['edit']}" style="background: #33cc00;">
                             <f:param name="id" value="#{cliente.id}" />
                         </p:button>
                     </x:securityArea>
                     <x:securityArea rolesAllowed="cliente.delete">
-                        <p:commandButton icon="ui-icon-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
-                                         action="#{clienteMB.delete}" >
+                        <p:commandButton icon="fa fa-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
+                                         action="#{clienteMB.delete}" style="background: #ff3333;">
                             <f:setPropertyActionListener value="#{cliente.id}" target="#{clienteMB.id}" />
                             <x:confirmation message="#{xmsg['confirmDelete']} - #{cliente}" />
                         </p:commandButton>
                     </x:securityArea>
-                </p:column>
-                <p:column styleClass="uix-datatable-actions" exportable="false" headerText="Mensagem" style="text-align: center;">
-                    <p:commandLink action="#{clienteMB.enviarMensagemZap(cliente)}" style="margin-right:20px;" 
-                                   process="@this" update="@form" ajax="false" target="_blank">
+                    <p:commandButton action="#{clienteMB.enviarMensagemZap(cliente)}" style="margin-right:20px;background: #34af23;" 
+                                     process="@this" update="@form" ajax="false" icon="fa fa-whatsapp" onclick="this.form.target = '_blank'">
                         <h:outputText value="Enviar Mensagem" />
-                    </p:commandLink> 
+                    </p:commandButton> 
                 </p:column>
             </p:dataTable>
             <div class="uix-audit-delete">

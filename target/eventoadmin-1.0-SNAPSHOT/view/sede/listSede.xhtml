@@ -5,6 +5,7 @@
                  xmlns:p="http://primefaces.org/ui"
                  template="/template/mainTemplate.xhtml"
                  xmlns:x="http://xpert.com/faces">
+    <link rel="stylesheet" href="/resources/font-awesome-4.7.0/css/font-awesome.min.css"></link>
     <ui:param name="title" value="#{msg['sede.list']}" />
     <ui:define name="body">
         <ui:include src="menuSede.xhtml" />
@@ -57,13 +58,6 @@
                     </f:facet>
                     <h:outputText value="#{sede.telefone}"/>
                 </p:column>
-                <p:column headerText="#{msg['sede.whatsapp']}" sortBy="#{sede.whatsapp}"
-                          filterBy="#{sede.whatsapp}"   >
-                    <f:facet name="header">
-                        <h:outputText value="#{msg['sede.whatsapp']}" />
-                    </f:facet>
-                    <h:outputText value="#{sede.whatsapp}"/>
-                </p:column>
                 <p:column headerText="#{msg['sede.ativa']}" sortBy="#{sede.ativa}"
                           filterBy="#{sede.ativa}" filterOptions="#{booleanSelectItensEmptyOption}"  style="text-align: center;">
                     <f:facet name="header">
@@ -75,18 +69,18 @@
                     <f:facet name="header">
                         <h:outputText value="#{xmsg['actions']}"/>
                     </f:facet>
-                    <p:commandButton oncomplete="PF('widgetSedeDetail').show();"  icon="ui-icon-zoomin" 
-                                     process="@form" update=":formDetailSede" title="#{xmsg['detail']}" >
+                    <p:commandButton oncomplete="PF('widgetSedeDetail').show();"  icon="fa fa-info-circle" 
+                                     process="@form" update=":formDetailSede" title="#{xmsg['detail']}" style="background: #ffff00;">
                         <f:setPropertyActionListener value="#{sede}" target="#{sedeMB.entity}" />
                     </p:commandButton>
                     <x:securityArea rolesAllowed="sede.create">
-                        <p:button icon="ui-icon-pencil" outcome="createSede" title="#{xmsg['edit']}">
+                        <p:button icon="fa fa-pencil-square-o " outcome="createSede" title="#{xmsg['edit']}" style="background: #33cc00;">
                             <f:param name="id" value="#{sede.id}" />
                         </p:button>
                     </x:securityArea>
                     <x:securityArea rolesAllowed="sede.delete">
-                        <p:commandButton icon="ui-icon-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
-                                         action="#{sedeMB.delete}" >
+                        <p:commandButton icon="fa fa-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
+                                         action="#{sedeMB.delete}" style="background: #ff3333;">
                             <f:setPropertyActionListener value="#{sede.id}" target="#{sedeMB.id}" />
                             <x:confirmation message="#{xmsg['confirmDelete']} - #{sede}" />
                         </p:commandButton>

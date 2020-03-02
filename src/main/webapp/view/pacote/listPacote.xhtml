@@ -5,6 +5,7 @@
                  xmlns:p="http://primefaces.org/ui"
                  template="/template/mainTemplate.xhtml"
                  xmlns:x="http://xpert.com/faces">
+    <link rel="stylesheet" href="/resources/font-awesome-4.7.0/css/font-awesome.min.css"></link>
     <ui:param name="title" value="#{msg['pacote.list']}" />
     <ui:define name="body">
         <ui:include src="menuPacote.xhtml" />
@@ -52,18 +53,18 @@
                     <f:facet name="header">
                         <h:outputText value="#{xmsg['actions']}"/>
                     </f:facet>
-                    <p:commandButton oncomplete="PF('widgetPacoteDetail').show();"  icon="ui-icon-zoomin" 
-                                     process="@form" update=":formDetailPacote" title="#{xmsg['detail']}" >
+                    <p:commandButton oncomplete="PF('widgetPacoteDetail').show();"  icon="fa fa-info-circle" 
+                                     process="@form" update=":formDetailPacote" title="#{xmsg['detail']}" style="background: #ffff00;">
                         <f:setPropertyActionListener value="#{pacote}" target="#{pacoteMB.entity}" />
                     </p:commandButton>
                     <x:securityArea rolesAllowed="pacote.create">
-                        <p:button icon="ui-icon-pencil" outcome="createPacote" title="#{xmsg['edit']}">
+                        <p:button icon="fa fa-pencil-square-o " outcome="createPacote" title="#{xmsg['edit']}" style="background: #33cc00;">
                             <f:param name="id" value="#{pacote.id}" />
                         </p:button>
                     </x:securityArea>
                     <x:securityArea rolesAllowed="pacote.delete">
-                        <p:commandButton icon="ui-icon-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
-                                         action="#{pacoteMB.delete}" >
+                        <p:commandButton icon="fa fa-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
+                                         action="#{pacoteMB.delete}" style="background: #ff3333;">
                             <f:setPropertyActionListener value="#{pacote.id}" target="#{pacoteMB.id}" />
                             <x:confirmation message="#{xmsg['confirmDelete']} - #{pacote}" />
                         </p:commandButton>

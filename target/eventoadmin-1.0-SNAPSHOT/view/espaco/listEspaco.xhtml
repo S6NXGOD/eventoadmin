@@ -5,6 +5,7 @@
                  xmlns:p="http://primefaces.org/ui"
                  template="/template/mainTemplate.xhtml"
                  xmlns:x="http://xpert.com/faces">
+    <link rel="stylesheet" href="/resources/font-awesome-4.7.0/css/font-awesome.min.css"></link>
     <ui:param name="title" value="Consulta de Espaço" />
     <ui:define name="body">
         <ui:include src="menuEspaco.xhtml" />
@@ -12,7 +13,7 @@
             <x:modalMessages/>
 
             <x:dataTableActions fileName="espaco_export" target=":formListEspaco:dataTableEspaco"
-                                     widgetVar="dataTableEspacoWidget"  />
+                                widgetVar="dataTableEspacoWidget"  />
 
             <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
                          var="espaco" rowIndexVar="index" id="dataTableEspaco" widgetVar="dataTableEspacoWidget" styleClass="table-responsive"
@@ -23,7 +24,7 @@
                     <h:outputText value="#{index+1}"/>
                 </p:column>
                 <p:column headerText="#{msg['espaco.sede']}" sortBy="#{espaco.sede}"
-                       >
+                          >
                     <f:facet name="header">
                         <h:outputText value="#{msg['espaco.sede']}" />
                     </f:facet>
@@ -32,14 +33,14 @@
                     </h:outputText>
                 </p:column>
                 <p:column headerText="#{msg['espaco.nome']}" sortBy="#{espaco.nome}"
-                    filterBy="#{espaco.nome}"   >
+                          filterBy="#{espaco.nome}"   >
                     <f:facet name="header">
                         <h:outputText value="#{msg['espaco.nome']}" />
                     </f:facet>
                     <h:outputText value="#{espaco.nome}"/>
                 </p:column>
                 <p:column headerText="#{msg['espaco.descricao']}" sortBy="#{espaco.descricao}"
-                    filterBy="#{espaco.descricao}"   >
+                          filterBy="#{espaco.descricao}"   >
                     <f:facet name="header">
                         <h:outputText value="Descrição" />
                     </f:facet>
@@ -49,18 +50,18 @@
                     <f:facet name="header">
                         <h:outputText value="#{xmsg['actions']}"/>
                     </f:facet>
-                    <p:commandButton oncomplete="PF('widgetEspacoDetail').show();"  icon="ui-icon-zoomin" 
-                                     process="@form" update=":formDetailEspaco" title="#{xmsg['detail']}" >
+                    <p:commandButton oncomplete="PF('widgetEspacoDetail').show();"  icon="fa fa-info-circle" 
+                                     process="@form" update=":formDetailEspaco" title="#{xmsg['detail']}" style="background: #ffff00;">
                         <f:setPropertyActionListener value="#{espaco}" target="#{espacoMB.entity}" />
                     </p:commandButton>
                     <x:securityArea rolesAllowed="espaco.create">
-                        <p:button icon="ui-icon-pencil" outcome="createEspaco" title="#{xmsg['edit']}">
+                        <p:button icon="fa fa-pencil-square-o " outcome="createEspaco" title="#{xmsg['edit']}" style="background: #33cc00;">
                             <f:param name="id" value="#{espaco.id}" />
                         </p:button>
                     </x:securityArea>
                     <x:securityArea rolesAllowed="espaco.delete">
-                        <p:commandButton icon="ui-icon-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
-                                         action="#{espacoMB.delete}" >
+                        <p:commandButton icon="fa fa-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
+                                         action="#{espacoMB.delete}" style="background: #ff3333;">
                             <f:setPropertyActionListener value="#{espaco.id}" target="#{espacoMB.id}" />
                             <x:confirmation message="#{xmsg['confirmDelete']} - #{espaco}" />
                         </p:commandButton>
@@ -76,7 +77,7 @@
 
         <p:dialog widgetVar="widgetEspacoDetail" header="#{msg['espaco.detail']}" appendTo="@(body)" 
                   modal="true" styleClass="uix-dialog-fluid" >
-                  <ui:include src="detailEspaco.xhtml" />
+            <ui:include src="detailEspaco.xhtml" />
         </p:dialog>
     </ui:define>
 </ui:composition>

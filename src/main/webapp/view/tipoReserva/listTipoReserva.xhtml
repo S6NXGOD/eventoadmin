@@ -5,6 +5,7 @@
                  xmlns:p="http://primefaces.org/ui"
                  template="/template/mainTemplate.xhtml"
                  xmlns:x="http://xpert.com/faces">
+    <link rel="stylesheet" href="/resources/font-awesome-4.7.0/css/font-awesome.min.css"></link>
     <ui:param name="title" value="#{msg['tipoReserva.list']}" />
     <ui:define name="body">
         <ui:include src="menuTipoReserva.xhtml" />
@@ -30,13 +31,13 @@
                         <h:outputText value="#{xmsg['actions']}"/>
                     </f:facet>
                     <x:securityArea rolesAllowed="tipoReserva.create">
-                        <p:button icon="ui-icon-pencil" outcome="createTipoReserva" title="#{xmsg['edit']}">
+                        <p:button icon="fa fa-pencil-square-o " outcome="createTipoReserva" title="#{xmsg['edit']}" style="background: #33cc00;">
                             <f:param name="id" value="#{tipoReserva.id}" />
                         </p:button>
                     </x:securityArea>
                     <x:securityArea rolesAllowed="tipoReserva.delete">
-                        <p:commandButton icon="ui-icon-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
-                                         action="#{tipoReservaMB.delete}" >
+                        <p:commandButton icon="fa fa-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
+                                         action="#{tipoReservaMB.delete}" style="background: #ff3333;">
                             <f:setPropertyActionListener value="#{tipoReserva.id}" target="#{tipoReservaMB.id}" />
                             <x:confirmation message="#{xmsg['confirmDelete']} - #{tipoReserva}" />
                         </p:commandButton>
