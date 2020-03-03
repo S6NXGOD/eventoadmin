@@ -106,11 +106,12 @@ section.conteudo h1.page-header  span{vertical-align: middle;}
     font-family:'Montserrat',sans-serif;
     font-weight:300;
     text-align:center;
-/*    transition: all 0.2s;*/
+    transition: all 0.1s;
 }
-/*.login-button:hover{
-    background-color:#4095c6;
-}*/
+.login-button:hover{
+    background:#4095c6;
+    color: white;
+}
 ul li.ui-menuitem-active>a{
     background-image: none !important;
     background-color:#003580 !important;    
