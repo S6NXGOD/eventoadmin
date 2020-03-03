@@ -269,6 +269,7 @@ public class UsuarioMenuBO {
             //se o menu pai for nulo ou se encontrou o menu pai e ele possui menu pai
             if (permissaoPai == null || submenu != null) {
                 DefaultMenuItem item = new DefaultMenuItem();
+                item.setIcon(permissao.getIcone());
                 item.setId(permissao.getId().toString());
                 item.setValue(permissao.getNomeMenuVerificado());
                 item.setUrl(permissao.getUrlMenuVerificado());
@@ -293,6 +294,7 @@ public class UsuarioMenuBO {
                     //caso a permissao tenha pai deve ser adicionado um submenu desse pai quando nao encontrado
                     if (submenu == null) {
                         submenu = new DefaultSubMenu();
+                        submenu.setIcon(permissao.getIcone());
                         submenu.setId(permissao.getId().toString());
                         submenu.setLabel(permissao.getNomeMenuVerificado());
                         subMenuMap.put(permissao, submenu);

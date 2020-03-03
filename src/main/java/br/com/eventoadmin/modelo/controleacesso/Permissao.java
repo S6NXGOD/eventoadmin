@@ -41,6 +41,8 @@ public class Permissao implements Serializable, Role {
      */
     private String nomeMenu;
 
+    private String icone;
+
     private boolean possuiMenu = false;
 
     private boolean global = false;
@@ -54,12 +56,12 @@ public class Permissao implements Serializable, Role {
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "permissoes")
     private List<Perfil> perfis;
-    
+
     private boolean ativo = true;
 
     @Transient
     private String caminhoPermissao;
-    
+
     /**
      * iniciar com valor padrao 0
      */
@@ -137,7 +139,7 @@ public class Permissao implements Serializable, Role {
     public void setOrdenacao(Integer ordenacao) {
         this.ordenacao = ordenacao;
     }
-    
+
     public List<Perfil> getPerfis() {
         return perfis;
     }
@@ -193,7 +195,14 @@ public class Permissao implements Serializable, Role {
     public void setPermissoesFilhas(List<Permissao> permissoesFilhas) {
         this.permissoesFilhas = permissoesFilhas;
     }
-    
+
+    public String getIcone() {
+        return icone;
+    }
+
+    public void setIcone(String icone) {
+        this.icone = icone;
+    }
 
     @Override
     public String getKey() {

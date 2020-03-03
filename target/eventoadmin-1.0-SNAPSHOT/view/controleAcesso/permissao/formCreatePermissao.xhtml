@@ -6,6 +6,7 @@
                  xmlns:x="http://xpert.com/faces"
                  xmlns:custom="http://java.sun.com/jsf/composite/components"
                  >
+    <link rel="stylesheet" href="/resources/font-awesome-4.7.0/css/font-awesome.min.css"></link>
     <h:form id="formCreatePermissao">
         <x:modalMessages/>
         <p:fieldset legend="#{msg['dadosGerais']}">
@@ -110,7 +111,11 @@
                         <p:inputText value="#{permissaoMB.entity.urlMenu}" styleClass="form-control"  />
                         <h:outputText value="#{msg['permissao.urlMenuInfo']}" styleClass="help-block"/>
                     </div>
-
+                    <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <h:outputLabel value="Ícone:" />
+                        <p:inputText value="#{permissaoMB.entity.icone}" styleClass="form-control"  />
+<!--                        <h:outputText value="#{msg['permissao.iconeMenuInfo']}" styleClass="help-block"/>-->
+                    </div>
                 </div>
             </div>
         </p:fieldset>
