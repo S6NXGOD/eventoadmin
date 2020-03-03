@@ -235,7 +235,7 @@ public class UsuarioMenuBO {
     public DefaultMenuItem getMenuHome() {
         DefaultMenuItem item = new DefaultMenuItem();
         item.setValue(I18N.get("menu.home"));
-        item.setIcon("ui-icon-home");
+        item.setIcon("fa fa-home");
         item.setUrl("/view/home.jsf");
         return item;
     }
@@ -243,7 +243,7 @@ public class UsuarioMenuBO {
     public DefaultMenuItem getMenuSair() {
         DefaultMenuItem item = new DefaultMenuItem();
         item.setValue(I18N.get("menu.sair"));
-        item.setIcon("ui-icon-close");
+        item.setIcon("fa fa-times-circle");
         item.setCommand("#{loginMB.logout}");
         return item;
     }

@@ -8,10 +8,20 @@
     <p:toolbar >
         <p:toolbarGroup align="left">
             <x:securityArea rolesAllowed="reserva.list">
-                <p:button icon="ui-icon-circle-zoomin" value="#{xmsg['list']}" outcome="listReserva" />
+                <p:button icon="fa fa-search" value="#{xmsg['list']}" outcome="listReserva"
+                          style="    
+                          color: white;
+                          border-radius: 4px;
+                          text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+                          background: rgb(66, 184, 221);"/>
             </x:securityArea>
             <x:securityArea rolesAllowed="reserva.create">
-                <p:button icon="fa fa-calendar-plus-o" value="#{xmsg['create']}" outcome="createReserva" />
+                <p:button icon="fa fa-calendar-plus-o" value="Nova" outcome="createReserva"
+                          style="    
+                          color: white;
+                          border-radius: 4px;
+                          text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+                          background: rgb(28, 184, 65);"/>
             </x:securityArea>
         </p:toolbarGroup>
     </p:toolbar>

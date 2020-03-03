@@ -7,11 +7,21 @@
     <link rel="stylesheet" href="/resources/font-awesome-4.7.0/css/font-awesome.min.css"></link>
     <p:toolbar>
         <p:toolbarGroup align="left">
-                        <x:securityArea rolesAllowed="cliente.list">
-                <p:button icon="fa fa-search-plus" value="#{xmsg['list']}" outcome="listCliente" />
+            <x:securityArea rolesAllowed="cliente.list">
+                <p:button icon="fa fa-search" value="#{xmsg['list']}" outcome="listCliente"
+                          style="    
+                          color: white;
+                          border-radius: 4px;
+                          text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+                          background: rgb(66, 184, 221);"/>
             </x:securityArea>
             <x:securityArea rolesAllowed="cliente.create">
-                <p:button icon="fa fa-user-plus" value="#{xmsg['create']}" outcome="createCliente" />
+                <p:button icon="fa fa-user-plus" value="#{xmsg['create']}" outcome="createCliente" 
+                          style="    
+                          color: white;
+                          border-radius: 4px;
+                          text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+                          background: rgb(28, 184, 65);"/>
             </x:securityArea>
         </p:toolbarGroup>
     </p:toolbar>

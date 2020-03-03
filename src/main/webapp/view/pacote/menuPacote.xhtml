@@ -8,10 +8,20 @@
     <p:toolbar>
         <p:toolbarGroup align="left">
             <x:securityArea rolesAllowed="pacote.list">
-                <p:button icon="ui-icon-circle-zoomin" value="#{xmsg['list']}" outcome="listPacote" style="font-family: 'Oswald'"/>
+                <p:button icon="fa fa-search" value="#{xmsg['list']}" outcome="listPacote" 
+                          style="    
+                          color: white;
+                          border-radius: 4px;
+                          text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+                          background: rgb(66, 184, 221);"/>
             </x:securityArea>
             <x:securityArea rolesAllowed="pacote.create">
-                <p:button icon="fa fa-archive" value="#{xmsg['create']}" outcome="createPacote" style="font-family: 'Oswald'"/>
+                <p:button icon="fa fa-archive" value="#{xmsg['create']}" outcome="createPacote" 
+                          style="    
+                          color: white;
+                          border-radius: 4px;
+                          text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+                          background: rgb(28, 184, 65);"/>
             </x:securityArea>
         </p:toolbarGroup>
     </p:toolbar>

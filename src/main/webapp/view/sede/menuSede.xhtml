@@ -8,10 +8,22 @@
     <p:toolbar>
         <p:toolbarGroup align="left">
             <x:securityArea rolesAllowed="sede.list">
-                <p:button icon="ui-icon-circle-zoomin" value="#{xmsg['list']}" outcome="listSede" />
+                <p:button icon="fa fa-search" value="#{xmsg['list']}" outcome="listSede" 
+                          style="    
+                          color: white;
+                          border-radius: 4px;
+                          text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+                          background: rgb(66, 184, 221);
+                          "/>
             </x:securityArea>
             <x:securityArea rolesAllowed="sede.create">
-                <p:button icon="fa fa-building-o" value="#{xmsg['create']}" outcome="createSede" />
+                <p:button icon="fa fa-building-o" value="Nova" outcome="createSede" 
+                          style="    
+                          color: white;
+                          border-radius: 4px;
+                          text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+                          background: rgb(28, 184, 65);
+                          "/>
             </x:securityArea>
         </p:toolbarGroup>
     </p:toolbar>

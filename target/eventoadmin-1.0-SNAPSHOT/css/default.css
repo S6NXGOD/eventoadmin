@@ -9,7 +9,7 @@ footer {border-top: 1px solid #ddd;margin: 10px auto 0; padding: 20px; width: 98
 .ui-widget{font-size: 12px;}
 select{padding: 4px;}
 .header-main{padding: 10px 20px;background-color: #003580}
-.font-11, .font-11  td, .font-11  th{font-size:  11px;color: white;font-family: 'Oswald'}
+.font-11, .font-11  td, .font-11  th{font-size:  11px;font-family: 'Oswald'}
 .font-weight-normal, .font-weight-normal  td{font-weight: normal;}
 .grid-detail, grid-form{margin-top: 0;}
 .grid-detail td, grid-form td{padding: 4px 0;}
@@ -109,17 +109,17 @@ section.conteudo h1.page-header  span{vertical-align: middle;}
     transition: all 0.1s;
 }
 .login-button:hover{
-    background:#4095c6;
+    background:rgb(28, 184, 65);
     color: white;
 }
 ul li.ui-menuitem-active>a{
     background-image: none !important;
-    background-color:#003580 !important;    
+    background-color:rgb(28, 184, 65) !important;    
 }
 
 li ul li.ui-menuitem-active>a{
     background-image: none !important;
-    background-color:#003580 !important;    
+    background-color:rgb(28, 184, 65) !important;    
 }
 @media (max-width: 600px) {
     .login-wraper {width: auto;height: auto;margin: 10% auto;}
@@ -132,3 +132,6 @@ li ul li.ui-menuitem-active>a{
 .ui-datatable tr.ui-widget-content:hover, .ui-panelgrid tr.ui-widget-content:hover, .ui-treetable tr.ui-widget-content:hover{background-color: #EBEBEB;}
 .uix-form-detail .control-label { margin-bottom: 0; margin-top: 8px;}
 .uix-datatable-actions{font-size: 15px;}
+.form-group{
+    font-family: 'Montserrat';
+}
