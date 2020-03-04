@@ -115,7 +115,11 @@
         <h:outputText value="#{xmsg['requiredFieldsForm']}"/>
         <div class="uix-center">
             <x:securityArea rolesAllowed="reserva.create">
-                <p:commandButton process="@form" update="@form" action="#{reservaMB.save}" value="#{xmsg['save']}" />
+                <p:commandButton process="@form" update="@form" action="#{reservaMB.save}" value="#{xmsg['save']}" 
+                                 style="
+                                 background: #34af23;
+                                 color: white;
+                                 font-size: 14px;" />
             </x:securityArea>
             <x:securityArea rolesAllowed="reserva.audit">
                 <x:audit for="#{reservaMB.entity}"/>

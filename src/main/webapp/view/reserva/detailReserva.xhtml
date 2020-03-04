@@ -14,7 +14,7 @@
                     </h:outputText>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <h:outputLabel value="Espaço:" styleClass="control-label" /><br/>
+                    <h:outputLabel value="Espaço:" styleClass="control-label" style="icon:'fa fa-calendar' "/><br/>
                     <h:outputText value="#{reservaMB.entity.espaco}" styleClass="uix-content-detail">
                         <x:initializer/>
                     </h:outputText>
@@ -58,20 +58,20 @@
                     <h:outputText value="#{reservaMB.entity.tipopagamento.descricao}" styleClass="uix-content-detail"/>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <h:outputLabel value="Valor Pago:" styleClass="control-label" /><br/>
-                    <h:outputText value="#{reservaMB.entity.valorpago}" styleClass="uix-content-detail">
+                    <h:outputLabel value="Valor Pago:" styleClass="control-label" style="font-size: 15px;"/><br/>
+                    <h:outputText value="R$ #{reservaMB.entity.valorpago}" styleClass="uix-content-detail" style="color: #006600;">
                         <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
                     </h:outputText>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <h:outputLabel value="Valor da Reserva:" styleClass="control-label" /><br/>
-                    <h:outputText value="#{reservaMB.entity.valorReserva}" styleClass="uix-content-detail">
+                    <h:outputLabel value="Valor da Reserva:" styleClass="control-label" style="font-size: 15px;"/><br/>
+                    <h:outputText value="R$ #{reservaMB.entity.valorReserva}" styleClass="uix-content-detail" style="color: #006600;">
                         <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
                     </h:outputText>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <h:outputLabel value="Valor a quitar:" styleClass="control-label" style="font-size: 15px;color: red;"/><br/>
-                    <h:outputText value="R$ #{reservaMB.entity.valorReserva - reservaMB.entity.valorpago}" style="color: #006600;font-family: 'Montserrat';font-weight: 900;" styleClass="uix-content-detail">
+                    <h:outputLabel value="Valor Pendente:" styleClass="control-label" style="font-size: 15px;color: red;"/><br/>
+                    <h:outputText value="R$ #{reservaMB.entity.valorReserva - reservaMB.entity.valorpago}" style="color: #006600;" styleClass="uix-content-detail">
                         <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
                     </h:outputText>
                 </div>

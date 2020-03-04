@@ -56,7 +56,7 @@
                         <h:outputText value="#{xmsg['actions']}"/>
                     </f:facet>
                     <p:commandButton oncomplete="PF('widgetClienteDetail').show();"  icon="fa fa-info-circle" 
-                                     process="@form" update=":formDetailCliente" title="#{xmsg['detail']}" style="background: #ffff00;color: #666666">
+                                     process="@form" update=":formDetailCliente" title="#{xmsg['detail']}" style="background: #ffff00;">
                         <f:setPropertyActionListener value="#{cliente}" target="#{clienteMB.entity}" />
                     </p:commandButton>
                     <x:securityArea rolesAllowed="cliente.create">
