@@ -45,7 +45,7 @@
                     <f:facet name="header">
                         <h:outputText value="Valor"/>
                     </f:facet>
-                    <h:outputText value="R$ #{pacote.valor}" style="font-family: 'Oswald';color: green;">
+                    <h:outputText value="R$ #{pacote.valor}" style="font-family: 'Oswald';color: green;text-align: center;font-weight: 900;">
                         <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
                     </h:outputText>
                 </p:column>
@@ -53,10 +53,6 @@
                     <f:facet name="header">
                         <h:outputText value="#{xmsg['actions']}"/>
                     </f:facet>
-                    <p:commandButton oncomplete="PF('widgetPacoteDetail').show();"  icon="fa fa-info-circle" 
-                                     process="@form" update=":formDetailPacote" title="#{xmsg['detail']}" style="background: #ffff00;">
-                        <f:setPropertyActionListener value="#{pacote}" target="#{pacoteMB.entity}" />
-                    </p:commandButton>
                     <x:securityArea rolesAllowed="pacote.create">
                         <p:button icon="fa fa-pencil-square-o " outcome="createPacote" title="#{xmsg['edit']}" style="background: #33cc00;">
                             <f:param name="id" value="#{pacote.id}" />
@@ -77,10 +73,5 @@
                 </x:securityArea>
             </div>  
         </h:form>
-
-        <p:dialog widgetVar="widgetPacoteDetail" header="#{msg['pacote.detail']}" appendTo="@(body)" 
-                  modal="true" styleClass="uix-dialog-fluid" >
-            <ui:include src="detailPacote.xhtml" />
-        </p:dialog>
     </ui:define>
 </ui:composition>

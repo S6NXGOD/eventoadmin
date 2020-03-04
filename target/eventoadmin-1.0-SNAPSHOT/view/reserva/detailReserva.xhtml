@@ -5,7 +5,7 @@
                  xmlns:p="http://primefaces.org/ui"
                  xmlns:x="http://xpert.com/faces">
     <h:form id="formDetailReserva" styleClass="uix-form-detail">
-        <div class="container-fluid">
+        <div class="container-fluid" style="font-family: 'Montserrat'">
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                     <h:outputLabel value="#{msg['reserva.sede']}:" styleClass="control-label" /><br/>
@@ -70,11 +70,17 @@
                     </h:outputText>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="Valor a quitar:" styleClass="control-label" style="font-size: 15px;color: red;"/><br/>
+                    <h:outputText value="R$ #{reservaMB.entity.valorReserva - reservaMB.entity.valorpago}" style="color: #006600;font-family: 'Montserrat';font-weight: 900;" styleClass="uix-content-detail">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+                    </h:outputText>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                     <h:outputLabel value="#{msg['reserva.pagamento']}:" styleClass="control-label" /><br/>
                     <h:outputText value="#{reservaMB.entity.pagamento}" converter ="yesNoConverter"  styleClass="uix-content-detail"/>
                 </div>
-           </div>
-         </div>
+            </div>
+        </div>
         <p:separator/>
         <div class="uix-center">
             <p:commandButton type="button" value="#{xmsg['close']}" onclick="PF('widgetReservaDetail').hide()" />

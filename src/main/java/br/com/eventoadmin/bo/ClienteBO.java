@@ -40,18 +40,4 @@ public class ClienteBO extends AbstractBusinessObject<Cliente> {
     public boolean isAudit() {
         return true;
     }
-
-    @Override
-    public void save(Cliente cliente) throws BusinessException {
-        boolean novo = cliente.getId() == null;
-
-        if (novo) {
-            try {
-                cliente.setCpf(Encryption.getSHA256(cliente.getCpf()));
-            } catch (NoSuchAlgorithmException ex) {
-                throw new RuntimeException(ex);
-            }
-        }
-        super.save(cliente);
-    }
 }

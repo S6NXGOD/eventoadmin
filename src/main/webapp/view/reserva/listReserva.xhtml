@@ -28,7 +28,7 @@
                     <f:facet name="header">
                         <h:outputText value="#{msg['reserva.sede']}" />
                     </f:facet>
-                    <h:outputText value="#{reserva.sede}">
+                    <h:outputText value="#{reserva.sede}" style="font-family:'Montserrat';font-weight: bold;" >
                         <x:initializer/>
                     </h:outputText>
                 </p:column>
@@ -66,17 +66,17 @@
                         <h:outputText value="Check-Out" />
                         <x:dateFilter/>
                     </f:facet>
-                    <h:outputText value="#{reserva.checkout}">
+                    <h:outputText value="#{reserva.checkout}" style="font-family: 'Oswald'">
                         <f:convertDateTime />
                     </h:outputText>
                 </p:column>
                 <p:column headerText="#{msg['reserva.valorReserva']}" sortBy="#{reserva.valorReserva}"
-                          style="text-align: right;">
+                          style="text-align: center;">
                     <f:facet name="header">
                         <h:outputText value="#{msg['reserva.valorReserva']}" />
                     </f:facet>
-                    <h:outputText value="R$ #{reserva.valorReserva}">
-                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+                    <h:outputText value="R$ #{reserva.valorReserva}" style="font-family: 'Oswald';color: green;text-align: center;font-weight: 900;">
+                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
                     </h:outputText>
                 </p:column>
                 <p:column headerText="#{msg['reserva.pagamento']}" sortBy="#{reserva.pagamento}"
@@ -84,7 +84,7 @@
                     <f:facet name="header">
                         <h:outputText value="#{msg['reserva.pagamento']}" />
                     </f:facet>
-                    <h:outputText value="#{reserva.pagamento}" converter ="yesNoConverter" />
+                    <h:outputText value="#{reserva.pagamento}" converter ="yesNoConverter" id="JsPagamento"/>
                 </p:column>
                 <p:column styleClass="uix-datatable-actions" exportable="false" headerText="#{xmsg['actions']}">
                     <f:facet name="header">

@@ -56,7 +56,7 @@
                         <h:outputText value="#{xmsg['actions']}"/>
                     </f:facet>
                     <p:commandButton oncomplete="PF('widgetClienteDetail').show();"  icon="fa fa-info-circle" 
-                                     process="@form" update=":formDetailCliente" title="#{xmsg['detail']}" style="background: #ffff00;">
+                                     process="@form" update=":formDetailCliente" title="#{xmsg['detail']}" style="background: #ffff00;color: #666666">
                         <f:setPropertyActionListener value="#{cliente}" target="#{clienteMB.entity}" />
                     </p:commandButton>
                     <x:securityArea rolesAllowed="cliente.create">
@@ -66,14 +66,13 @@
                     </x:securityArea>
                     <x:securityArea rolesAllowed="cliente.delete">
                         <p:commandButton icon="fa fa-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
-                                         action="#{clienteMB.delete}" style="background: #ff3333;">
+                                         action="#{clienteMB.delete}" style="background: #ff3333">
                             <f:setPropertyActionListener value="#{cliente.id}" target="#{clienteMB.id}" />
                             <x:confirmation message="#{xmsg['confirmDelete']} - #{cliente}" />
                         </p:commandButton>
                     </x:securityArea>
-                    <p:commandButton action="#{clienteMB.enviarMensagemZap(cliente)}" style="margin-right:20px;background: #34af23;" 
-                                     process="@this" update="@form" ajax="false" icon="fa fa-whatsapp" onclick="this.form.target = '_blank'">
-                        <h:outputText value="Enviar Mensagem" />
+                    <p:commandButton action="#{clienteMB.enviarMensagemZap(cliente)}" style="margin-right:20px;background: #34af23;color: white" 
+                                     process="@this" update="@form" ajax="false" icon="fa fa-phone-square" onclick="this.form.target = '_blank'">
                     </p:commandButton> 
                 </p:column>
             </p:dataTable>
