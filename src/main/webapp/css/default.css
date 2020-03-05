@@ -98,6 +98,7 @@ section.conteudo h1.page-header  span{vertical-align: middle;}
 .login-wraper .login-body input[type=text],.login-wraper .login-body input[type=password]{width: 100%}
 .login-button{
     display:inline-block;
+    color: #1f3780;
     padding:0.3em 1.2em;
     margin:0 0.3em 0.3em 0;
     border-radius:2em;
@@ -110,7 +111,7 @@ section.conteudo h1.page-header  span{vertical-align: middle;}
 }
 .login-button:hover{
     background:rgb(28, 184, 65);
-    color: white;
+    color: #ffffff;
 }
 ul li.ui-menuitem-active>a{
     background-image: none !important;

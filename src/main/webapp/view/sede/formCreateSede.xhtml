@@ -4,82 +4,86 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:p="http://primefaces.org/ui"
                  xmlns:x="http://xpert.com/faces">
-    
-  
+
+
     <h:form id="formCreateSede" >
         <p:fieldset legend="#{xmsg['generalData']}">
             <x:modalMessages/>
 
             <div class="container-fluid">
-                 <div class="row">
-                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                         <h:outputLabel for="scopo" value="* #{msg['sede.scopo']}:" />
-                         <h:selectOneMenu id="scopo" value="#{sedeMB.entity.scopo}"  styleClass="form-control" >
-                             <f:selectItem itemLabel="#{xmsg['select']}" />
-                             <f:selectItems value="#{findAllBean.get(classMB.scopo)}" 
-                                            var="scopo"
-                                            itemLabel="#{scopo.descricao}"/>
-                         </h:selectOneMenu>
-                     </div>
-                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                         <h:outputLabel for="nome" value="* #{msg['sede.nome']}:" />
-                         <p:inputText id="nome" value="#{sedeMB.entity.nome}" maxlength="80"  styleClass="form-control"  />
-                     </div>
-                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                         <h:outputLabel for="razaoSocial" value="Razão Social:" />
-                         <p:inputText id="razaoSocial" value="#{sedeMB.entity.razaoSocial}" maxlength="80"  styleClass="form-control"  />
-                     </div>
-                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                         <h:outputLabel for="cidade" value="* #{msg['sede.cidade']}:" />
-                         <h:selectOneMenu id="cidade" value="#{sedeMB.entity.cidade}" converter="entityConverter" styleClass="form-control" >
-                             <x:initializer/>
-                             <f:selectItem itemLabel="#{xmsg['select']}" />
-                             <f:selectItems value="#{findAllBean.get(classMB.cidade)}" 
-                                            var="cidade"
-                                            itemLabel="#{cidade}"/>
-                         </h:selectOneMenu>
-                     </div>
-                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                         <h:outputLabel for="endereco" value="Endereço:" />
-                         <p:inputText id="endereco" value="#{sedeMB.entity.endereco}" maxlength="150"  styleClass="form-control"  />
-                     </div>
-                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                         <h:outputLabel for="cnpj" value="CNPJ:" />
-                         <x:cnpj id="cnpj" value="#{sedeMB.entity.cnpj}" maxlength="14"  styleClass="form-control" placeholder="00.000.000/0001-00" />
-                     </div>
-                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                         <h:outputLabel for="cep" value="CEP:" />
-                         <p:inputMask mask="#{formatMB.format.codigoPostal}" id="cep" value="#{sedeMB.entity.cep}" maxlength="10"  styleClass="form-control"  />
-                     </div>
-                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                         <h:outputLabel for="telefone" value="#{msg['sede.telefone']}:" />
-                         <p:inputMask mask="#{formatMB.format.telefone}" id="telefone" value="#{sedeMB.entity.telefone}" maxlength="15"  styleClass="form-control"  />
-                     </div>
-                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                         <h:outputLabel for="whatsapp" value="#{msg['sede.whatsapp']}:" />
-                         <p:inputMask mask="#{formatMB.format.telefone}" id="whatsapp" value="#{sedeMB.entity.whatsapp}" maxlength="15"  styleClass="form-control"  />
-                     </div>
-                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                         <h:outputLabel for="email" value="#{msg['sede.email']}:" />
-                         <p:inputText id="email" value="#{sedeMB.entity.email}" maxlength="80"  styleClass="form-control"  />
-                     </div>
-                      <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                         <div class="checkbox">
-                             <label>
-                                 <h:selectBooleanCheckbox id="ativa" value="#{sedeMB.entity.ativa}" />
-                                 #{msg['sede.ativa']}
-                             </label>
-                             <h:outputText value="Desmarque se a empresa estiver inativa." styleClass="help-block"/>
-                         </div>
-                     </div>
+                <div class="row">
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="scopo" value="* #{msg['sede.scopo']}:" />
+                        <h:selectOneMenu id="scopo" value="#{sedeMB.entity.scopo}"  styleClass="form-control" >
+                            <f:selectItem itemLabel="#{xmsg['select']}" />
+                            <f:selectItems value="#{findAllBean.get(classMB.scopo)}" 
+                                           var="scopo"
+                                           itemLabel="#{scopo.descricao}"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="nome" value="* #{msg['sede.nome']}:" />
+                        <p:inputText id="nome" value="#{sedeMB.entity.nome}" maxlength="80"  styleClass="form-control"  />
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="razaoSocial" value="Razão Social:" />
+                        <p:inputText id="razaoSocial" value="#{sedeMB.entity.razaoSocial}" maxlength="80"  styleClass="form-control"  />
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="cidade" value="* #{msg['sede.cidade']}:" />
+                        <h:selectOneMenu id="cidade" value="#{sedeMB.entity.cidade}" converter="entityConverter" styleClass="form-control" >
+                            <x:initializer/>
+                            <f:selectItem itemLabel="#{xmsg['select']}" />
+                            <f:selectItems value="#{findAllBean.get(classMB.cidade)}" 
+                                           var="cidade"
+                                           itemLabel="#{cidade}"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="endereco" value="Endereço:" />
+                        <p:inputText id="endereco" value="#{sedeMB.entity.endereco}" maxlength="150"  styleClass="form-control"  />
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="cnpj" value="CNPJ:" />
+                        <x:cnpj id="cnpj" value="#{sedeMB.entity.cnpj}" maxlength="14"  styleClass="form-control" placeholder="00.000.000/0001-00" />
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="cep" value="CEP:" />
+                        <p:inputMask mask="#{formatMB.format.codigoPostal}" id="cep" value="#{sedeMB.entity.cep}" maxlength="10"  styleClass="form-control"  />
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="telefone" value="#{msg['sede.telefone']}:" />
+                        <p:inputMask mask="#{formatMB.format.telefone}" id="telefone" value="#{sedeMB.entity.telefone}" maxlength="15"  styleClass="form-control"  />
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="whatsapp" value="#{msg['sede.whatsapp']}:" />
+                        <p:inputMask mask="#{formatMB.format.telefone}" id="whatsapp" value="#{sedeMB.entity.whatsapp}" maxlength="15"  styleClass="form-control"  />
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel for="email" value="#{msg['sede.email']}:" />
+                        <p:inputText id="email" value="#{sedeMB.entity.email}" maxlength="80"  styleClass="form-control"  />
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <div class="checkbox">
+                            <label>
+                                <h:selectBooleanCheckbox id="ativa" value="#{sedeMB.entity.ativa}" />
+                                #{msg['sede.ativa']}
+                            </label>
+                            <h:outputText value="Desmarque se a empresa estiver inativa." styleClass="help-block"/>
+                        </div>
+                    </div>
 
-                 </div>
-             </div>
+                </div>
+            </div>
         </p:fieldset>
         <h:outputText value="#{xmsg['requiredFieldsForm']}"/>
         <div class="uix-center">
             <x:securityArea rolesAllowed="sede.create">
-                <p:commandButton process="@form" update="@form" action="#{sedeMB.save}" value="#{xmsg['save']}" />
+                <p:commandButton process="@form" update="@form" action="#{sedeMB.save}" value="#{xmsg['save']}"
+                                 style="
+                                 background: #34af23;
+                                 color: white;
+                                 font-size: 14px;"/>
             </x:securityArea>
             <x:securityArea rolesAllowed="sede.audit">
                 <x:audit for="#{sedeMB.entity}"/>

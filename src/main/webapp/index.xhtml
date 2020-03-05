@@ -20,23 +20,23 @@
                 <div class="row">
                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                        <h:outputLabel value="#{msg['usuario.userLogin']}:"/>
+                        <h:outputLabel value="#{msg['usuario.userLogin']}:" style="font-family: 'Oswald';color: #1f3780;font-size: 16px;"/>
                         <p:inputText id="user" value="#{loginMB.userLogin}" required="true" requiredMessage="#{msg['required.usuario']}" styleClass="form-control"  />
 
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <h:outputLabel value="#{msg['usuario.userPassword']}:"/>
+                        <h:outputLabel value="#{msg['usuario.userPassword']}:" style="font-family: 'Oswald';color: #1f3780;font-size: 16px;"/>
                         <p:password id="password" feedback="false" autocomplete="false" value="#{loginMB.userPassword}" required="true" maxlength="20" requiredMessage="#{msg['required.password']}" styleClass="form-control"/>
                     </div>
                 </div>
 
-                <p:commandButton value="#{msg['entrar']}" action="#{loginMB.login}" process="@form" update="@form" styleClass="col-lg-12  col-md-12 col-sm-12 col-xs-12 login-button"/>   
+                <p:commandButton style="font-family: 'Montserrat';font-size: 13px;font-weight: bold;" value="#{msg['entrar']}" action="#{loginMB.login}" process="@form" update="@form" styleClass="col-lg-12  col-md-12 col-sm-12 col-xs-12 login-button"/>   
                 <br/>
                 <br/>
                 <div class="text-right">
-                    <h:link outcome="/esqueciSenha.jsf" value="#{msg['solicitacaoRecuperacaoSenha.esqueciMinhaSenha']}"/>
+                    <h:link outcome="/esqueciSenha.jsf" value="#{msg['solicitacaoRecuperacaoSenha.esqueciMinhaSenha']}" style="color: #1f3780;font-family: 'Oswald';font-size: 15px;"/>
                 </div>
                 <p:focus/>
             </div>
