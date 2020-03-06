@@ -73,4 +73,11 @@ public class ReservaMB extends AbstractBaseBean<Reserva> implements Serializable
 
         FacesMessageUtils.info(event.getTitle());
     }
+    public String getCor(Reserva reserva){
+        if(reserva.isPagamento()){
+            return "color:green;font-family:'Montserrat';font-weight: bold; font-size: 15px;";
+        }else{
+            return "color:red;font-family:'Montserrat';font-weight: bold; font-size: 15px;";
+        }
+    }
 }

@@ -37,7 +37,7 @@
                     </f:facet>
                     <h:outputText value="#{sede.razaoSocial}"/>
                 </p:column>
-                <p:column headerText="#{msg['sede.scopo']}" filterOptions="#{findAllBean.getSelect(classMB.scopo)}" 
+                <p:column headerText="#{msg['sede.scopo']}" filterOptions="#{findAllBean.getSelect(classMB.scopo)}" sortBy="#{sede.scopo}" 
                           >
                     <f:facet name="header">
                         <h:outputText value="#{msg['sede.scopo']}" />
