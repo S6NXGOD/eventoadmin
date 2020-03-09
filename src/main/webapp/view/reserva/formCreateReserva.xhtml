@@ -57,14 +57,14 @@
                     <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <h:outputLabel for="checkin" value="* Check-In:" />
                         <p:calendar id="checkin" value="#{reservaMB.entity.checkin}" 
-                                    showOn="button" pattern="dd/MM/yyyy" styleClass="uix-calendar" placeholder="DD/MM/AAAA" >
+                                    showOn="button" mindate="#{now}" pattern="dd/MM/yyyy" styleClass="uix-calendar" placeholder="DD/MM/AAAA">
                             <x:mask/>
                         </p:calendar>
                     </div>
                     <div class="form-group col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <h:outputLabel for="checkout" value="* Check-Out:" />
                         <p:calendar id="checkout" value="#{reservaMB.entity.checkout}" 
-                                    showOn="button" pattern="dd/MM/yyyy" styleClass="uix-calendar" placeholder="DD/MM/AAAA" >
+                                    showOn="button" mindate="#{now}" pattern="dd/MM/yyyy" styleClass="uix-calendar"  placeholder="DD/MM/AAAA" >
                             <x:mask/>
                         </p:calendar>
                     </div>

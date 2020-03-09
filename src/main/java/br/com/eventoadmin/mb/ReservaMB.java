@@ -75,9 +75,9 @@ public class ReservaMB extends AbstractBaseBean<Reserva> implements Serializable
     }
     public String getCor(Reserva reserva){
         if(reserva.isPagamento()){
-            return "color:green;font-family:'Montserrat';font-weight: bold; font-size: 15px;";
+            return "color:green;";
         }else{
-            return "color:red;font-family:'Montserrat';font-weight: bold; font-size: 15px;";
+            return "color:red;";
         }
     }
 }

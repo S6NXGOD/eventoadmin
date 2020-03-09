@@ -85,7 +85,7 @@
                         <f:facet name="header">
                             <h:outputText value="#{msg['reserva.pagamento']}" />
                         </f:facet>
-                        <h:outputText value="#{reserva.pagamento}" converter ="yesNoConverter" style="#{reservaMB.getCor(reserva)}"/>
+                        <h:outputText value="#{reserva.pagamento}" converter ="yesNoConverter" style="#{reservaMB.getCor(reserva)}; font-family:'Oswald';font-weight: bold; font-size: 16px;"/>
                     </p:column>
                     <p:column styleClass="uix-datatable-actions" exportable="false" headerText="#{xmsg['actions']}">
                         <f:facet name="header">
